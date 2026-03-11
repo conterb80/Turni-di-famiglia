@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turni Andrea & Micol</title>
+<style>
+body{font-family:Arial;margin:0;background:#f3f3f3}
+.container{max-width:900px;margin:auto;padding:20px}
+.card{background:white;border-radius:14px;padding:15px;margin-bottom:15px;box-shadow:0 2px 5px rgba(0,0,0,.1)}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.day{background:#fff;border:1px solid #ddd;border-radius:10px;padding:5px;min-height:70px;font-size:12px;cursor:pointer}
+.badge{display:block;margin-top:3px;padding:2px 4px;border-radius:6px;font-size:11px}
+.M{background:#fff4b5}
+.P{background:#ffd9b5}
+.N{background:#b5d3ff}
+.R{background:#c8f7c5}
+h1{margin:0}
+button{padding:8px 12px;border:none;border-radius:8px;background:#222;color:white;cursor:pointer}
+select,textarea{width:100%;padding:6px;margin-top:5px}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="card">
+<h1>Turni Andrea & Micol</h1>
+<p>Ciclo Andrea automatico • Micol manuale</p>
+<button onclick="generaCiclo()">Rigenera ciclo Andrea</button>
+</div>
+
+<div class="card">
+<div id="cal" class="grid"></div>
+</div>
+
+<div class="card">
+<h3>Modifica giorno</h3>
+<div id="dataSel"></div>
+
+<label>Andrea</label>
+<select id="andrea">
+<option value="">-</option>
+<option value="M">Mattina</option>
+<option value="P">Pomeriggio</option>
+<option value="N">Notte</option>
+<option value="R">Riposo</option>
+</select>
+
+<label>Micol</label>
+<select id="micol">
+<option value="">-</option>
+<option value="M">Mattina</option>
+<option value="P">Pomeriggio</option>
+<option value="N">Notte</option>
+<option value="R">Riposo</option>
+</select>
+
+<label>Nota</label>
+<textarea id="nota"></textarea>
+
+<button onclick="salva()">Salva</button>
+
+</div>
+
+</div>
+
+<script>
+
+const ciclo = ["M","M","R","N","N","R","P","P","R"]
+
+// punto di partenza ciclo
+const startDate = new Date("2026-03-12")
+
+let dati = JSON.parse(localStorage.getItem("turniApp") || "{}")
+let selected=null
+
+function key(d){
+return d.toISOString().slice(0,10)
+}
+
+function turnoAndrea(date){
+
+let diff = Math.floor((date - startDate)/86400000)
+
+let i = ((diff % ciclo.length)+ciclo.length)%ciclo.length
+
+return ciclo[i]
+
+}
+
+function generaCiclo(){
+
+for(let i=0;i<365;i++){
+
+let d=new Date(startDate)
+d.setDate(startDate.getDate()+i)
+
+let k=key(d)
+
+if(!dati[k]) dati[k]={}
+
+dati[k].andrea=turnoAndrea(d)
+
+}
+
+localStorage.setItem("turniApp",JSON.stringify(dati))
+
+render()
+
+}
+
+function render(){
+
+let cal=document.getElementById("cal")
+cal.innerHTML=""
+
+let today=new Date()
+
+for(let i=0;i<30;i++){
+
+let d=new Date()
+d.setDate(today.getDate()+i)
+
+let k=key(d)
+
+let day=document.createElement("div")
+day.className="day"
+
+let rec=dati[k]||{}
+
+day.innerHTML=`
+<strong>${d.getDate()}/${d.getMonth()+1}</strong>
+<div class="badge ${rec.andrea||""}">A: ${rec.andrea||turnoAndrea(d)}</div>
+<div class="badge ${rec.micol||""}">M: ${rec.micol||"-"}</div>
+`
+
+day.onclick=()=>{
+selected=k
+edit(k)
+}
+
+cal.appendChild(day)
+
+}
+
+}
+
+function edit(k){
+
+let rec=dati[k]||{}
+
+document.getElementById("dataSel").innerText=k
+document.getElementById("andrea").value=rec.andrea||""
+document.getElementById("micol").value=rec.micol||""
+document.getElementById("nota").value=rec.nota||""
+
+}
+
+function salva(){
+
+if(!selected) return
+
+dati[selected]={
+andrea:document.getElementById("andrea").value,
+micol:document.getElementById("micol").value,
+nota:document.getElementById("nota").value
+}
+
+localStorage.setItem("turniApp",JSON.stringify(dati))
+
+render()
+
+}
+
+generaCiclo()
+render()
+
+</script>
+
+</body>
+</html>
