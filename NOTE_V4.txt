@@ -1,0 +1,1 @@
+Versione 4: grafica migliorata, vista annuale Andrea + Micol, ricerca data, modifica rapida dei giorni. Se usi già Firebase, conserva il tuo config.js attuale.
