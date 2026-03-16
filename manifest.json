@@ -1,7 +1,7 @@
 {
   "name": "Turni Andrea & Micol",
   "short_name": "Turni",
-  "start_url": "./index.html",
+  "start_url": "./index.html?v=5",
   "display": "standalone",
   "background_color": "#f3f4f6",
   "theme_color": "#18181b",

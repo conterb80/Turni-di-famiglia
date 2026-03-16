@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Turni Andrea & Micol - V4</title>
+<title>Turni Andrea & Micol - V5</title>
 <meta name="theme-color" content="#18181b" />
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="icon.svg" type="image/svg+xml" />
@@ -11,7 +11,7 @@
 :root{--bg:#f3f4f6;--card:#fff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--shadow:0 6px 18px rgba(0,0,0,.06)}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text)}
 .wrap{max-width:1220px;margin:0 auto;padding:14px}.card{background:#fff;border-radius:24px;padding:16px;box-shadow:var(--shadow)}
-.top,.stats,.tabs,.layout,.year-grid{display:grid;gap:12px}.top,.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.tabs{grid-template-columns:repeat(4,1fr)}
+.top,.stats,.tabs,.layout,.year-grid{display:grid;gap:12px}.top,.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.tabs{grid-template-columns:repeat(5,1fr)}
 @media(min-width:920px){.top{grid-template-columns:1.5fr 1fr}.layout{grid-template-columns:1.45fr .9fr}.stats{grid-template-columns:repeat(4,1fr)}}
 h1,h2,h3,p{margin:0}.muted{color:var(--muted)}.small{font-size:13px}.title{font-size:30px;font-weight:800}
 button,select,input,textarea{font:inherit;border:1px solid var(--border);border-radius:16px;padding:10px 12px;background:#fff;color:var(--text)}button{cursor:pointer}
@@ -19,7 +19,7 @@ button,select,input,textarea{font:inherit;border:1px solid var(--border);border-
 .toolbar{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.searchbar{display:grid;grid-template-columns:1fr auto;gap:10px}
 .legend{display:flex;gap:8px;flex-wrap:wrap}.badge{display:inline-block;border-radius:999px;padding:5px 10px;border:1px solid var(--border);font-size:12px;font-weight:700}
 .bM{background:#fef3c7}.bP{background:#ffedd5}.bN{background:#dbeafe}.bR{background:#f3f4f6}.bF{background:#ede9fe}.bT{background:#dcfce7}
-.stat .value{font-size:32px;font-weight:800;margin-top:6px}
+.stat .value{font-size:32px;font-weight:800;margin-top:6px}.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.quick-box{background:#f9fafb;border:1px solid var(--border);border-radius:20px;padding:14px}
 .week-list{display:grid;gap:12px}.week-day{border:1px solid var(--border);border-radius:18px;padding:12px;background:#fff}.week-day.sel{outline:2px solid #111827}.week-day.together{background:#f0fdf4;border-color:#86efac}
 .month-head,.headerline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.weekday{text-align:center;color:var(--muted);font-size:13px;font-weight:700;padding:4px 0}
 .day{min-height:100px;border:1px solid var(--border);border-radius:18px;background:#fff;padding:6px;cursor:pointer}.day.sel{outline:2px solid #111827}.day.together{background:#f0fdf4;border-color:#86efac}.empty{background:transparent;border:none;cursor:default}
@@ -37,14 +37,23 @@ button,select,input,textarea{font:inherit;border:1px solid var(--border);border-
 <div class="wrap">
 <div class="top">
 <div class="card">
-<div class="small muted">APP TURNI FAMIGLIA · VERSIONE 4</div>
+<div class="small muted">APP TURNI FAMIGLIA · VERSIONE 5</div>
 <h1 class="title">Andrea & Micol</h1>
-<p class="muted" style="margin-top:8px">Grafica migliorata, ricerca data, vista annuale con Andrea + Micol, giorni liberi insieme evidenziati e modifica rapida dei giorni.</p>
+<p class="muted" style="margin-top:8px">Aggiunto mini-widget iniziale e pulsante aggiorna app per evitare problemi di cache.</p>
 <div class="searchbar" style="margin-top:12px"><input id="jumpDate" placeholder="Cerca data: 2027-08-15" /><button id="jumpBtn" class="primary">Vai</button></div>
 </div>
 <div class="card">
 <div class="toolbar"><button id="prevBtn">Indietro</button><button id="todayBtn">Oggi</button><button id="nextBtn">Avanti</button><button id="regenBtn" class="primary">Rigenera Andrea</button></div>
+<div class="toolbar" style="margin-top:10px"><button id="refreshBtn">Aggiorna app</button><button id="clearCacheBtn">Ricarica pulita</button></div>
 <div class="small muted" style="margin-top:8px">Se usi già Firebase, conserva il tuo config.js attuale.</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:12px">
+<div class="headerline"><div><h2>Schermata rapida</h2><div class="small muted">Oggi e domani subito visibili</div></div></div>
+<div class="quick-grid" style="margin-top:12px">
+<div class="quick-box"><div class="small muted">Oggi</div><div class="list" style="margin-top:10px"><div class="row"><span>Andrea</span><strong id="qA">-</strong></div><div class="row"><span>Micol</span><strong id="qM">-</strong></div></div></div>
+<div class="quick-box"><div class="small muted">Domani</div><div class="list" style="margin-top:10px"><div class="row"><span>Andrea</span><strong id="qAD">-</strong></div><div class="row"><span>Micol</span><strong id="qMD">-</strong></div></div></div>
 </div>
 </div>
 
@@ -56,7 +65,7 @@ button,select,input,textarea{font:inherit;border:1px solid var(--border);border-
 </div>
 
 <div class="tabs" style="margin-top:12px">
-<button class="tab active" data-view="week">Settimana</button><button class="tab" data-view="month">Mese</button><button class="tab" data-view="year">Anno</button><button class="tab" data-view="stats">Statistiche</button>
+<button class="tab active" data-view="week">Settimana</button><button class="tab" data-view="month">Mese</button><button class="tab" data-view="year">Anno</button><button class="tab" data-view="stats">Statistiche</button><button class="tab" data-view="widget">Widget</button>
 </div>
 
 <div class="layout" style="margin-top:12px">
@@ -65,6 +74,7 @@ button,select,input,textarea{font:inherit;border:1px solid var(--border);border-
 <div id="monthView" class="card hidden"></div>
 <div id="yearView" class="card hidden"></div>
 <div id="statsView" class="card hidden"></div>
+<div id="widgetView" class="card hidden"></div>
 </div>
 <div class="side">
 <div class="card">
@@ -105,7 +115,7 @@ button,select,input,textarea{font:inherit;border:1px solid var(--border);border-
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import { getDatabase, ref, onValue, set, update } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
 const cfg=window.TURNI_APP_CONFIG||{}; const sync=Boolean(cfg.firebase?.apiKey&&cfg.firebase?.databaseURL&&cfg.sharedPath);
-const STORAGE_KEY="turni-famiglia-v4-local"; const cycle=["M","M","R","N","N","R","P","P","R"]; const baseDate=new Date("2026-03-12T00:00:00");
+const STORAGE_KEY="turni-famiglia-v5-local"; const cycle=["M","M","R","N","N","R","P","P","R"]; const baseDate=new Date("2026-03-12T00:00:00");
 const months=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
 const weekdays=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"]; const turnHours={M:8,P:8,N:8,R:0,F:0}; const turnLabel={M:"Mattina",P:"Pomeriggio",N:"Notte",R:"Riposo",F:"Ferie"};
 let db=null; let state={current:new Date(),selected:null,data:{}}; let modalKey=null;
@@ -128,23 +138,27 @@ async function persistOne(key,payload){if(sync&&db){await set(ref(db, `${cfg.sha
 async function saveCurrent(){ensure(state.selected); const payload={andrea:document.getElementById("andreaSel").value,micol:document.getElementById("micolInput").value.trim(),nota:document.getElementById("notaInput").value.trim()}; state.data[state.selected]=payload; renderAll(); await persistOne(state.selected,payload);}
 async function clearCurrent(){const payload={andrea:"",micol:"",nota:""}; state.data[state.selected]=payload; renderAll(); await persistOne(state.selected,payload);}
 async function regenYear(){const y=state.current.getFullYear(); const patch={}; for(let m=0;m<12;m++){for(let d=1; d<=dim(y,m); d++){const key=k(new Date(y,m,d)); ensure(key); state.data[key].andrea=autoAndrea(fromKey(key)); if(sync&&db) patch[`${cfg.sharedPath}/days/${key}/andrea`]=state.data[key].andrea;}} renderAll(); if(sync&&db) await update(ref(db), patch); else saveLocal();}
-function show(view){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===view)); document.getElementById("weekView").classList.toggle("hidden",view!=="week"); document.getElementById("monthView").classList.toggle("hidden",view!=="month"); document.getElementById("yearView").classList.toggle("hidden",view!=="year"); document.getElementById("statsView").classList.toggle("hidden",view!=="stats");}
+function show(view){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===view)); document.getElementById("weekView").classList.toggle("hidden",view!=="week"); document.getElementById("monthView").classList.toggle("hidden",view!=="month"); document.getElementById("yearView").classList.toggle("hidden",view!=="year"); document.getElementById("statsView").classList.toggle("hidden",view!=="stats"); document.getElementById("widgetView").classList.toggle("hidden",view!=="widget");}
 function renderHeaderStats(){const s=stats(); document.getElementById("sA").textContent=s.a; document.getElementById("sM").textContent=s.m.toFixed(1).replace(".0",""); document.getElementById("sL").textContent=s.l; document.getElementById("sW").textContent=s.w;}
 function renderWeek(){const root=document.getElementById("weekView"), start=sow(state.current); let html=`<div class="headerline"><div><h2>Vista settimanale</h2><div class="small muted">Settimana di ${k(start)}</div></div></div><div class="week-list" style="margin-top:12px">`; for(let i=0;i<7;i++){const d=new Date(start); d.setDate(start.getDate()+i); const dd=day(k(d)); html+=`<div class="week-day ${state.selected===dd.key?'sel':''} ${together(dd)?'together':''}" data-key="${dd.key}"><div class="headerline"><div><strong>${weekdays[i]} ${d.getDate()} ${months[d.getMonth()]}</strong><div class="small muted">${dd.key}</div></div>${together(dd)?'<span class="badge bT">Liberi insieme</span>':''}</div><div style="display:grid;gap:8px;margin-top:8px"><div><span class="badge b${dd.andrea}">Andrea: ${turnLabel[dd.andrea]}</span></div><div><span class="badge">Micol: ${micolText(dd.micol)}</span></div><div class="small muted">${dd.nota||'Nessuna nota'}</div></div></div>`;} root.innerHTML=html+`</div>`; root.querySelectorAll("[data-key]").forEach(el=>el.onclick=()=>{state.selected=el.dataset.key; renderAll();});}
 function renderMonth(){const root=document.getElementById("monthView"), y=state.current.getFullYear(), m=state.current.getMonth(), grid=monthGrid(y,m); let html=`<div class="month-head"><div><h2>${months[m]} ${y}</h2><div class="small muted">Vista mensile</div></div><div class="legend"><span class="badge bM">M</span><span class="badge bP">P</span><span class="badge bN">N</span><span class="badge bR">Riposo</span><span class="badge bF">Ferie</span></div></div><div class="month-grid" style="margin-top:12px">${weekdays.map(w=>`<div class="weekday">${w}</div>`).join("")}</div><div class="month-grid" style="margin-top:8px">`; for(const d of grid){if(!d){html+=`<div class="day empty"></div>`; continue;} const dd=day(k(d)); html+=`<div class="day ${state.selected===dd.key?'sel':''} ${together(dd)?'together':''}" data-key="${dd.key}"><div class="num">${d.getDate()}</div><div class="mini"><div><strong>A:</strong> ${turnLabel[dd.andrea]}</div><div><strong>M:</strong> ${micolShort(dd.micol)}</div></div></div>`;} root.innerHTML=html+`</div>`; root.querySelectorAll("[data-key]").forEach(el=>el.onclick=()=>{state.selected=el.dataset.key; renderAll();});}
 function renderYear(){const root=document.getElementById("yearView"), y=state.current.getFullYear(); let html=`<div class="headerline"><div><h2>Vista annuale</h2><div class="small muted">Andrea + Micol, utile per cambi lontani e pianificazione ferie</div></div></div><div class="year-grid" style="margin-top:12px">`; for(let m=0;m<12;m++){html+=`<div class="monthbox"><strong>${months[m]}</strong><div class="ygrid">`; const grid=monthGrid(y,m); for(const d of grid){if(!d){html+=`<div class="ycell hidden"></div>`; continue;} const dd=day(k(d)); html+=`<div class="ycell a${dd.andrea} ${together(dd)?'together':''}" data-key="${dd.key}" title="${dd.key}"><div class="d">${d.getDate()}</div><div class="a">${turnLabel[dd.andrea]}</div><div class="m">${micolShort(dd.micol)}</div></div>`;} html+=`</div></div>`;} root.innerHTML=html+`</div>`; root.querySelectorAll("[data-key]").forEach(el=>el.onclick=()=>openModal(el.dataset.key));}
 function renderStats(){const root=document.getElementById("statsView"), s=stats(), ys=yearStats(state.current.getFullYear()), media=s.mg?(s.m/s.mg):0; root.innerHTML=`<div class="headerline"><div><h2>Statistiche</h2><div class="small muted">Mese e anno correnti</div></div></div><div class="list" style="margin-top:12px"><div class="row"><span>Andrea · Mattine</span><strong>${s.am}</strong></div><div class="row"><span>Andrea · Pomeriggi</span><strong>${s.ap}</strong></div><div class="row"><span>Andrea · Notti</span><strong>${s.an}</strong></div><div class="row"><span>Andrea · Riposi</span><strong>${s.ar}</strong></div><div class="row"><span>Andrea · Ferie</span><strong>${s.af}</strong></div><div class="row"><span>Andrea · Ore mese</span><strong>${s.a}</strong></div><div class="row"><span>Micol · Ore mese</span><strong>${s.m.toFixed(1).replace(".0","")}</strong></div><div class="row"><span>Micol · Giorni lavorati</span><strong>${s.mg}</strong></div><div class="row"><span>Micol · Media ore/giorno</span><strong>${media.toFixed(1).replace(".0","")}</strong></div><div class="row"><span>Micol · Ferie</span><strong>${s.mf}</strong></div><div class="row"><span>Micol · Riposi</span><strong>${s.mr}</strong></div><div class="row"><span>Famiglia · Liberi insieme</span><strong>${s.l}</strong></div><div class="row"><span>Famiglia · Entrambi al lavoro</span><strong>${s.fw}</strong></div><div class="row"><span>Anno · Ore Andrea</span><strong>${ys.a}</strong></div><div class="row"><span>Anno · Ore Micol</span><strong>${ys.m.toFixed(1).replace(".0","")}</strong></div><div class="row"><span>Anno · Mattine Andrea</span><strong>${ys.am}</strong></div><div class="row"><span>Anno · Notti Andrea</span><strong>${ys.an}</strong></div><div class="row"><span>Anno · Liberi insieme</span><strong>${ys.l}</strong></div></div>`;}
+function renderWidgetView(){document.getElementById("widgetView").innerHTML=`<div class="headerline"><div><h2>Mini-widget</h2><div class="small muted">Schermata rapida per oggi e domani</div></div></div><div class="quick-grid" style="margin-top:12px"><div class="quick-box"><div class="small muted">Oggi</div><div class="list" style="margin-top:10px"><div class="row"><span>Andrea</span><strong>${document.getElementById("qA").textContent}</strong></div><div class="row"><span>Micol</span><strong>${document.getElementById("qM").textContent}</strong></div></div></div><div class="quick-box"><div class="small muted">Domani</div><div class="list" style="margin-top:10px"><div class="row"><span>Andrea</span><strong>${document.getElementById("qAD").textContent}</strong></div><div class="row"><span>Micol</span><strong>${document.getElementById("qMD").textContent}</strong></div></div></div></div>`;}
 function renderSide(){if(!state.selected) state.selected=k(new Date()); const d=day(state.selected), rec=state.data[state.selected]||{andrea:"",micol:"",nota:""}; document.getElementById("selLabel").textContent=d.key; document.getElementById("andreaSel").value=rec.andrea||""; document.getElementById("micolInput").value=rec.micol||""; document.getElementById("notaInput").value=rec.nota||"";}
-function renderWidget(){const t=day(k(new Date())); const d=new Date(); d.setDate(d.getDate()+1); const n=day(k(d)); document.getElementById("wA").textContent=turnLabel[t.andrea]; document.getElementById("wM").textContent=micolText(t.micol); document.getElementById("wAD").textContent=turnLabel[n.andrea]; document.getElementById("wMD").textContent=micolText(n.micol);}
-function renderAll(){renderHeaderStats(); renderWeek(); renderMonth(); renderYear(); renderStats(); renderSide(); renderWidget();}
+function renderWidget(){const t=day(k(new Date())); const d=new Date(); d.setDate(d.getDate()+1); const n=day(k(d)); document.getElementById("wA").textContent=turnLabel[t.andrea]; document.getElementById("wM").textContent=micolText(t.micol); document.getElementById("wAD").textContent=turnLabel[n.andrea]; document.getElementById("wMD").textContent=micolText(n.micol); document.getElementById("qA").textContent=turnLabel[t.andrea]; document.getElementById("qM").textContent=micolText(t.micol); document.getElementById("qAD").textContent=turnLabel[n.andrea]; document.getElementById("qMD").textContent=micolText(n.micol);}
+function renderAll(){renderHeaderStats(); renderWeek(); renderMonth(); renderYear(); renderStats(); renderSide(); renderWidget(); renderWidgetView();}
 function openModal(key){modalKey=key; const d=day(key), rec=state.data[key]||{andrea:"",micol:"",nota:""}; document.getElementById("mLabel").textContent=d.key; document.getElementById("mAndrea").value=rec.andrea||""; document.getElementById("mMicol").value=rec.micol||""; document.getElementById("mNota").value=rec.nota||""; document.getElementById("modalWrap").style.display="flex";}
 async function saveModal(){if(!modalKey) return; const payload={andrea:document.getElementById("mAndrea").value,micol:document.getElementById("mMicol").value.trim(),nota:document.getElementById("mNota").value.trim()}; state.data[modalKey]=payload; state.selected=modalKey; document.getElementById("modalWrap").style.display="none"; renderAll(); await persistOne(modalKey,payload);}
 async function init(){if(sync){try{const app=initializeApp(cfg.firebase); db=getDatabase(app); onValue(ref(db, `${cfg.sharedPath}/days`), snap=>{state.data=snap.val()||{}; renderAll();}); return;}catch(e){console.error(e);}} loadLocal();}
+function forceRefresh(){const url=new URL(window.location.href); url.searchParams.set("v","5"); url.searchParams.set("t",String(Date.now())); window.location.href=url.toString();}
+async function clearAndRefresh(){if('caches' in window){const keys=await caches.keys(); for(const key of keys){await caches.delete(key);}} localStorage.removeItem(STORAGE_KEY); forceRefresh();}
 document.getElementById("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1); renderAll();};
 document.getElementById("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1); renderAll();};
 document.getElementById("todayBtn").onclick=()=>{state.current=new Date(); state.selected=k(new Date()); renderAll();};
 document.getElementById("regenBtn").onclick=regenYear; document.getElementById("saveBtn").onclick=saveCurrent; document.getElementById("clearBtn").onclick=clearCurrent;
 document.getElementById("jumpBtn").onclick=()=>{const val=document.getElementById("jumpDate").value.trim(); const d=new Date(val+"T00:00:00"); if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1); state.selected=k(d); renderAll(); show("year");}};
+document.getElementById("refreshBtn").onclick=forceRefresh; document.getElementById("clearCacheBtn").onclick=clearAndRefresh;
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>show(b.dataset.view)); document.getElementById("mSave").onclick=saveModal; document.getElementById("mClose").onclick=()=>document.getElementById("modalWrap").style.display="none";
 document.getElementById("modalWrap").onclick=(e)=>{if(e.target.id==="modalWrap") document.getElementById("modalWrap").style.display="none";};
 await init(); if(!state.selected) state.selected=k(new Date()); renderAll(); show("week");
