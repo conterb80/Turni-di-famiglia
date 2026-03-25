@@ -1,0 +1,7 @@
+Versione 8:
+- rigenera Andrea da qui corretto
+- scrittura Firebase giorno per giorno
+- non tocca Micol
+- grafica V7 mantenuta
+IMPORTANTE: non sovrascrivere config.js se usi già Firebase.
+Carica: index.html, manifest.json, sw.js, icon.svg, icon-192.png, icon-512.png
