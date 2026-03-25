@@ -1,0 +1,7 @@
+Versione 7:
+- schermata rapida in alto con note e colori
+- comandi principali in basso
+- rigenera Andrea da data selezionata in poi
+- svuota separato Andrea / Micol / Nota
+IMPORTANTE: non sovrascrivere config.js se usi già Firebase.
+Carica: index.html, manifest.json, sw.js, icon.svg, icon-192.png, icon-512.png
