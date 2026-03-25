@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Turni Andrea & Micol - V8</title><meta name="theme-color" content="#111827"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Turni Andrea & Micol - V9</title><meta name="theme-color" content="#111827"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg" type="image/svg+xml">
 <style>
 :root{--bg:#eef2f7;--card:#fff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--shadow:0 8px 24px rgba(0,0,0,.06);--m:#fef3c7;--p:#ffedd5;--n:#dbeafe;--r:#f3f4f6;--f:#ede9fe;--t:#dcfce7;--today:#e0f2fe;--tomorrow:#f8fafc;--note:#fef9c3}
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}body{padding-bottom:118px}.wrap{max-width:1180px;margin:0 auto;padding:14px}.card{background:var(--card);border-radius:26px;padding:16px;box-shadow:var(--shadow)}.hidden{display:none!important}h1,h2,h3,p{margin:0}.muted{color:var(--muted)}.small{font-size:13px}.title{font-size:30px;font-weight:800}
@@ -16,7 +16,7 @@ button,select,input,textarea{font:inherit;border:1px solid var(--border);border-
 .modalWrap{position:fixed;inset:0;background:rgba(0,0,0,.34);display:none;align-items:center;justify-content:center;padding:16px}.modal{max-width:460px;width:100%;background:#fff;border-radius:22px;padding:16px;box-shadow:var(--shadow)}.selected-hint{background:#111827;color:#fff;border-radius:14px;padding:10px 12px;font-size:13px}
 </style></head><body>
 <div class="wrap">
-<div class="header"><div class="card"><div class="small muted">APP TURNI FAMIGLIA · VERSIONE 8</div><h1 class="title">Andrea & Micol</h1><p class="muted" style="margin-top:8px">Rigenera Andrea corretto: riscrive davvero da data selezionata in poi senza toccare Micol. Grafica V7 mantenuta.</p></div></div>
+<div class="header"><div class="card"><div class="small muted">APP TURNI FAMIGLIA · VERSIONE 9</div><h1 class="title">Andrea & Micol</h1><p class="muted" style="margin-top:8px">Rigenera Andrea da qui pulito: riscrive Andrea da data selezionata in poi senza toccare Micol o le note. Grafica V8 mantenuta.</p></div></div>
 <div class="card" style="margin-top:12px"><div class="headerline"><div><h2>Schermata rapida</h2><div class="small muted">Oggi e domani subito visibili</div></div></div>
 <div class="quick-grid" style="margin-top:12px">
 <div class="quick-box quick-today"><div class="small muted">Oggi</div><div class="list" style="margin-top:10px"><div class="row"><span>Andrea</span><strong id="qA">-</strong></div><div class="row"><span>Micol</span><strong id="qM">-</strong></div></div><div class="quick-note"><strong>Nota:</strong> <span id="qN">Nessuna nota</span></div></div>
@@ -27,7 +27,7 @@ button,select,input,textarea{font:inherit;border:1px solid var(--border);border-
 <div class="layout" style="margin-top:12px">
 <div><div id="weekView" class="card"></div><div id="monthView" class="card hidden"></div><div id="yearView" class="card hidden"></div><div id="statsView" class="card hidden"></div><div id="widgetView" class="card hidden"></div></div>
 <div class="side">
-<div class="card"><h3>Dettaglio giorno</h3><div id="selLabel" class="small muted" style="margin-top:6px"></div><div class="selected-hint" style="margin-top:12px">Seleziona un giorno corretto di Andrea e usa Rigenera Andrea da qui. Micol non viene toccata.</div>
+<div class="card"><h3>Dettaglio giorno</h3><div id="selLabel" class="small muted" style="margin-top:6px"></div><div class="selected-hint" style="margin-top:12px">Scegli un giorno corretto di Andrea, salvalo, poi usa Rigenera Andrea da qui. Micol e note restano intatti.</div>
 <div class="field" style="margin-top:12px"><label>Andrea</label><select id="andreaSel"><option value="">-</option><option value="M">Mattina</option><option value="P">Pomeriggio</option><option value="N">Notte</option><option value="R">Riposo</option><option value="F">Ferie</option></select></div>
 <div class="field" style="margin-top:12px"><label>Micol</label><input id="micolInput" placeholder="08:30-13:30 oppure Riposo/Ferie"></div>
 <div class="field" style="margin-top:12px"><label>Nota</label><textarea id="notaInput" placeholder="Impegni, scuola, visite, promemoria"></textarea></div>
@@ -42,7 +42,10 @@ button,select,input,textarea{font:inherit;border:1px solid var(--border);border-
 <script src="./config.js"></script><script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import { getDatabase, ref, onValue, set } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
-const cfg=window.TURNI_APP_CONFIG||{}, sync=Boolean(cfg.firebase?.apiKey&&cfg.firebase?.databaseURL&&cfg.sharedPath), STORAGE_KEY="turni-famiglia-v8-local", cycle=["M","M","R","N","N","R","P","P","R"], baseDate=new Date("2026-03-12T00:00:00"), months=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"], weekdays=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"], turnHours={M:8,P:8,N:8,R:0,F:0}, turnLabel={M:"Mattina",P:"Pomeriggio",N:"Notte",R:"Riposo",F:"Ferie"}; let db=null,state={current:new Date(),selected:null,data:{}},modalKey=null;
+
+const cfg=window.TURNI_APP_CONFIG||{}, sync=Boolean(cfg.firebase?.apiKey&&cfg.firebase?.databaseURL&&cfg.sharedPath), STORAGE_KEY="turni-famiglia-v9-local", cycle=["M","M","R","N","N","R","P","P","R"], baseDate=new Date("2026-03-12T00:00:00"), months=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"], weekdays=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"], turnHours={M:8,P:8,N:8,R:0,F:0}, turnLabel={M:"Mattina",P:"Pomeriggio",N:"Notte",R:"Riposo",F:"Ferie"};
+let db=null,state={current:new Date(),selected:null,data:{}},modalKey=null;
+
 const k=d=>{const tz=d.getTimezoneOffset()*60000; return new Date(d-tz).toISOString().slice(0,10)}, fromKey=s=>new Date(s+"T00:00:00"), dim=(y,m)=>new Date(y,m+1,0).getDate();
 function sow(d){const c=new Date(d), diff=(c.getDay()+6)%7; c.setDate(c.getDate()-diff); c.setHours(0,0,0,0); return c}
 function monthGrid(y,m){const first=new Date(y,m,1), off=(first.getDay()+6)%7, total=dim(y,m), cells=Math.ceil((off+total)/7)*7, out=[]; for(let i=0;i<cells;i++){const dd=i-off+1; out.push(dd<1||dd>total?null:new Date(y,m,dd))} return out}
@@ -50,7 +53,7 @@ function cycleFrom(anchorDate, anchorValue, date){const ai=cycle.indexOf(anchorV
 function autoAndrea(date){return cycleFrom(baseDate,"M",date)}
 function ensure(key){if(!state.data[key]) state.data[key]={andrea:"",micol:"",nota:""}}
 function day(key){ensure(key); const rec=state.data[key], d=fromKey(key); return {key,date:d,andrea:rec.andrea||autoAndrea(d),micol:rec.micol||"",nota:rec.nota||""}}
-function parseMicolHours(v){if(!v) return 0; const s=v.trim().toLowerCase(); if(["riposo","ferie","r","f"].includes(s)) return 0; const m=s.match(/^(\\d{1,2}):(\\d{2})-(\\d{1,2}):(\\d{2})$/); if(!m) return 0; let a=parseInt(m[1])*60+parseInt(m[2]), b=parseInt(m[3])*60+parseInt(m[4]); if(b<a) b+=24*60; return (b-a)/60}
+function parseMicolHours(v){if(!v) return 0; const s=v.trim().toLowerCase(); if(["riposo","ferie","r","f"].includes(s)) return 0; const m=s.match(/^(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})$/); if(!m) return 0; let a=parseInt(m[1])*60+parseInt(m[2]), b=parseInt(m[3])*60+parseInt(m[4]); if(b<a) b+=24*60; return (b-a)/60}
 function micolText(v){if(!v) return "Riposo"; const s=v.trim().toLowerCase(); if(["r","riposo"].includes(s)) return "Riposo"; if(["f","ferie"].includes(s)) return "Ferie"; return v}
 const micolShort=v=>{const t=micolText(v); return (t==="Riposo"||t==="Ferie")?t:t.replace(":00","")}, together=d=>d.andrea==="R"&&micolText(d.micol)==="Riposo";
 function monthDays(){const y=state.current.getFullYear(),m=state.current.getMonth(),arr=[]; for(let d=1; d<=dim(y,m); d++) arr.push(day(k(new Date(y,m,d)))); return arr}
@@ -62,7 +65,26 @@ async function saveCurrent(){ensure(state.selected); const p={andrea:andreaSel.v
 async function clearAndrea(){ensure(state.selected); state.data[state.selected].andrea=""; andreaSel.value=""; renderAll(); await persistOne(state.selected,state.data[state.selected])}
 async function clearMicol(){ensure(state.selected); state.data[state.selected].micol=""; micolInput.value=""; renderAll(); await persistOne(state.selected,state.data[state.selected])}
 async function clearNota(){ensure(state.selected); state.data[state.selected].nota=""; notaInput.value=""; renderAll(); await persistOne(state.selected,state.data[state.selected])}
-async function regenFromSelected(){if(!state.selected) return; ensure(state.selected); const anchorDate=fromKey(state.selected); let anchorValue=andreaSel.value || state.data[state.selected].andrea || autoAndrea(anchorDate); if(!["M","P","N","R","F"].includes(anchorValue)) anchorValue=autoAndrea(anchorDate); state.data[state.selected].andrea=anchorValue; const end=new Date(state.current.getFullYear()+2,11,31); for(let d=new Date(anchorDate); d<=end; d.setDate(d.getDate()+1)){const key=k(d); ensure(key); state.data[key].andrea=cycleFrom(anchorDate, anchorValue, new Date(d)); const current=state.data[key]||{andrea:"",micol:"",nota:""}; await persistOne(key, {andrea:state.data[key].andrea, micol:current.micol||"", nota:current.nota||""})} renderAll()}
+async function regenFromSelected(){
+  if(!state.selected) return;
+  ensure(state.selected);
+  const anchorDate = fromKey(state.selected);
+  let anchorValue = andreaSel.value || state.data[state.selected].andrea || autoAndrea(anchorDate);
+  if(!["M","P","N","R","F"].includes(anchorValue)) anchorValue = autoAndrea(anchorDate);
+  const end = new Date(state.current.getFullYear()+2, 11, 31);
+  for(let d = new Date(anchorDate); d <= end; d.setDate(d.getDate()+1)){
+    const key = k(d);
+    ensure(key);
+    const newAndrea = cycleFrom(anchorDate, anchorValue, new Date(d));
+    state.data[key] = {
+      andrea: newAndrea,
+      micol: state.data[key].micol || "",
+      nota: state.data[key].nota || ""
+    };
+    await persistOne(key, state.data[key]);
+  }
+  renderAll();
+}
 function show(view){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===view)); ["week","month","year","stats","widget"].forEach(v=>document.getElementById(v+"View").classList.toggle("hidden", view!==v))}
 function renderHeaderStats(){const s=stats(); sA.textContent=s.a; sM.textContent=s.m.toFixed(1).replace(".0",""); sL.textContent=s.l; sW.textContent=s.w}
 function renderWeek(){const root=weekView,start=sow(state.current); let html=`<div class="headerline"><div><h2>Vista settimanale</h2><div class="small muted">Settimana di ${k(start)}</div></div></div><div class="week-list" style="margin-top:12px">`; for(let i=0;i<7;i++){const d=new Date(start); d.setDate(start.getDate()+i); const dd=day(k(d)); html+=`<div class="week-day ${state.selected===dd.key?'sel':''} ${together(dd)?'together':''}" data-key="${dd.key}"><div class="headerline"><div><strong>${weekdays[i]} ${d.getDate()} ${months[d.getMonth()]}</strong><div class="small muted">${dd.key}</div></div>${together(dd)?'<span class="badge bT">Liberi insieme</span>':''}</div><div style="display:grid;gap:8px;margin-top:8px"><div><span class="badge b${dd.andrea}">Andrea: ${turnLabel[dd.andrea]}</span></div><div><span class="badge">Micol: ${micolText(dd.micol)}</span></div><div class="note-line">📝 ${dd.nota||'Nessuna nota'}</div></div></div>`} root.innerHTML=html+`</div>`; root.querySelectorAll("[data-key]").forEach(el=>el.onclick=()=>{state.selected=el.dataset.key; renderAll()})}
@@ -76,7 +98,7 @@ function renderAll(){renderHeaderStats(); renderWeek(); renderMonth(); renderYea
 function openModal(key){modalKey=key; const rec=state.data[key]||{andrea:"",micol:"",nota:""}; mLabel.textContent=key; mAndrea.value=rec.andrea||""; mMicol.value=rec.micol||""; mNota.value=rec.nota||""; modalWrap.style.display="flex"}
 async function saveModal(){if(!modalKey) return; const p={andrea:mAndrea.value,micol:mMicol.value.trim(),nota:mNota.value.trim()}; state.data[modalKey]=p; state.selected=modalKey; modalWrap.style.display="none"; renderAll(); await persistOne(modalKey,p)}
 async function init(){if(sync){try{const app=initializeApp(cfg.firebase); db=getDatabase(app); onValue(ref(db, `${cfg.sharedPath}/days`), snap=>{state.data=snap.val()||{}; renderAll()}); return}catch(e){console.error(e)}} loadLocal()}
-const forceRefresh=()=>{const url=new URL(window.location.href); url.searchParams.set("v","8"); url.searchParams.set("t",String(Date.now())); window.location.href=url.toString()};
+const forceRefresh=()=>{const url=new URL(window.location.href); url.searchParams.set("v","9"); url.searchParams.set("t",String(Date.now())); window.location.href=url.toString()};
 prevBtn.onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1); renderAll()}; nextBtn.onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1); renderAll()}; todayBtn.onclick=()=>{state.current=new Date(); state.selected=k(new Date()); renderAll()}; refreshBtn.onclick=forceRefresh; jumpOpenBtn.onclick=()=>searchWrap.style.display="flex"; jumpCloseBtn.onclick=()=>searchWrap.style.display="none";
 jumpBtn.onclick=()=>{const val=jumpDate.value.trim(); const d=new Date(val+"T00:00:00"); if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1); state.selected=k(d); renderAll(); show("year"); searchWrap.style.display="none"}};
 saveBtn.onclick=saveCurrent; clearAndreaBtn.onclick=clearAndrea; clearMicolBtn.onclick=clearMicol; clearNotaBtn.onclick=clearNota; regenFromBtn.onclick=regenFromSelected;
