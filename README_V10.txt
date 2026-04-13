@@ -1,0 +1,1 @@
+V10 backup sicuro. Carica su GitHub solo index.html, manifest.json, sw.js, icon.svg, icon-192.png, icon-512.png. NON sovrascrivere config.js.
