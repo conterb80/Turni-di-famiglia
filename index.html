@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Turni Andrea & Micol - V12</title>
+<title>Turni Andrea & Micol - V13</title>
 <meta name="theme-color" content="#111827">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -23,7 +23,7 @@ button,select,input,textarea{font:inherit;border:1px solid var(--border);border-
 </head>
 <body>
 <div class="wrap">
-  <div class="card"><div class="small muted">APP TURNI FAMIGLIA · VERSIONE 12</div><h1 class="title">Andrea & Micol</h1><p class="muted" style="margin-top:8px">Sync Firebase automatica + ciclo intelligente fisso. Backup incluso.</p></div>
+  <div class="card"><div class="small muted">APP TURNI FAMIGLIA · VERSIONE 13 BLINDATA</div><h1 class="title">Andrea & Micol</h1><p class="muted" style="margin-top:8px">Firebase integrato direttamente nell’app. Niente config.js. Ciclo intelligente + backup.</p></div>
   <div class="card"><div class="head"><div><h2>Schermata rapida</h2><div class="small muted">Oggi e domani subito visibili</div></div></div><div class="quick-grid" style="margin-top:12px"><div class="quick-box quick-today"><div class="small muted">Oggi</div><div class="list" style="margin-top:10px"><div class="row"><span>Andrea</span><strong id="qA">-</strong></div><div class="row"><span>Micol</span><strong id="qM">-</strong></div></div><div class="quick-note"><strong>Nota:</strong> <span id="qN">Nessuna nota</span></div></div><div class="quick-box"><div class="small muted">Domani</div><div class="list" style="margin-top:10px"><div class="row"><span>Andrea</span><strong id="qAD">-</strong></div><div class="row"><span>Micol</span><strong id="qMD">-</strong></div></div><div class="quick-note"><strong>Nota:</strong> <span id="qND">Nessuna nota</span></div></div></div></div>
   <div class="stats"><div class="card stat"><div class="small muted">Ore Andrea mese</div><div class="value" id="sA">0</div></div><div class="card stat"><div class="small muted">Ore Micol mese</div><div class="value" id="sM">0</div></div><div class="card stat"><div class="small muted">Liberi insieme</div><div class="value" id="sL">0</div></div><div class="card stat"><div class="small muted">Weekend lavorati</div><div class="value" id="sW">0</div></div></div>
   <div class="tabs"><button class="tab active" data-view="week">Settimana</button><button class="tab" data-view="month">Mese</button><button class="tab" data-view="year">Anno</button><button class="tab" data-view="stats">Statistiche</button><button class="tab" data-view="backup">Backup</button></div>
@@ -43,30 +43,26 @@ button,select,input,textarea{font:inherit;border:1px solid var(--border);border-
 </div>
 <div class="bottom-wrap"><div class="bottom-bar"><button id="prevBtn">Indietro</button><button id="todayBtn">Oggi</button><button id="nextBtn">Avanti</button><button id="refreshBtn">Aggiorna</button><button id="jumpOpenBtn" class="primary">Cerca</button></div></div>
 <div class="modalWrap" id="searchWrap"><div class="modal"><h3>Cerca data</h3><div class="field"><label>Formato</label><input id="jumpDate" placeholder="2027-08-15"></div><div class="toolbar" style="grid-template-columns:1fr 1fr;margin-top:12px"><button id="jumpBtn" class="primary">Vai</button><button id="jumpCloseBtn">Chiudi</button></div></div></div>
-<script>
-window.TURNI_APP_CONFIG = window.TURNI_APP_CONFIG || {
-  firebase: {
-    apiKey: "AIzaSyDsDSbb0j6VrkQMhZRAVAredHI8BQdI57Q",
-    authDomain: "turni-di-famiglia-99d41.firebaseapp.com",
-    databaseURL: "https://turni-di-famiglia-99d41-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "turni-di-famiglia-99d41",
-    storageBucket: "turni-di-famiglia-99d41.firebasestorage.app",
-    messagingSenderId: "940441790090",
-    appId: "1:940441790090:web:9ab729eafe46ef06fdaf73"
-  },
-  sharedPath: "turni-famiglia"
-};
-</script>
-<script src="./config.js"></script>
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import { getDatabase, ref, onValue, set, get } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
 import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 
-const cfg=window.TURNI_APP_CONFIG, sync=!!(cfg?.firebase?.apiKey&&cfg?.firebase?.databaseURL&&cfg?.sharedPath);
+const cfg={
+  firebase:{
+    apiKey:"AIzaSyDsDSbb0j6VrkQMhZRAVAredHI8BQdI57Q",
+    authDomain:"turni-di-famiglia-99d41.firebaseapp.com",
+    databaseURL:"https://turni-di-famiglia-99d41-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId:"turni-di-famiglia-99d41",
+    storageBucket:"turni-di-famiglia-99d41.firebasestorage.app",
+    messagingSenderId:"940441790090",
+    appId:"1:940441790090:web:9ab729eafe46ef06fdaf73"
+  },
+  sharedPath:"turni-famiglia"
+};
 const cycle=["M","M","R","N","N","R","P","P","R"], labels={M:"Mattina",P:"Pomeriggio",N:"Notte",R:"Riposo",F:"Ferie"}, hours={M:8,P:8,N:8,R:0,F:0};
 const months=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"], weekdays=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
-const STORE="turni-v12-local", SNAP="turni-v12-snap", ANCHOR="turni-v12-anchor";
+const STORE="turni-v13-local", SNAP="turni-v13-snap", ANCHOR="turni-v13-anchor";
 let db=null, state={current:new Date(), selected:null, data:{}, anchor:{date:"2026-04-08",value:"M"}};
 
 const $=id=>document.getElementById(id);
@@ -106,7 +102,7 @@ function render(){renderTop();renderWeek();renderMonth();renderYear();renderStat
 function show(v){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===v));["week","month","year","stats","backup"].forEach(x=>$(x+"View").classList.toggle("hidden",x!==v))}
 function exportBackup(){let blob=new Blob([JSON.stringify({version:12,exportedAt:new Date().toISOString(),anchor:state.anchor,data:state.data},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`backup_turni_v12_${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href)}
 async function importBackup(file){let p=JSON.parse(await file.text());snapshot("prima import");state.data=p.data||p;state.anchor=p.anchor||state.anchor;saveLocal();if(db){await persistAnchor();for(let [k,v] of Object.entries(state.data))await persist(k,v)}render();alert("Backup importato e sincronizzato.")}
-async function init(){loadLocal();if(sync){try{let app=initializeApp(cfg.firebase),auth=getAuth(app);db=getDatabase(app);await signInAnonymously(auth);$("firebaseStatus").className="status ok";$("firebaseStatus").textContent=`Firebase attivo · ${cfg.firebase.projectId} · ${cfg.sharedPath}`;let a=await get(ref(db,`${cfg.sharedPath}/meta/anchor`));if(a.exists()){state.anchor=a.val();saveLocal()}onValue(ref(db,`${cfg.sharedPath}/days`),snap=>{let cloud=snap.val();if(cloud&&Object.keys(cloud).length){state.data=cloud;saveLocal()}render()});return}catch(e){$("firebaseStatus").textContent="Firebase errore: uso locale";console.error(e)}}$("firebaseStatus").textContent="Modalità locale · controlla config.js";render()}
+async function init(){loadLocal();try{let app=initializeApp(cfg.firebase),auth=getAuth(app);db=getDatabase(app);await signInAnonymously(auth);$("firebaseStatus").className="status ok";$("firebaseStatus").textContent=`Firebase attivo · ${cfg.firebase.projectId} · ${cfg.sharedPath}`;let a=await get(ref(db,`${cfg.sharedPath}/meta/anchor`));if(a.exists()){state.anchor=a.val();saveLocal()}onValue(ref(db,`${cfg.sharedPath}/days`),snap=>{let cloud=snap.val();if(cloud&&Object.keys(cloud).length){state.data=cloud;saveLocal()}render()});return}catch(e){$("firebaseStatus").className="status err";$("firebaseStatus").textContent="Firebase errore: controlla regole/Auth anonimo";console.error(e)}render()}
 $("saveBtn").onclick=saveCurrent;$("regenFromBtn").onclick=realign;$("clearAndreaBtn").onclick=()=>clearField("andrea");$("clearMicolBtn").onclick=()=>clearField("micol");$("clearNotaBtn").onclick=()=>clearField("nota");
 $("exportBtn").onclick=exportBackup;$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=e=>{let f=e.target.files?.[0];if(f)importBackup(f)};$("restoreLocalBtn").onclick=()=>{let s=JSON.parse(localStorage.getItem(SNAP)||"null");if(!s)return alert("Nessun backup locale");state.data=s.data||{};state.anchor=s.anchor||state.anchor;saveLocal();render()};$("saveSnapshotBtn").onclick=()=>{snapshot("snapshot manuale");alert("Snapshot salvato")};
 $("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","12");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
