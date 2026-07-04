@@ -1,165 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Turni Andrea & Micol - V19</title>
-<meta name="theme-color" content="#111827">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<style>
-:root{--bg:#eef2f7;--card:#fff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--shadow:0 8px 24px rgba(0,0,0,.06);--m:#fef3c7;--p:#ffedd5;--n:#dbeafe;--r:#f3f4f6;--f:#ede9fe;--t:#dcfce7;--today:#e0f2fe;--note:#fef9c3}
-*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}body{padding-bottom:112px}.wrap{max-width:1180px;margin:auto;padding:14px}.card{background:var(--card);border-radius:26px;padding:16px;box-shadow:var(--shadow);margin-bottom:12px}h1,h2,h3,p{margin:0}.title{font-size:31px;font-weight:850}.muted{color:var(--muted)}.small{font-size:13px}.hidden{display:none!important}
-button,select,input,textarea{font:inherit;border:1px solid var(--border);border-radius:16px;padding:10px 12px;background:#fff;color:var(--text)}button{cursor:pointer}.primary{background:#111827;color:white;border-color:#111827}.danger{background:#fff7ed;border-color:#fdba74}.tabs{display:flex;gap:10px;overflow:auto;margin-bottom:12px}.tab.active{background:#111827;color:white}.stats,.quick-grid,.toolbar{display:grid;gap:12px}.stats{grid-template-columns:repeat(2,1fr)}.quick-grid{grid-template-columns:1fr 1fr}.layout{display:grid;gap:12px}@media(min-width:900px){.layout{grid-template-columns:1.45fr .9fr}.stats{grid-template-columns:repeat(4,1fr)}}
-.quick-box{border-radius:22px;padding:16px;border:1px solid var(--border)}.quick-today{background:var(--today)}.quick-note{margin-top:10px;background:var(--note);border-radius:16px;padding:10px 12px}.row{display:flex;justify-content:space-between;gap:10px;background:#f9fafb;padding:11px 12px;border-radius:14px}.list{display:grid;gap:10px}.stat .value{font-size:34px;font-weight:850;margin-top:6px}
-.badge{display:inline-block;border-radius:999px;padding:5px 10px;border:1px solid var(--border);font-size:12px;font-weight:700}.bM{background:var(--m)}.bP{background:var(--p)}.bN{background:var(--n)}.bR{background:var(--r)}.bF{background:var(--f)}.bT{background:var(--t)}
-.week-list{display:grid;gap:12px}.week-day{border:1px solid var(--border);border-radius:20px;padding:14px;background:white}.sel{outline:2px solid #111827}.together{outline:2px solid #22c55e;background:#f0fdf4}.head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.note-line{margin-top:10px;font-size:14px;background:#fafaf9;border-radius:14px;padding:10px 12px;color:#374151}
-.month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.weekday{text-align:center;color:var(--muted);font-size:13px;font-weight:700}.day{min-height:108px;border:1px solid var(--border);border-radius:18px;background:white;padding:6px;cursor:pointer}.empty{background:transparent;border:none}.num{font-size:13px;font-weight:800}.mini{margin-top:5px;font-size:11px;display:grid;gap:3px}
-.year-grid{display:grid;gap:12px}@media(min-width:900px){.year-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1180px){.year-grid{grid-template-columns:repeat(3,1fr)}}.monthbox{border:1px solid var(--border);border-radius:20px;padding:10px;background:white}.ygrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}.ycell{min-height:56px;border-radius:10px;border:1px solid #eef0f2;padding:4px;background:#f9fafb;font-size:9px;overflow:hidden}.ycell .d{font-size:10px;font-weight:800}.aM{background:var(--m)}.aP{background:var(--p)}.aN{background:var(--n)}.aR{background:var(--r)}.aF{background:var(--f)}
-.field{display:grid;gap:6px;margin-top:12px}textarea{width:100%;min-height:96px}.status{padding:10px 12px;border-radius:14px;background:#f9fafb}.ok{background:#ecfeff}.warn{background:#fff7ed}.hint{background:#111827;color:white;border-radius:14px;padding:10px 12px;font-size:13px}
-.bottom-wrap{position:fixed;left:0;right:0;bottom:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(238,242,247,1),rgba(238,242,247,.92),rgba(238,242,247,0))}.bottom-bar{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.bottom-bar button{box-shadow:var(--shadow)}
-.modalWrap{position:fixed;inset:0;background:rgba(0,0,0,.34);display:none;align-items:center;justify-content:center;padding:16px}.modal{max-width:460px;width:100%;background:white;border-radius:22px;padding:16px;box-shadow:var(--shadow)}
-
-/* V15 COMPACT UI */
-body{padding-bottom:92px}.wrap{padding:10px}.card{border-radius:22px;padding:14px;margin-bottom:10px}.title{font-size:28px}.stats{grid-template-columns:repeat(4,1fr);gap:8px}.stat{padding:10px!important}.stat .small{font-size:11px}.stat .value{font-size:28px;margin-top:2px}
-.quick-grid{gap:8px}.quick-box{padding:12px;border-radius:18px}.quick-box .row{padding:8px 10px}.quick-note{padding:8px 10px;font-size:13px}
-.tabs{gap:8px}.tabs button{padding:9px 12px;border-radius:14px}
-.week-list{gap:0;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:#fff}.week-day{border:0;border-radius:0;box-shadow:none;padding:0;background:#fff;border-bottom:1px solid var(--border)}.week-day:last-child{border-bottom:0}.week-day.sel{outline:0;background:#eff6ff}.week-day.together{outline:0;background:#f0fdf4}
-.week-compact-row{display:grid;grid-template-columns:54px 1fr 1fr 30px;gap:6px;align-items:center;padding:8px 8px;min-height:52px}.wdate{font-weight:850;text-align:center;line-height:1.05}.wdate .dow{font-size:12px}.wdate .num{font-size:16px}.person-head{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:2px;text-align:center}.pill{display:flex;align-items:center;justify-content:center;gap:5px;border-radius:999px;padding:7px 7px;font-weight:850;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}.pill .code{width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.65);font-size:11px}.pillM{background:var(--m);color:#92400e}.pillP{background:var(--p);color:#c2410c}.pillN{background:var(--n);color:#1d4ed8}.pillR{background:var(--t);color:#166534}.pillF{background:var(--f);color:#6d28d9}.pillMic{background:#eff6ff;color:#1d4ed8}.pillMic.rip{background:#ecfdf5;color:#166534}.noteIcon{font-size:16px;text-align:center;opacity:.75}.legendCompact{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:12px}.legendCompact span{padding:5px 8px;border-radius:999px;background:#f9fafb;border:1px solid var(--border)}
-.month-grid{gap:5px}.day{min-height:82px;border-radius:14px}.mini{font-size:10px}.bottom-bar{gap:8px}.bottom-bar button{padding:9px 8px;border-radius:16px;font-size:14px}
-@media(max-width:420px){.stats{grid-template-columns:repeat(2,1fr)}.week-compact-row{grid-template-columns:48px 1fr 1fr 24px}.pill{font-size:12px;padding:6px 5px}.person-head{display:none}.title{font-size:26px}}
-
-
-/* V16 HOME FOCUS UI */
-.headerIntro{display:none!important}
-body{padding-bottom:88px}.wrap{padding:8px;max-width:980px}.card{border-radius:20px;padding:12px;margin-bottom:8px}.title{font-size:28px}
-.appbar{position:sticky;top:0;z-index:10;background:rgba(238,242,247,.92);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 8px 8px;margin:-8px -8px 8px}
-.appbar .brand{display:flex;align-items:center;gap:10px;font-size:23px;font-weight:900;color:#111827}.appbar .hamb{font-size:24px;line-height:1}.appbar .icons{display:flex;gap:8px}.appbar .miniBtn{border:1px solid var(--border);border-radius:14px;background:white;padding:7px 9px;box-shadow:var(--shadow)}
-.quickHome{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}.quickCard{background:white;border:1px solid var(--border);border-radius:18px;padding:10px;box-shadow:var(--shadow)}.quickTitle{font-size:13px;font-weight:900;display:flex;align-items:center;gap:6px;margin-bottom:8px}.dot{width:10px;height:10px;border-radius:999px;background:#22c55e;display:inline-block}.dot.tom{background:#f97316}.quickTwo{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:center}.qPerson{text-align:center}.qLab{font-size:11px;color:var(--muted);font-weight:700}.qVal{margin-top:4px;display:inline-flex;justify-content:center;align-items:center;border-radius:999px;padding:7px 10px;font-weight:900;font-size:15px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qVal.M,.pillM{background:#fef3c7;color:#92400e}.qVal.P,.pillP{background:#ffedd5;color:#c2410c}.qVal.N,.pillN{background:#dbeafe;color:#1d4ed8}.qVal.R,.pillR{background:#dcfce7;color:#166534}.qVal.F,.pillF{background:#ede9fe;color:#6d28d9}.qVal.micol{background:#eff6ff;color:#1d4ed8}.qVal.micol.rip{background:#dcfce7;color:#166534}.quickNoteMini{margin-top:8px;background:#fef9c3;border-radius:999px;padding:6px 9px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.stats{display:none!important}.tabs{margin:0 0 8px 0;padding-bottom:0;display:flex;gap:8px;overflow:auto}.tabs button{padding:8px 11px;border-radius:14px;font-size:14px}.tabs .tab[data-view="stats"]{display:none}
-.layout{display:block}.layout>div:first-child{display:block}.layout>div:nth-child(2){display:block}#weekView{padding:12px}#weekView h2{font-size:27px}#weekView .small{font-size:13px}.week-list{margin-top:10px!important;border-radius:18px}.week-compact-row{grid-template-columns:48px 1fr 1fr 26px;min-height:49px;padding:6px 7px}.wdate .dow{font-size:12px}.wdate .num{font-size:17px}.pill{font-size:13px;padding:6px 6px}.pill .code{width:19px;height:19px;font-size:11px}.person-head{display:none}.legendCompact{justify-content:center;margin-top:8px;font-size:11px;gap:5px}.legendCompact span{padding:4px 7px}.side .card:first-child,.layout > div:nth-child(2) > .card:first-child{margin-top:8px}#selLabel + .hint{display:none}.field{margin-top:9px}textarea{min-height:68px}.toolbar{gap:8px}.bottom-bar{grid-template-columns:repeat(5,1fr);gap:7px}.bottom-bar button{padding:8px 6px;font-size:13px}
-@media(min-width:900px){.layout{display:grid;grid-template-columns:1.35fr .9fr;gap:12px}.stats{display:grid!important}.appbar{position:static}.headerIntro{display:block!important}}
-@media(max-width:420px){.quickCard{padding:9px}.quickTitle{font-size:12px}.qVal{font-size:14px;padding:6px 8px}#weekView h2{font-size:25px}.week-compact-row{grid-template-columns:44px 1fr 1fr 22px;gap:4px}.pill{font-size:12px}}
-
-
-/* V18 MESE PRO VERIFICATA */
-.monthHeaderPro{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.monthHeaderPro h2{font-size:27px;margin:0}.monthHeaderPro button{padding:7px 10px;border-radius:14px}.monthCardPro{padding:12px!important;overflow:hidden}.monthGridPro{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;width:100%}.weekdayPro{text-align:center;color:var(--muted);font-size:11px;font-weight:850;padding:0 0 3px}.dayPro{min-width:0;height:72px;border:1px solid var(--border);border-radius:12px;background:#fff;padding:5px 2px;text-align:center;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px}.dayPro.empty{background:transparent;border:0;cursor:default}.dayPro.sel{outline:2px solid #111827}.dayPro.today{outline:2px solid #2563eb;background:#eff6ff}.dayPro.together{border-color:#22c55e;background:#f0fdf4}.dayNumPro{font-size:14px;font-weight:900;line-height:1}.badgePro{width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;line-height:1}.badgeM{background:#fef3c7;color:#92400e}.badgeP{background:#ffedd5;color:#c2410c}.badgeN{background:#dbeafe;color:#1d4ed8}.badgeR{background:#dcfce7;color:#166534}.badgeF{background:#ede9fe;color:#6d28d9}.micolMiniPro{font-size:9px;font-weight:800;color:#2563eb;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.05}.micolMiniPro.rip{color:#166534}.noteMiniPro{font-size:11px;line-height:1}.legendCompact.v18{justify-content:center;margin-top:9px}.yearPro{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.yearMonthPro{background:#fff;border:1px solid var(--border);border-radius:16px;padding:8px;cursor:pointer}.yearMonthTitlePro{text-align:center;font-weight:900;font-size:12px;margin-bottom:5px}.yearDotsPro{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}.dotPro{width:7px;height:7px;border-radius:999px;margin:auto;background:#e5e7eb}.dotM{background:#f59e0b}.dotP{background:#f97316}.dotN{background:#6366f1}.dotR{background:#22c55e}.dotF{background:#a855f7}.statsSmartPro{display:grid;gap:9px;margin-top:12px}.smartRowPro{background:#fff;border:1px solid var(--border);border-radius:16px;padding:10px 12px}.smartHeadPro{display:flex;justify-content:space-between;gap:8px;font-weight:850}.barPro{height:9px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin-top:8px}.fillPro{height:100%;border-radius:999px;background:#22c55e}.fillPro.micol{background:#2563eb}.fillPro.free{background:#a855f7}.fillPro.weekend{background:#f97316}@media(max-width:420px){.monthCardPro{padding:10px!important}.monthGridPro{gap:3px}.dayPro{height:66px;border-radius:11px;padding:4px 2px}.dayNumPro{font-size:13px}.badgePro{width:18px;height:18px;font-size:10px}.micolMiniPro{font-size:8.5px}.yearPro{grid-template-columns:repeat(2,minmax(0,1fr))}}
-
-
-/* V19 NOTE PRO */
-.week-compact-row{grid-template-columns:48px 1fr 1fr minmax(110px,.85fr)!important;gap:7px!important}
-.week-day.hasNote{background:#fffbeb!important}.week-day.hasNote.sel{background:#eff6ff!important}.week-day.hasNote.together{background:#f0fdf4!important}
-.weekNoteText{display:flex;align-items:center;justify-content:flex-start;gap:5px;background:#fef9c3;border-radius:999px;padding:6px 8px;font-size:12px;font-weight:750;color:#713f12;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:inset 0 0 0 1px rgba(234,179,8,.12)}
-.weekNoteText span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}.weekNoteText.empty{justify-content:center;background:#fff;color:#94a3b8;font-weight:700;box-shadow:none}.weekNoteText.empty span{overflow:visible}.weekNoteHint{margin-top:8px;font-size:12px;color:var(--muted);display:flex;gap:6px;align-items:center;justify-content:center}
-@media(max-width:420px){.week-compact-row{grid-template-columns:42px 1fr 1fr 92px!important;gap:4px!important}.weekNoteText{font-size:11px;padding:5px 6px}.pill{font-size:11px!important}.pill .code{display:none}}
-
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#062231" />
+  <title>Meteo Conte V15</title>
+  <link rel="manifest" href="manifest.json?v=15" />
+  <link rel="icon" type="image/png" href="icon.png?v=15" />
+  <link rel="stylesheet" href="style.css?v=15.0.0" />
 </head>
 <body>
-<div class="wrap">
-  <div class="appbar"><div class="brand"><span class="hamb">☰</span><span>Turni di Famiglia</span></div><div class="icons"><button class="miniBtn" id="miniCalendarBtn">📅</button><button class="miniBtn" id="miniMoreBtn">⋮</button></div></div>
-  <div class="card headerIntro"><div class="small muted">APP TURNI FAMIGLIA · VERSIONE 19 NOTE PRO</div><h1 class="title">Andrea & Micol</h1><p class="muted" style="margin-top:8px">Note leggibili nella settimana, senza stravolgere la home. Sync e backup invariati.</p></div>
-  <div class="quickHome">
-    <div class="quickCard">
-      <div class="quickTitle"><span class="dot"></span><span>OGGI</span><span class="muted" id="qTodayDate"></span></div>
-      <div class="quickTwo">
-        <div class="qPerson"><div class="qLab">Andrea</div><div id="qA" class="qVal">-</div></div>
-        <div class="qPerson"><div class="qLab">Micol</div><div id="qM" class="qVal micol">-</div></div>
+  <main class="app">
+    <header class="topbar logo-head">
+      <div class="brand-block">
+        <img class="app-logo" src="icon.png?v=15" alt="Meteo Conte" />
+        <div>
+          <h1>Meteo Conte</h1>
+          <p>Villanova di Bagnacavallo</p>
+        </div>
       </div>
-      <div class="quickNoteMini">📝 <span id="qN">Nessuna nota</span></div>
-    </div>
-    <div class="quickCard">
-      <div class="quickTitle"><span class="dot tom"></span><span>DOMANI</span><span class="muted" id="qTomorrowDate"></span></div>
-      <div class="quickTwo">
-        <div class="qPerson"><div class="qLab">Andrea</div><div id="qAD" class="qVal">-</div></div>
-        <div class="qPerson"><div class="qLab">Micol</div><div id="qMD" class="qVal micol">-</div></div>
-      </div>
-      <div class="quickNoteMini">📝 <span id="qND">Nessuna nota</span></div>
-    </div>
-  </div>
-  <div class="stats"><div class="card stat"><div class="small muted">Ore Andrea mese</div><div class="value" id="sA">0</div></div><div class="card stat"><div class="small muted">Ore Micol mese</div><div class="value" id="sM">0</div></div><div class="card stat"><div class="small muted">Liberi insieme</div><div class="value" id="sL">0</div></div><div class="card stat"><div class="small muted">Weekend lavorati</div><div class="value" id="sW">0</div></div></div>
-  <div class="tabs"><button class="tab active" data-view="week">Settimana</button><button class="tab" data-view="month">Mese</button><button class="tab" data-view="year">Anno</button><button class="tab" data-view="stats">Statistiche</button><button class="tab" data-view="backup">Backup</button></div>
-  <div class="layout">
-    <div><div id="weekView" class="card"></div><div id="monthView" class="card hidden"></div><div id="yearView" class="card hidden"></div><div id="statsView" class="card hidden"></div><div id="backupView" class="card hidden"></div></div>
-    <div>
-      <div class="card"><h3>Dettaglio giorno</h3><div id="selLabel" class="small muted" style="margin-top:6px"></div><div class="hint" style="margin-top:12px">Andrea usa il ciclo fisso. Ferie e correzioni manuali non sfalsano i mesi dopo. “Riallinea ciclo da qui” serve solo se il ciclo base è sbagliato.</div>
-        <div class="field"><label>Andrea</label><select id="andreaSel"><option value="">Automatico</option><option value="M">Mattina</option><option value="P">Pomeriggio</option><option value="N">Notte</option><option value="R">Riposo</option><option value="F">Ferie</option></select></div>
-        <div class="field"><label>Micol</label><input id="micolInput" placeholder="08:30-13:30 oppure Riposo/Ferie"></div>
-        <div class="field"><label>Nota</label><textarea id="notaInput"></textarea></div>
-        <div class="toolbar" style="grid-template-columns:1fr 1fr;margin-top:12px"><button id="saveBtn" class="primary">Salva</button><button id="regenFromBtn">Riallinea ciclo da qui</button></div>
-        <div class="toolbar" style="grid-template-columns:1fr 1fr 1fr;margin-top:12px"><button id="clearAndreaBtn" class="danger">Svuota Andrea</button><button id="clearMicolBtn" class="danger">Svuota Micol</button><button id="clearNotaBtn" class="danger">Svuota nota</button></div>
-      </div>
-      <div class="card"><h3>Backup e sincronizzazione</h3><div id="firebaseStatus" class="status warn" style="margin-top:12px">Firebase: controllo…</div><div id="backupInfo" class="status" style="margin-top:12px">Ultimo backup locale: nessuno</div><div class="toolbar" style="grid-template-columns:1fr 1fr;margin-top:12px"><button id="exportBtn" class="primary">Esporta backup</button><button id="importBtn">Importa backup</button></div><div class="toolbar" style="grid-template-columns:1fr 1fr;margin-top:12px"><button id="restoreLocalBtn">Ripristina locale</button><button id="saveSnapshotBtn">Salva snapshot</button></div><input type="file" id="importFile" accept=".json" class="hidden"></div>
-    </div>
-  </div>
-</div>
-<div class="bottom-wrap"><div class="bottom-bar"><button id="prevBtn">‹</button><button id="todayBtn">Oggi</button><button id="nextBtn">›</button><button id="refreshBtn">↻</button><button id="jumpOpenBtn" class="primary">Cerca</button></div></div>
-<div class="modalWrap" id="searchWrap"><div class="modal"><h3>Cerca data</h3><div class="field"><label>Formato</label><input id="jumpDate" placeholder="2027-08-15"></div><div class="toolbar" style="grid-template-columns:1fr 1fr;margin-top:12px"><button id="jumpBtn" class="primary">Vai</button><button id="jumpCloseBtn">Chiudi</button></div></div></div>
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getDatabase, ref, onValue, set, get } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
+      <div class="head-weather"><span id="headerIcon">☀️</span><b id="headerTemp">--°</b></div>
+    </header>
 
-const cfg={
-  firebase:{
-    apiKey:"AIzaSyDsDSbb0j6VrkQMhZRAVAredHI8BQdI57Q",
-    authDomain:"turni-di-famiglia-99d41.firebaseapp.com",
-    databaseURL:"https://turni-di-famiglia-99d41-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId:"turni-di-famiglia-99d41",
-    storageBucket:"turni-di-famiglia-99d41.firebasestorage.app",
-    messagingSenderId:"940441790090",
-    appId:"1:940441790090:web:9ab729eafe46ef06fdaf73"
-  },
-  sharedPath:"turni-famiglia"
-};
-const cycle=["M","M","R","N","N","R","P","P","R"], labels={M:"Mattina",P:"Pomeriggio",N:"Notte",R:"Riposo",F:"Ferie"}, hours={M:8,P:8,N:8,R:0,F:0};
-const months=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"], weekdays=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
-const STORE="turni-v19-local", SNAP="turni-v19-snap", ANCHOR="turni-v19-anchor";
-let db=null, state={current:new Date(), selected:null, data:{}, anchor:{date:"2026-04-08",value:"M"}};
+    <section class="semafori card slim" aria-label="Semafori operativi">
+      <button class="sem" data-jump="meteoNow"><span id="dotMeteo" class="dot green"></span><small>Meteo</small></button>
+      <button class="sem" data-jump="lamoneCard"><span id="dotLamone" class="dot green"></span><small>Lamone</small></button>
+      <button class="sem" data-jump="alertsCard"><span id="dotAllerte" class="dot green"></span><small>Allerte</small></button>
+      <button class="sem" data-jump="timelineCard"><span id="dotTemporali" class="dot green"></span><small>Temporali</small></button>
+    </section>
 
-const $=id=>document.getElementById(id);
-const key=d=>{let x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)}
-const from=s=>new Date(s+"T00:00:00")
-const dim=(y,m)=>new Date(y,m+1,0).getDate()
-function sow(d){let c=new Date(d),diff=(c.getDay()+6)%7;c.setDate(c.getDate()-diff);c.setHours(0,0,0,0);return c}
-function grid(y,m){let first=new Date(y,m,1),off=(first.getDay()+6)%7,total=dim(y,m),cells=Math.ceil((off+total)/7)*7,out=[];for(let i=0;i<cells;i++){let dd=i-off+1;out.push(dd<1||dd>total?null:new Date(y,m,dd))}return out}
-function cyc(anchorDate,anchorValue,d){let ai=cycle.indexOf(anchorValue),diff=Math.floor((d-anchorDate)/86400000);return cycle[((ai+diff)%cycle.length+cycle.length)%cycle.length]}
-function autoA(d){return cyc(from(state.anchor.date),state.anchor.value,d)}
-function ensure(k){if(!state.data[k])state.data[k]={andrea:"",micol:"",nota:""}}
-function eff(rec,d){if(rec.andrea==="F")return"F"; if(rec.andrea&&rec.andrea.startsWith("X:"))return rec.andrea.slice(2); return autoA(d)}
-function day(k){ensure(k);let rec=state.data[k],d=from(k);return {key:k,date:d,andrea:eff(rec,d),micol:rec.micol||"",nota:rec.nota||"",raw:rec.andrea||""}}
-function micolText(v){if(!v)return"Riposo";let s=v.trim().toLowerCase();if(["r","riposo"].includes(s))return"Riposo";if(["f","ferie"].includes(s))return"Ferie";return v}
-function hM(v){if(!v)return 0;let s=v.trim().toLowerCase();if(["r","riposo","f","ferie"].includes(s))return 0;let m=s.match(/^(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})$/);if(!m)return 0;let a=+m[1]*60+ +m[2],b=+m[3]*60+ +m[4];if(b<a)b+=1440;return(b-a)/60}
-function together(d){return d.andrea==="R"&&micolText(d.micol)==="Riposo"}
-function saveLocal(){localStorage.setItem(STORE,JSON.stringify(state.data));localStorage.setItem(ANCHOR,JSON.stringify(state.anchor))}
-function loadLocal(){try{state.data=JSON.parse(localStorage.getItem(STORE)||"{}");state.anchor=JSON.parse(localStorage.getItem(ANCHOR)||JSON.stringify(state.anchor))}catch(e){}}
-function snapshot(label){localStorage.setItem(SNAP,JSON.stringify({savedAt:new Date().toISOString(),label,anchor:state.anchor,data:state.data}));updateBackupInfo()}
-function updateBackupInfo(){try{let s=JSON.parse(localStorage.getItem(SNAP)||"null");$("backupInfo").textContent=s?`Ultimo backup locale: ${s.savedAt.replace("T"," ").slice(0,16)} · ${s.label}`:"Ultimo backup locale: nessuno"}catch(e){}}
-async function persist(k,p){state.data[k]=p;saveLocal();if(db)await set(ref(db,`${cfg.sharedPath}/days/${k}`),p)}
-async function persistAnchor(){saveLocal();if(db)await set(ref(db,`${cfg.sharedPath}/meta/anchor`),state.anchor)}
-function norm(v,d){if(!v)return"";let a=autoA(d);if(v==="F")return"F";return v===a?"":"X:"+v}
-async function saveCurrent(){ensure(state.selected);let d=from(state.selected),p={andrea:norm($("andreaSel").value,d),micol:$("micolInput").value.trim(),nota:$("notaInput").value.trim()};snapshot("salvataggio giorno");await persist(state.selected,p);render()}
-async function clearField(f){ensure(state.selected);state.data[state.selected][f]="";snapshot("svuota "+f);await persist(state.selected,state.data[state.selected]);render()}
-async function realign(){let v=$("andreaSel").value;if(!["M","P","N","R"].includes(v)){alert("Scegli M, P, N o R per riallineare.");return}snapshot("prima riallinea");state.anchor={date:state.selected,value:v};await persistAnchor();render();alert("Ciclo riallineato.")}
-function monthDays(){let y=state.current.getFullYear(),m=state.current.getMonth(),a=[];for(let i=1;i<=dim(y,m);i++)a.push(day(key(new Date(y,m,i))));return a}
-function stats(){let a=monthDays();return {a:a.reduce((s,d)=>s+(hours[d.andrea]||0),0),m:a.reduce((s,d)=>s+hM(d.micol),0),l:a.filter(together).length,w:a.filter(d=>[0,6].includes(d.date.getDay())&&!["R","F"].includes(d.andrea)).length}}
-function renderTop(){let s=stats();$("sA").textContent=s.a;$("sM").textContent=s.m.toFixed(1).replace(".0","");$("sL").textContent=s.l;$("sW").textContent=s.w;let now=new Date(),t=day(key(now)),tm=new Date();tm.setDate(tm.getDate()+1);let n=day(key(tm));$("qA").textContent=labels[t.andrea];$("qA").className="qVal "+t.andrea;let mt=micolText(t.micol);$("qM").textContent=mt;$("qM").className="qVal micol "+((mt==="Riposo"||mt==="Ferie")?"rip":"");$("qN").textContent=t.nota||"Nessuna nota";$("qAD").textContent=labels[n.andrea];$("qAD").className="qVal "+n.andrea;let mtd=micolText(n.micol);$("qMD").textContent=mtd;$("qMD").className="qVal micol "+((mtd==="Riposo"||mtd==="Ferie")?"rip":"");$("qND").textContent=n.nota||"Nessuna nota";if($("qTodayDate"))$("qTodayDate").textContent=`· ${weekdays[(now.getDay()+6)%7]} ${now.getDate()} ${months[now.getMonth()]}`;if($("qTomorrowDate"))$("qTomorrowDate").textContent=`· ${weekdays[(tm.getDay()+6)%7]} ${tm.getDate()} ${months[tm.getMonth()]}`}
-function noteShort(t){return (t||"").trim().replace(/\s+/g," ")}
-function renderWeek(){let start=sow(state.current),endD=new Date(start);endD.setDate(start.getDate()+6);let html=`<div class="head"><div><h2>Settimana compatta</h2><div class="small muted">${key(start)} · ${key(endD)} · Ancora ciclo: ${state.anchor.date} = ${labels[state.anchor.value]}</div></div></div><div class="week-list" style="margin-top:12px">`;for(let i=0;i<7;i++){let d=new Date(start);d.setDate(start.getDate()+i);let dd=day(key(d));let mt=micolText(dd.micol);let micClass=(mt==="Riposo"||mt==="Ferie")?"pillMic rip":"pillMic";let nt=noteShort(dd.nota);html+=`<div class="week-day ${state.selected===dd.key?'sel':''} ${together(dd)?'together':''} ${nt?'hasNote':''}" data-k="${dd.key}"><div class="week-compact-row"><div class="wdate"><div class="dow">${weekdays[i].toUpperCase()}</div><div class="num">${d.getDate()}</div></div><div><div class="person-head">Andrea</div><div class="pill pill${dd.andrea}"><span class="code">${dd.andrea}</span><span>${labels[dd.andrea]}</span></div></div><div><div class="person-head">Micol</div><div class="pill ${micClass}"><span>${mt}</span></div></div><div class="weekNoteText ${nt?'':'empty'}" title="${nt||'Nessuna nota'}">${nt?'📝':''}<span>${nt||'—'}</span></div></div></div>`}html+=`</div><div class="weekNoteHint">📝 Le note si leggono qui; tocca il giorno per il testo completo sotto.</div><div class="legendCompact"><span>🟡 Mattina</span><span>🟠 Pomeriggio</span><span>🔵 Notte</span><span>🟢 Riposo</span><span>🟣 Ferie</span></div>`;$("weekView").innerHTML=html;document.querySelectorAll("#weekView [data-k]").forEach(e=>e.onclick=()=>{state.selected=e.dataset.k;render()})}
-function renderMonth(){let y=state.current.getFullYear(),m=state.current.getMonth();let today=key(new Date());let html=`<div class="monthHeaderPro"><button onclick="state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()">‹</button><h2>${months[m]} ${y}</h2><button onclick="state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()">›</button></div><div class="monthGridPro">${weekdays.map(w=>`<div class="weekdayPro">${w}</div>`).join("")}</div><div class="monthGridPro" style="margin-top:4px">`;for(let d of grid(y,m)){if(!d){html+='<div class="dayPro empty"></div>';continue}let dd=day(key(d));let mt=micolText(dd.micol);let mic=mt.replace(":00","").replace("Riposo","R").replace("Ferie","F");let micClass=(mt==="Riposo"||mt==="Ferie")?"micolMiniPro rip":"micolMiniPro";html+=`<div class="dayPro ${state.selected===dd.key?'sel':''} ${dd.key===today?'today':''} ${together(dd)?'together':''}" data-k="${dd.key}"><div class="dayNumPro">${d.getDate()}</div><span class="badgePro badge${dd.andrea}">${dd.andrea}</span><div class="${micClass}">${mic}</div><div class="noteMiniPro">${dd.nota?'📝':''}</div></div>`}html+=`</div><div class="legendCompact v18"><span>🟡 M</span><span>🟠 P</span><span>🔵 N</span><span>🟢 R</span><span>🟣 F</span></div>`;$("monthView").classList.add("monthCardPro");$("monthView").innerHTML=html;document.querySelectorAll("#monthView [data-k]").forEach(e=>e.onclick=()=>{state.selected=e.dataset.k;render()})}
-function renderYear(){let y=state.current.getFullYear();let html=`<div class="monthHeaderPro"><button onclick="state.current=new Date(state.current.getFullYear()-1,state.current.getMonth(),1);render()">‹</button><h2>${y}</h2><button onclick="state.current=new Date(state.current.getFullYear()+1,state.current.getMonth(),1);render()">›</button></div><div class="yearPro">`;for(let m=0;m<12;m++){html+=`<div class="yearMonthPro" data-month="${m}"><div class="yearMonthTitlePro">${months[m].slice(0,3).toUpperCase()}</div><div class="yearDotsPro">`;for(let i=1;i<=31;i++){if(i>dim(y,m)){html+='<span></span>';continue}let dd=day(key(new Date(y,m,i)));html+=`<span class="dotPro dot${dd.andrea}"></span>`}html+=`</div></div>`}html+=`</div><div class="legendCompact v18"><span>🟢 R</span><span>🟡 M</span><span>🟠 P</span><span>🔵 N</span><span>🟣 F</span></div>`;$("yearView").innerHTML=html;document.querySelectorAll("#yearView [data-month]").forEach(e=>e.onclick=()=>{state.current=new Date(y,+e.dataset.month,1);show("month");render()})}
-function renderStats(){let s=stats();let pct=(v,max)=>Math.max(4,Math.min(100,Math.round(v/max*100)));$("statsView").innerHTML=`<h2>Statistiche smart</h2><div class="statsSmartPro"><div class="smartRowPro"><div class="smartHeadPro"><span>Ore Andrea mese</span><strong>${s.a}h</strong></div><div class="barPro"><div class="fillPro" style="width:${pct(s.a,200)}%"></div></div></div><div class="smartRowPro"><div class="smartHeadPro"><span>Ore Micol mese</span><strong>${s.m.toFixed(1).replace(".0","")}h</strong></div><div class="barPro"><div class="fillPro micol" style="width:${pct(s.m,120)}%"></div></div></div><div class="smartRowPro"><div class="smartHeadPro"><span>Liberi insieme</span><strong>${s.l} giorni</strong></div><div class="barPro"><div class="fillPro free" style="width:${pct(s.l,12)}%"></div></div></div><div class="smartRowPro"><div class="smartHeadPro"><span>Weekend lavorati</span><strong>${s.w}</strong></div><div class="barPro"><div class="fillPro weekend" style="width:${pct(s.w,10)}%"></div></div></div></div>`}
-function renderBackup(){ $("backupView").innerHTML=`<h2>Backup</h2><p class="muted" style="margin-top:8px">Usa Esporta backup prima di modifiche importanti. Importa backup carica i dati anche su Firebase.</p>`}
-function renderSide(){if(!state.selected)state.selected=key(new Date());let rec=state.data[state.selected]||{andrea:"",micol:"",nota:""},d=from(state.selected);$("selLabel").textContent=`${state.selected} · automatico: ${labels[autoA(d)]}`;$("andreaSel").value=eff(rec,d);$("micolInput").value=rec.micol||"";$("notaInput").value=rec.nota||""}
-function render(){renderTop();renderWeek();renderMonth();renderYear();renderStats();renderBackup();renderSide();updateBackupInfo()}
-function show(v){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===v));["week","month","year","stats","backup"].forEach(x=>$(x+"View").classList.toggle("hidden",x!==v))}
-function exportBackup(){let blob=new Blob([JSON.stringify({version:12,exportedAt:new Date().toISOString(),anchor:state.anchor,data:state.data},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`backup_turni_v12_${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href)}
-async function importBackup(file){let p=JSON.parse(await file.text());snapshot("prima import");state.data=p.data||p;state.anchor=p.anchor||state.anchor;saveLocal();if(db){await persistAnchor();for(let [k,v] of Object.entries(state.data))await persist(k,v)}render();alert("Backup importato e sincronizzato.")}
-async function init(){loadLocal();try{let app=initializeApp(cfg.firebase);db=getDatabase(app);$("firebaseStatus").className="status ok";$("firebaseStatus").textContent=`Firebase attivo senza login · ${cfg.firebase.projectId} · ${cfg.sharedPath}`;let a=await get(ref(db,`${cfg.sharedPath}/meta/anchor`));if(a.exists()){state.anchor=a.val();saveLocal()}onValue(ref(db,`${cfg.sharedPath}/days`),snap=>{let cloud=snap.val();if(cloud&&Object.keys(cloud).length){state.data=cloud;saveLocal()}render()});return}catch(e){$("firebaseStatus").className="status err";$("firebaseStatus").textContent="Firebase errore: controlla regole database. Deve essere read/write true";console.error(e)}render()}
-if($("miniCalendarBtn"))$("miniCalendarBtn").onclick=()=>show("month");if($("miniMoreBtn"))$("miniMoreBtn").onclick=()=>show("backup");
-$("saveBtn").onclick=saveCurrent;$("regenFromBtn").onclick=realign;$("clearAndreaBtn").onclick=()=>clearField("andrea");$("clearMicolBtn").onclick=()=>clearField("micol");$("clearNotaBtn").onclick=()=>clearField("nota");
-$("exportBtn").onclick=exportBackup;$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=e=>{let f=e.target.files?.[0];if(f)importBackup(f)};$("restoreLocalBtn").onclick=()=>{let s=JSON.parse(localStorage.getItem(SNAP)||"null");if(!s)return alert("Nessun backup locale");state.data=s.data||{};state.anchor=s.anchor||state.anchor;saveLocal();render()};$("saveSnapshotBtn").onclick=()=>{snapshot("snapshot manuale");alert("Snapshot salvato")};
-$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","12");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>show(b.dataset.view));await init();if(!state.selected)state.selected=key(new Date());render();show("week");
-</script>
+    <section class="top-status card">
+      <div class="status-mini">
+        <span id="statusDot" class="bigdot green"></span>
+        <div>
+          <span class="label">SITUAZIONE</span>
+          <strong id="statusTitle">Valuto...</strong>
+          <p id="statusText">Aggiornamento dati in corso.</p>
+        </div>
+      </div>
+      <div class="indice-mini" id="indiceCard" role="button" tabindex="0" data-trend="indice">
+        <span>Indice Conte</span>
+        <b><span id="indiceVal">--</span><small>/100</small></b>
+        <em id="indiceLabel">--</em>
+      </div>
+    </section>
+
+    <section class="card decisione decisione-compact">
+      <div>
+        <span class="label">DECISIONE CONTE</span>
+        <h2 id="decisionTitle">Valuto...</h2>
+        <p id="decisionText">Sintesi in arrivo.</p>
+      </div>
+      <button id="analyzeBtn">🔎 Analizza</button>
+    </section>
+
+    <section id="analysisBox" class="card analysis hidden"></section>
+
+    <section id="meteoNow" class="card meteo-now">
+      <div class="now-head">
+        <span class="label">ADESSO</span>
+        <strong id="tempNow">--°</strong>
+        <p id="nowDesc">--</p>
+      </div>
+      <div class="trend-shortcuts" aria-label="Apri approfondimenti">
+        <button data-trend="temperatura">🌡️ Temperature</button>
+        <button data-trend="pioggia">☔ Pioggia</button>
+        <button data-trend="vento">🌬️ Vento</button>
+        <button data-trend="pressione">📈 Pressione</button>
+      </div>
+      <div class="metrics">
+        <button class="metric" data-trend="temperatura">🥵 <b id="feels">--°</b><span>Percepita</span></button>
+        <button class="metric" data-trend="umidita">💧 <b id="hum">--%</b><span>Umidità</span></button>
+        <button class="metric" data-trend="umidita">💦 <b id="dew">--°</b><span>Rugiada</span></button>
+        <button class="metric" data-trend="vento">🌬️ <b id="wind">-- km/h</b><span>Vento</span></button>
+        <button class="metric" data-trend="vento">💨 <b id="gust">-- km/h</b><span>Raffica</span></button>
+        <button class="metric" data-trend="pressione">📈 <b id="press">-- hPa</b><span>Pressione →</span></button>
+        <button class="metric" data-trend="pioggia">☔ <b id="rain6">-- mm</b><span>Pioggia 6h</span></button>
+      </div>
+    </section>
+
+    <section id="trendBox" class="card trendbox hidden"></section>
+
+    <section id="lamoneCard" class="card river">
+      <span class="label">FIUMI · LAMONE</span><span id="lamoneCorner" class="cornerdot green"></span>
+      <h2>Solo asta Lamone</h2>
+      <div class="mini-grid compact-mini">
+        <div><span>Fonte</span><b>Sensori Lamone</b></div>
+        <div><span>Stato app</span><b id="lamoneState">link pronto</b></div>
+      </div>
+      <p>Accesso diretto ai sensori dell’asta fluviale del Lamone.</p>
+      <a class="btn" href="https://www.protezionecivilecalderara.org/sensori_fiumi/Fiume_Lamone/slamone.php" target="_blank" rel="noopener">📈 Dettagli Lamone</a>
+    </section>
+
+    <section id="alertsCard" class="card alerts">
+      <span class="label">ALLERTE</span><span id="allerteCorner" class="cornerdot green"></span>
+      <h2>Emilia-Romagna</h2>
+      <div class="pillrow"><span>🌊 Idr.</span><span>⛰️ Idro.</span><span>⛈️ Temp.</span><span>🌬️ Vento</span></div>
+      <p>Bollettini ufficiali sempre a un tocco.</p>
+      <a class="btn" href="https://allertameteo.regione.emilia-romagna.it/" target="_blank" rel="noopener">🛡️ Bollettini</a>
+    </section>
+
+    <section id="timelineCard" class="card timeline compact-timeline">
+      <div class="section-head"><h2>Timeline rischio</h2><button id="refreshBtn">Aggiorna</button></div>
+      <div id="riskTimeline" class="riskline"></div>
+    </section>
+
+    <section class="card forecast compact-forecast">
+      <h2>Prossime ore</h2>
+      <div id="hours" class="hours"></div>
+    </section>
+
+    <section class="card links">
+      <h2>Link rapidi</h2>
+      <div class="linkgrid">
+        <a href="https://allertameteo.regione.emilia-romagna.it/radar-meteo" target="_blank" rel="noopener">📡 Radar ER</a>
+        <a href="https://www.lightningmaps.org/" target="_blank" rel="noopener">⚡ Fulmini</a>
+        <a href="https://www.windy.com/?44.42,11.98,8" target="_blank" rel="noopener">🌬️ Windy</a>
+        <a href="https://pretemp.altervista.org/index.html" target="_blank" rel="noopener">⛈️ Pretemp</a>
+        <a href="https://www.meteoam.it/it/satellite/italia" target="_blank" rel="noopener">🛰️ Satellite</a>
+        <a href="https://www.protezionecivilecalderara.org/sensori_fiumi/Fiume_Lamone/slamone.php" target="_blank" rel="noopener">🌊 Lamone</a>
+        <a href="https://allertameteo.regione.emilia-romagna.it/livello-idrometrico" target="_blank" rel="noopener">🌊 Fiumi ER</a>
+        <a href="https://www.arpae.it/it/temi-ambientali/meteo" target="_blank" rel="noopener">🌦️ Arpae</a>
+        <a href="https://www.meteoam.it/it/home" target="_blank" rel="noopener">🛰️ MeteoAM</a>
+        <a href="https://allertameteo.regione.emilia-romagna.it/" target="_blank" rel="noopener">🚨 Allerte ER</a>
+      </div>
+    </section>
+
+    <footer>Aggiornato <span id="updated">--:--</span><br/>Meteo Conte V15 · dashboard operativa</footer>
+  </main>
+  <script src="app.js?v=15.0.0"></script>
 </body>
 </html>
