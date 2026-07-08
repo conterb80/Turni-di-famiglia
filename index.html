@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Turni Andrea & Micol - V22</title>
+<title>Turni Andrea & Micol - V23A</title>
 <meta name="theme-color" content="#111827">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -87,12 +87,90 @@ body{padding-bottom:96px}.wrap{padding-top:6px}.card,.quickCard{box-shadow:var(-
 .bottom-wrap{padding:8px 14px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(238,242,247,1),rgba(238,242,247,.94),rgba(238,242,247,0))}.polishBottom{gap:8px}.polishBottom button{height:58px;border-radius:22px!important;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:5px 3px!important;box-shadow:var(--shadow-button);font-weight:850}.polishBottom .primary{box-shadow:0 10px 22px rgba(17,24,39,.22)}.navIcon{font-size:20px;line-height:1;font-weight:950}.navText{font-size:11px;line-height:1.05;white-space:nowrap}.polishBottom #todayBtn .navIcon{font-size:18px}.polishBottom #jumpOpenBtn .navIcon{font-size:22px}
 @media(max-width:420px){.brandTitle{font-size:22px}.brandSub{display:none}.hambBtn{width:38px;height:38px;font-size:26px}.polishAppbar .miniBtn{width:40px;height:40px;border-radius:15px}.polishBottom button{height:54px;border-radius:20px!important}.navIcon{font-size:18px}.navText{font-size:10px}.detailCardPro{padding:13px!important}}
 
+
+/* V23A HEADER INTELLIGENTE */
+.appbar.polishAppbar{
+  min-height:64px!important;
+  padding:8px 14px 10px!important;
+  gap:10px!important;
+  border-bottom:1px solid rgba(15,23,42,.06);
+}
+.appbar .brand{
+  flex:0 0 auto;
+}
+.appbar .hambBtn,.brandSub{display:none!important}
+.brandTitle{
+  font-size:29px!important;
+  letter-spacing:-.05em;
+  font-weight:950!important;
+}
+.headerNavV23{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:7px;
+  margin-left:auto;
+  width:100%;
+}
+.navIconV23{
+  width:52px;
+  height:52px;
+  border:1px solid var(--border);
+  border-radius:19px;
+  background:rgba(255,255,255,.88);
+  box-shadow:var(--shadow-button,0 8px 22px rgba(15,23,42,.08));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1px;
+  color:#111827;
+  font-weight:900;
+  cursor:pointer;
+  padding:0;
+}
+.navIconV23 .ico{font-size:18px;line-height:1}
+.navIconV23 .txt{font-size:9.5px;line-height:1}
+.navIconV23.active{
+  background:#111827;
+  color:white;
+  border-color:#111827;
+}
+.navIconV23.more{width:46px}
+.appbar .icons{display:none!important}
+.tabs{display:none!important}
+.quickHome{margin-top:8px!important}
+#weekView,#monthView,#yearView,#backupView,#detailView{scroll-margin-top:76px}
+@media(max-width:420px){
+  .appbar.polishAppbar{padding:7px 9px 8px!important;gap:6px!important}
+  .brandTitle{font-size:26px!important}
+  .headerNavV23{gap:5px}
+  .navIconV23{width:46px;height:48px;border-radius:17px}
+  .navIconV23.more{width:40px}
+  .navIconV23 .ico{font-size:17px}
+  .navIconV23 .txt{font-size:8.5px}
+}
+@media(max-width:370px){
+  .brandTitle{font-size:23px!important}
+  .navIconV23{width:41px;height:46px}
+  .navIconV23 .txt{display:none}
+}
+
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="appbar polishAppbar"><div class="brand"><button class="hambBtn" aria-label="Menu">☰</button><div><div class="brandTitle">Turni di Famiglia</div><div class="brandSub">Andrea · Micol</div></div></div><div class="icons"><button class="miniBtn" id="miniCalendarBtn" aria-label="Mese">📅</button><button class="miniBtn" id="miniMoreBtn" aria-label="Dettaglio">⋮</button></div></div>
-  <div class="card headerIntro"><div class="small muted">APP TURNI FAMIGLIA · VERSIONE 22 POLISH UI</div><h1 class="title">Andrea & Micol</h1><p class="muted" style="margin-top:8px">Polish UI: header, barra inferiore, dettaglio e backup più curati. Logica invariata.</p></div>
+  <div class="appbar polishAppbar">
+    <div class="brand"><div><div class="brandTitle">TURNI</div></div></div>
+    <div class="headerNavV23">
+      <button class="navIconV23" data-viewnav="week" id="navWeek"><span class="ico">📅</span><span class="txt">Set</span></button>
+      <button class="navIconV23" data-viewnav="month" id="navMonth"><span class="ico">📆</span><span class="txt">Mese</span></button>
+      <button class="navIconV23" data-viewnav="year" id="navYear"><span class="ico">🗓️</span><span class="txt">Anno</span></button>
+      <button class="navIconV23" data-viewnav="backup" id="navBackup"><span class="ico">💾</span><span class="txt">Backup</span></button>
+      <button class="navIconV23 more" id="navMore"><span class="ico">⋮</span><span class="txt">Altro</span></button>
+    </div>
+  </div>
+  <div class="card headerIntro"><div class="small muted">APP TURNI FAMIGLIA · VERSIONE 23A HEADER INTELLIGENTE</div><h1 class="title">Andrea & Micol</h1><p class="muted" style="margin-top:8px">V23a: header attivo con navigazione superiore. Logica invariata.</p></div>
   <div class="quickHome">
     <div class="quickCard">
       <div class="quickTitle"><span class="dot"></span><span>OGGI</span><span class="muted" id="qTodayDate"></span></div>
@@ -154,7 +232,7 @@ const cfg={
 };
 const cycle=["M","M","R","N","N","R","P","P","R"], labels={M:"Mattina",P:"Pomeriggio",N:"Notte",R:"Riposo",F:"Ferie"}, hours={M:8,P:8,N:8,R:0,F:0};
 const months=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"], weekdays=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
-const STORE="turni-v22-local", SNAP="turni-v22-snap", ANCHOR="turni-v22-anchor";
+const STORE="turni-v23a-local", SNAP="turni-v23a-snap", ANCHOR="turni-v23a-anchor";
 let db=null, state={current:new Date(), selected:null, data:{}, anchor:{date:"2026-04-08",value:"M"}};
 
 const $=id=>document.getElementById(id);
@@ -197,12 +275,15 @@ function renderYear(){let y=state.current.getFullYear();let html=`<div class="mo
 function renderStats(){let s=stats();let pct=(v,max)=>Math.max(4,Math.min(100,Math.round(v/max*100)));$("statsView").innerHTML=`<h2>Statistiche smart</h2><div class="statsSmartPro"><div class="smartRowPro"><div class="smartHeadPro"><span>Ore Andrea mese</span><strong>${s.a}h</strong></div><div class="barPro"><div class="fillPro" style="width:${pct(s.a,200)}%"></div></div></div><div class="smartRowPro"><div class="smartHeadPro"><span>Ore Micol mese</span><strong>${s.m.toFixed(1).replace(".0","")}h</strong></div><div class="barPro"><div class="fillPro micol" style="width:${pct(s.m,120)}%"></div></div></div><div class="smartRowPro"><div class="smartHeadPro"><span>Liberi insieme</span><strong>${s.l} giorni</strong></div><div class="barPro"><div class="fillPro free" style="width:${pct(s.l,12)}%"></div></div></div><div class="smartRowPro"><div class="smartHeadPro"><span>Weekend lavorati</span><strong>${s.w}</strong></div><div class="barPro"><div class="fillPro weekend" style="width:${pct(s.w,10)}%"></div></div></div></div>`}
 function renderBackup(){ $("backupView").innerHTML=`<h2>Backup</h2><p class="muted" style="margin-top:8px">Usa Esporta backup prima di modifiche importanti. Importa backup carica i dati anche su Firebase.</p>`}
 function renderSide(){if(!state.selected)state.selected=key(new Date());let rec=state.data[state.selected]||{andrea:"",micol:"",nota:""},d=from(state.selected),a=eff(rec,d),mt=micolText(rec.micol);$("selLabel").textContent=`${state.selected} · automatico: ${labels[autoA(d)]}`;$("andreaSel").value=a;$("micolInput").value=rec.micol||"";$("notaInput").value=rec.nota||"";if($("andreaPreview")){ $("andreaPreview").textContent=labels[a]||"-"; $("andreaPreview").className=`previewPillPro ${a}`;} if($("micolPreview")){ $("micolPreview").textContent=mt||"-"; $("micolPreview").className=`previewPillPro micol ${((mt==="Riposo"||mt==="Ferie")?"rip":"")}`;} if($("notePreview")){let nt=(rec.nota||"").trim();$("notePreview").className=`previewNotePro ${nt?"":"empty"}`;$("notePreview").innerHTML=prettyNoteHtmlV21(nt);} if($("editPanelV21"))$("editPanelV21").classList.remove("open"); if($("editToggleV21"))$("editToggleV21").textContent="✏️ Modifica giornata";}
-function render(){renderTop();renderWeek();renderMonth();renderYear();renderStats();renderBackup();renderSide();updateBackupInfo()}
-function show(v){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===v));["week","month","year","stats","backup"].forEach(x=>$(x+"View").classList.toggle("hidden",x!==v))}
+function setActiveNavV23(v){document.querySelectorAll("[data-viewnav]").forEach(b=>b.classList.toggle("active",b.dataset.viewnav===v))}
+function render(){setActiveNavV23((document.querySelector('.tab.active')||{}).dataset?.view||'week');renderTop();renderWeek();renderMonth();renderYear();renderStats();renderBackup();renderSide();updateBackupInfo()}
+function show(v){setActiveNavV23(v);document.querySelectorAll("[data-viewnav]").forEach(b=>b.onclick=()=>show(b.dataset.viewnav));
+if($("navMore"))$("navMore").onclick=()=>{document.getElementById("detailView")?.scrollIntoView({behavior:"smooth",block:"start"})};
+document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===v));["week","month","year","stats","backup"].forEach(x=>$(x+"View").classList.toggle("hidden",x!==v))}
 function exportBackup(){let blob=new Blob([JSON.stringify({version:12,exportedAt:new Date().toISOString(),anchor:state.anchor,data:state.data},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`TurniFamiglia_${new Date().toISOString().replace(/[:.]/g,"-").slice(0,16)}.json`;a.click();URL.revokeObjectURL(a.href)}
 async function importBackup(file){let p=JSON.parse(await file.text());snapshot("prima import");state.data=p.data||p;state.anchor=p.anchor||state.anchor;saveLocal();if(db){await persistAnchor();for(let [k,v] of Object.entries(state.data))await persist(k,v)}render();alert("Backup importato e sincronizzato.")}
 async function init(){loadLocal();try{let app=initializeApp(cfg.firebase);db=getDatabase(app);$("firebaseStatus").className="status ok syncBadgePro";$("firebaseStatus").innerHTML=`<span class="syncDot"></span><span><div class="syncTitle">Sincronizzazione attiva</div><div class="syncSub">Firebase · ${cfg.firebase.projectId} · ${cfg.sharedPath}</div></span>`;let a=await get(ref(db,`${cfg.sharedPath}/meta/anchor`));if(a.exists()){state.anchor=a.val();saveLocal()}onValue(ref(db,`${cfg.sharedPath}/days`),snap=>{let cloud=snap.val();if(cloud&&Object.keys(cloud).length){state.data=cloud;saveLocal()}render()});return}catch(e){$("firebaseStatus").className="status err";$("firebaseStatus").textContent="Firebase errore: controlla regole database. Deve essere read/write true";console.error(e)}render()}
-if($("miniCalendarBtn"))$("miniCalendarBtn").onclick=()=>show("month");if($("miniMoreBtn"))$("miniMoreBtn").onclick=()=>show("backup");
+if($("miniCalendarBtn"))if($("miniCalendarBtn"))$("miniCalendarBtn").onclick=()=>show("month");if($("miniMoreBtn"))if($("miniMoreBtn"))$("miniMoreBtn").onclick=()=>show("backup");
 $("saveBtn").onclick=saveCurrent;$("regenFromBtn").onclick=realign;$("clearAndreaBtn").onclick=()=>clearField("andrea");$("clearMicolBtn").onclick=()=>clearField("micol");$("clearNotaBtn").onclick=()=>clearField("nota");
 $("exportBtn").onclick=exportBackup;$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=e=>{let f=e.target.files?.[0];if(f)importBackup(f)};$("restoreLocalBtn").onclick=()=>{let s=JSON.parse(localStorage.getItem(SNAP)||"null");if(!s)return alert("Nessun backup locale");state.data=s.data||{};state.anchor=s.anchor||state.anchor;saveLocal();render()};$("saveSnapshotBtn").onclick=()=>{snapshot("snapshot manuale");alert("Snapshot salvato")};
 if($("editToggleV21"))$("editToggleV21").onclick=()=>{$("editPanelV21").classList.toggle("open");$("editToggleV21").textContent=$("editPanelV21").classList.contains("open")?"Chiudi modifica":"✏️ Modifica giornata"};
