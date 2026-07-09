@@ -156,6 +156,106 @@ body{padding-bottom:96px}.wrap{padding-top:6px}.card,.quickCard{box-shadow:var(-
   .navIconV23 .txt{display:none}
 }
 
+
+/* V23 FINAL - fix larghezza schermo */
+html, body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden!important;
+}
+*{box-sizing:border-box}
+.app,.wrap,main,.card,.quickHome,#weekView,#monthView,#yearView,#backupView,#detailView{
+  max-width:100%!important;
+}
+.appbar{
+  width:100%!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+}
+.headerNavV23{
+  flex:1 1 auto!important;
+  min-width:0!important;
+  justify-content:flex-end!important;
+}
+.appbar .brand{flex:0 0 auto!important}
+.navIconV23{flex:0 0 auto!important}
+.quickHome{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:10px!important;
+  width:100%!important;
+  overflow:hidden!important;
+}
+.quick-card{
+  min-width:0!important;
+  width:100%!important;
+  overflow:hidden!important;
+}
+.week-list,.week-day,.week-compact-row{
+  width:100%!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+}
+.week-compact-row{
+  grid-template-columns:78px minmax(0,1fr) minmax(0,1fr) minmax(92px,1fr)!important;
+}
+.pill,.pillMic,.notePillV19,.weekNoteText{
+  min-width:0!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+.legendCompact{
+  max-width:100%!important;
+  overflow-x:auto!important;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:2px;
+}
+.weekNotesV21{
+  width:100%!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+}
+.detailReadGrid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+}
+.personSummary{min-width:0!important}
+.bottom-bar{
+  width:100%!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+}
+.bottom-bar button{min-width:0!important}
+@media(max-width:420px){
+  .wrap{
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+  .quickHome{gap:8px!important}
+  .week-compact-row{
+    grid-template-columns:64px minmax(0,1fr) minmax(0,1fr) minmax(78px,1fr)!important;
+  }
+  .notePillV19{
+    font-size:12px!important;
+    padding-left:7px!important;
+    padding-right:7px!important;
+  }
+  .navIconV23{width:43px!important}
+  .appbar .brand{
+    font-size:24px!important;
+    min-width:62px!important;
+  }
+}
+@media(max-width:380px){
+  .navIconV23{width:39px!important}
+  .navIconV23 .txt{display:none!important}
+  .appbar .brand{
+    font-size:22px!important;
+    min-width:54px!important;
+  }
+}
+
 </style>
 </head>
 <body>
