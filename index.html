@@ -256,6 +256,219 @@ html, body{
   }
 }
 
+
+/* V23 FINAL FIX - zero scroll orizzontale */
+html, body{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  overflow-x:hidden!important;
+  position:relative;
+}
+body{
+  margin:0!important;
+}
+*,
+*::before,
+*::after{
+  box-sizing:border-box!important;
+}
+.app,
+.page,
+.wrap,
+main,
+section,
+.card,
+.quickHome,
+.quick-card,
+#weekView,
+#monthView,
+#yearView,
+#statsView,
+#backupView,
+#detailView,
+.week-list,
+.week-day,
+.week-compact-row,
+.weekNotesV21,
+.detailReadGrid,
+.bottom-bar,
+.appbar{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+.wrap,
+main{
+  overflow-x:hidden!important;
+}
+.appbar{
+  left:0!important;
+  right:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+  display:flex!important;
+  align-items:center!important;
+}
+.appbar .brand{
+  flex:0 0 58px!important;
+  min-width:0!important;
+  max-width:58px!important;
+  font-size:22px!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+}
+.headerNavV23{
+  flex:1 1 auto!important;
+  min-width:0!important;
+  max-width:calc(100vw - 70px)!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:4px!important;
+  margin-left:4px!important;
+}
+.navIconV23,
+.navIconV23.more{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:46px!important;
+  border-radius:16px!important;
+  padding:0!important;
+}
+.navIconV23 .ico{
+  font-size:15px!important;
+}
+.navIconV23 .txt{
+  font-size:8px!important;
+  line-height:1!important;
+}
+
+.quickHome{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:8px!important;
+  overflow:hidden!important;
+}
+.quick-card{
+  overflow:hidden!important;
+  padding-left:10px!important;
+  padding-right:10px!important;
+}
+.quick-card *{
+  min-width:0!important;
+}
+.quick-card .note,
+.quick-card .notePill,
+.quick-card .q-note{
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+
+.week-compact-row{
+  display:grid!important;
+  grid-template-columns:58px minmax(0,1fr) minmax(0,1fr) minmax(66px,1fr)!important;
+  gap:6px!important;
+  align-items:center!important;
+  overflow:hidden!important;
+}
+.wdate{
+  min-width:0!important;
+}
+.pill,
+.pillMic,
+.notePillV19,
+.weekNoteText,
+.shiftBig{
+  min-width:0!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+.notePillV19{
+  font-size:11.5px!important;
+  padding:6px 6px!important;
+}
+.legendCompact{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+  overflow:hidden!important;
+}
+.legendCompact span{
+  white-space:nowrap!important;
+}
+.weekNoteRow{
+  grid-template-columns:48px minmax(0,1fr)!important;
+  gap:7px!important;
+}
+.weekNoteDate{
+  font-size:12px!important;
+  white-space:nowrap!important;
+}
+.detailReadGrid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:8px!important;
+}
+.personSummary{
+  min-width:0!important;
+  overflow:hidden!important;
+}
+.bottom-bar{
+  left:0!important;
+  right:0!important;
+  margin:0!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:7px!important;
+  padding-left:8px!important;
+  padding-right:8px!important;
+  overflow:hidden!important;
+}
+.bottom-bar button{
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  padding-left:2px!important;
+  padding-right:2px!important;
+  font-size:12px!important;
+}
+.bottom-bar button .label,
+.bottom-bar button span{
+  min-width:0!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+/* telefoni più stretti: tolgo testo icone header se serve */
+@media(max-width:380px){
+  .appbar .brand{
+    flex-basis:52px!important;
+    max-width:52px!important;
+    font-size:20px!important;
+  }
+  .headerNavV23{
+    max-width:calc(100vw - 60px)!important;
+    gap:3px!important;
+  }
+  .navIconV23,
+  .navIconV23.more{
+    height:44px!important;
+    border-radius:15px!important;
+  }
+  .navIconV23 .txt{
+    display:none!important;
+  }
+  .navIconV23 .ico{
+    font-size:17px!important;
+  }
+  .week-compact-row{
+    grid-template-columns:50px minmax(0,1fr) minmax(0,1fr) minmax(58px,1fr)!important;
+    gap:4px!important;
+  }
+}
+
 </style>
 </head>
 <body>
