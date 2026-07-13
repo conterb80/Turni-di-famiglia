@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Turni Andrea & Micol - V24 TEST</title>
+<title>Turni Andrea & Micol - V24.1</title>
 <meta name="theme-color" content="#111827">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -533,6 +533,19 @@ main{
   .changeSheet{border-radius:26px}
 }
 
+
+/* V24.1 - rifinitura modifiche condivise */
+.changeBadge{top:-4px!important;right:-3px!important;min-width:19px!important;height:19px!important;font-size:9.5px!important}
+.changeCard{position:relative}
+.changeCard.read{opacity:.72}
+.changeCard.unread::after{content:"";position:absolute;top:12px;right:12px;width:9px;height:9px;border-radius:999px;background:#ef4444;box-shadow:0 0 0 3px #fee2e2}
+.changeRow{grid-template-columns:82px minmax(0,1fr)!important;align-items:start}
+.changeField{display:flex;align-items:center;gap:5px}
+.changeField .fieldIcon{width:20px;text-align:center}
+.changeMeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.changeMeta span{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:999px;background:#f8fafc;border:1px solid rgba(15,23,42,.07);font-size:11px;font-weight:850;color:#475569}
+.changeSheetFooter{margin-top:10px;text-align:center;color:var(--muted);font-size:11px}
+
 </style>
 </head>
 <body>
@@ -637,7 +650,7 @@ const cfg={
 };
 const cycle=["M","M","R","N","N","R","P","P","R"], labels={M:"Mattina",P:"Pomeriggio",N:"Notte",R:"Riposo",F:"Ferie"}, hours={M:8,P:8,N:8,R:0,F:0};
 const months=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"], weekdays=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
-const STORE="turni-v24test-local", SNAP="turni-v24test-snap", ANCHOR="turni-v24test-anchor", ACTOR_KEY="turni-v24test-actor", READ_KEY="turni-v24test-read";
+const STORE="turni-v24_1-local", SNAP="turni-v24_1-snap", ANCHOR="turni-v24_1-anchor", ACTOR_KEY="turni-v24_1-actor", READ_KEY="turni-v24_1-read";
 let db=null, state={current:new Date(), selected:null, data:{}, anchor:{date:"2026-04-08",value:"M"}}, sharedChanges={}, readChanges={};
 
 const $=id=>document.getElementById(id);
@@ -708,7 +721,9 @@ function loadReadChanges(){try{readChanges=JSON.parse(localStorage.getItem(READ_
 function saveReadChanges(){localStorage.setItem(READ_KEY,JSON.stringify(readChanges))}
 function newChangeId(){return `${Date.now()}_${Math.random().toString(36).slice(2,8)}`}
 function shownValue(v){return (v===undefined||v===null||String(v).trim()==="")?"—":String(v)}
-function changeFieldName(f){return ({andrea:"Andrea",micol:"Micol",nota:"Nota",ciclo:"Ciclo"})[f]||f}
+function changeFieldName(f){return ({andrea:"Turno Andrea",micol:"Orario Micol",nota:"Nota",ciclo:"Ciclo"})[f]||f}
+function changeFieldIcon(f){return ({andrea:"🕒",micol:"👩",nota:"📝",ciclo:"🔁"})[f]||"•"}
+function actorIcon(name){return name==="Andrea"?"👨":name==="Micol"?"👩":"📱"}
 async function writeSharedChange(dateKey,changes,kind="giorno"){
   if(!db)return;
   let useful=(changes||[]).filter(c=>shownValue(c.old)!==shownValue(c.new));
@@ -740,18 +755,28 @@ function renderSharedChanges(){
   if(!all.length){box.innerHTML='<div class="changeEmpty">Nessuna modifica registrata.</div>';return}
   let me=currentActor();
   box.innerHTML=all.map(c=>{
-    let unreadClass=(c.actor!==me&&!readChanges[c.id])?"unread":"";
-    let rows=(c.changes||[]).map(x=>`<div class="changeRow"><div class="changeField">${changeFieldName(x.field)}</div><div class="changeValue">${escapeHtmlV21(shownValue(x.old))}<span class="changeArrow">→</span><strong>${escapeHtmlV21(shownValue(x.new))}</strong></div></div>`).join("");
-    return `<div class="changeCard ${unreadClass}" data-change="${c.id}"><div class="changeTop"><div><div class="changeWho">${escapeHtmlV21(c.actor||"Dispositivo")} ha modificato</div><div class="changeDate">${escapeHtmlV21(c.date||"Calendario")}</div></div><div class="changeTime">${changeTime(c.createdAt)}</div></div><div class="changeRows">${rows}</div></div>`
-  }).join("");
+    let isUnread=(c.actor!==me&&!readChanges[c.id]);
+    let rows=(c.changes||[]).map(x=>`<div class="changeRow"><div class="changeField"><span class="fieldIcon">${changeFieldIcon(x.field)}</span>${changeFieldName(x.field)}</div><div class="changeValue">${escapeHtmlV21(shownValue(x.old))}<span class="changeArrow">→</span><strong>${escapeHtmlV21(shownValue(x.new))}</strong></div></div>`).join("");
+    let count=(c.changes||[]).length;
+    return `<div class="changeCard ${isUnread?'unread':'read'}" data-change="${c.id}">
+      <div class="changeTop">
+        <div>
+          <div class="changeWho">${actorIcon(c.actor)} ${escapeHtmlV21(c.actor||"Dispositivo")} ha modificato</div>
+          <div class="changeDate">${escapeHtmlV21(c.date||"Calendario")}</div>
+        </div>
+        <div class="changeTime">${changeTime(c.createdAt)}</div>
+      </div>
+      <div class="changeMeta"><span>${count} ${count===1?'modifica':'modifiche'}</span>${isUnread?'<span>Da vedere</span>':'<span>Vista</span>'}</div>
+      <div class="changeRows">${rows}</div>
+    </div>`
+  }).join("") + '<div class="changeSheetFooter">Le modifiche più recenti sono sempre in alto.</div>';
   box.querySelectorAll("[data-change]").forEach(el=>el.onclick=()=>{
     readChanges[el.dataset.change]=true;saveReadChanges();renderSharedChanges()
   })
 }
 function openSharedChanges(){
   $("changeOverlay").classList.add("open");
-  unreadSharedChanges().forEach(c=>readChanges[c.id]=true);
-  saveReadChanges();renderSharedChanges()
+  renderSharedChanges()
 }
 function closeSharedChanges(){$("changeOverlay").classList.remove("open")}
 function chooseActor(name){
@@ -786,7 +811,7 @@ if($("navChanges"))$("navChanges").onclick=openSharedChanges;
 if($("closeChangesBtn"))$("closeChangesBtn").onclick=closeSharedChanges;
 if($("markReadBtn"))$("markReadBtn").onclick=()=>{
   Object.values(sharedChanges||{}).filter(c=>c&&c.actor!==currentActor()).forEach(c=>readChanges[c.id]=true);
-  saveReadChanges();renderSharedChanges()
+  saveReadChanges();renderSharedChanges();setTimeout(closeSharedChanges,180)
 };
 if($("actorAndrea"))$("actorAndrea").onclick=()=>chooseActor("Andrea");
 if($("actorMicol"))$("actorMicol").onclick=()=>chooseActor("Micol");
@@ -795,7 +820,7 @@ if($("changeOverlay"))$("changeOverlay").onclick=e=>{if(e.target.id==="changeOve
 $("saveBtn").onclick=saveCurrent;$("regenFromBtn").onclick=realign;$("clearAndreaBtn").onclick=()=>clearField("andrea");$("clearMicolBtn").onclick=()=>clearField("micol");$("clearNotaBtn").onclick=()=>clearField("nota");
 $("exportBtn").onclick=exportBackup;$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=e=>{let f=e.target.files?.[0];if(f)importBackup(f)};$("restoreLocalBtn").onclick=()=>{let s=JSON.parse(localStorage.getItem(SNAP)||"null");if(!s)return alert("Nessun backup locale");state.data=s.data||{};state.anchor=s.anchor||state.anchor;saveLocal();render()};$("saveSnapshotBtn").onclick=()=>{snapshot("snapshot manuale");alert("Snapshot salvato")};
 if($("editToggleV21"))$("editToggleV21").onclick=()=>{$("editPanelV21").classList.toggle("open");$("editToggleV21").textContent=$("editPanelV21").classList.contains("open")?"Chiudi modifica":"✏️ Modifica giornata"};
-$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","24test");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
+$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","24_1");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>show(b.dataset.view));await init();if(!state.selected)state.selected=key(new Date());render();show("week");renderSharedChanges();if(!currentActor())$("actorOverlay").classList.add("open");
 </script>
 </body>
