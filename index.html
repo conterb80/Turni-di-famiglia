@@ -469,90 +469,6 @@ main{
   }
 }
 
-
-/* V24 MODIFICHE CONDIVISE */
-.navIconV23.bellBtn{position:relative}
-.changeBadge{
-  position:absolute;top:-5px;right:-5px;
-  min-width:20px;height:20px;padding:0 5px;border-radius:999px;
-  display:none;align-items:center;justify-content:center;
-  background:#ef4444;color:#fff;border:2px solid #fff;
-  font-size:10px;font-weight:950;line-height:1;
-  box-shadow:0 5px 12px rgba(239,68,68,.28)
-}
-.changeBadge.show{display:flex}
-.changePanel{
-  position:fixed;inset:0;z-index:9999;
-  background:rgba(15,23,42,.42);
-  display:none;align-items:flex-end;justify-content:center;
-  padding:14px
-}
-.changePanel.open{display:flex}
-.changeSheet{
-  width:min(560px,100%);max-height:82vh;overflow:auto;
-  background:#f5f8fc;border-radius:26px 26px 20px 20px;
-  padding:14px;box-shadow:0 24px 70px rgba(15,23,42,.28)
-}
-.changeSheetHead{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  margin-bottom:10px
-}
-.changeSheetHead h2{margin:0;font-size:25px;letter-spacing:-.04em}
-.changeActions{display:flex;gap:7px}
-.changeActions button{padding:8px 10px;border-radius:14px;font-size:12px;font-weight:850}
-.changeList{display:grid;gap:9px}
-.changeCard{
-  background:#fff;border:1px solid rgba(15,23,42,.08);
-  border-radius:19px;padding:11px 12px;
-  box-shadow:0 8px 22px rgba(15,23,42,.06)
-}
-.changeCard.unread{border-left:5px solid #2563eb;background:#f7fbff}
-.changeCardTop{
-  display:flex;justify-content:space-between;gap:10px;align-items:flex-start
-}
-.changeWho{font-weight:950}
-.changeWhen{font-size:11px;color:var(--muted);white-space:nowrap}
-.changeDate{font-size:13px;color:#334155;font-weight:850;margin-top:2px}
-.changeRows{display:grid;gap:5px;margin-top:8px}
-.changeRow{
-  display:grid;grid-template-columns:70px minmax(0,1fr);
-  gap:7px;font-size:13px;align-items:start
-}
-.changeField{font-weight:900;color:#475569}
-.changeValue{min-width:0;overflow-wrap:anywhere}
-.changeArrow{color:#64748b;padding:0 4px}
-.changeEmpty{
-  text-align:center;color:var(--muted);padding:28px 12px
-}
-.identityPanel{
-  position:fixed;inset:0;z-index:10000;background:rgba(15,23,42,.52);
-  display:none;align-items:center;justify-content:center;padding:18px
-}
-.identityPanel.open{display:flex}
-.identityCard{
-  width:min(430px,100%);background:#fff;border-radius:26px;padding:20px;
-  box-shadow:0 24px 70px rgba(15,23,42,.32);text-align:center
-}
-.identityCard h2{margin:0 0 7px;font-size:25px}
-.identityCard p{margin:0;color:var(--muted);line-height:1.35}
-.identityChoices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.identityChoices button{
-  min-height:72px;border-radius:20px;font-size:18px;font-weight:950
-}
-.identityCurrent{
-  display:inline-flex;align-items:center;gap:6px;margin-top:10px;
-  padding:6px 10px;border-radius:999px;background:#ecfdf5;color:#166534;
-  font-size:12px;font-weight:900
-}
-.changedDayMark{
-  display:inline-flex;align-items:center;justify-content:center;
-  margin-left:4px;width:8px;height:8px;border-radius:999px;background:#2563eb
-}
-@media(min-width:700px){
-  .changePanel{align-items:center}
-  .changeSheet{border-radius:26px}
-}
-
 </style>
 </head>
 <body>
@@ -564,7 +480,7 @@ main{
       <button class="navIconV23" data-viewnav="month" id="navMonth"><span class="ico">📆</span><span class="txt">Mese</span></button>
       <button class="navIconV23" data-viewnav="year" id="navYear"><span class="ico">🗓️</span><span class="txt">Anno</span></button>
       <button class="navIconV23" data-viewnav="backup" id="navBackup"><span class="ico">💾</span><span class="txt">Backup</span></button>
-      <button class="navIconV23 more bellBtn" id="navChanges"><span class="ico">🔔</span><span class="txt">Novità</span><span id="changeBadge" class="changeBadge">0</span></button>
+      <button class="navIconV23 more" id="navMore"><span class="ico">⋮</span><span class="txt">Altro</span></button>
     </div>
   </div>
   <div class="card headerIntro"><div class="small muted">APP TURNI FAMIGLIA · VERSIONE 23A HEADER INTELLIGENTE</div><h1 class="title">Andrea & Micol</h1><p class="muted" style="margin-top:8px">V23a: header attivo con navigazione superiore. Logica invariata.</p></div>
@@ -611,27 +527,6 @@ main{
 </div>
 <div class="bottom-wrap"><div class="bottom-bar polishBottom"><button id="prevBtn"><span class="navIcon">‹</span><span class="navText">Indietro</span></button><button id="todayBtn"><span class="navIcon">⌖</span><span class="navText">Oggi</span></button><button id="nextBtn"><span class="navIcon">›</span><span class="navText">Avanti</span></button><button id="refreshBtn"><span class="navIcon">↻</span><span class="navText">Aggiorna</span></button><button id="jumpOpenBtn" class="primary"><span class="navIcon">⌕</span><span class="navText">Cerca</span></button></div></div>
 <div class="modalWrap" id="searchWrap"><div class="modal"><h3>Cerca data</h3><div class="field"><label>Formato</label><input id="jumpDate" placeholder="2027-08-15"></div><div class="toolbar" style="grid-template-columns:1fr 1fr;margin-top:12px"><button id="jumpBtn" class="primary">Vai</button><button id="jumpCloseBtn">Chiudi</button></div></div></div>
-
-<div class="changePanel" id="changePanel">
-  <div class="changeSheet">
-    <div class="changeSheetHead">
-      <div><h2>Modifiche condivise</h2><div id="identityCurrent" class="identityCurrent"></div></div>
-      <div class="changeActions"><button id="markAllReadBtn">Segna viste</button><button id="closeChangesBtn" class="primary">Chiudi</button></div>
-    </div>
-    <div id="changeList" class="changeList"></div>
-  </div>
-</div>
-<div class="identityPanel" id="identityPanel">
-  <div class="identityCard">
-    <h2>Di chi è questo telefono?</h2>
-    <p>Serve solo per distinguere chi modifica i turni e mostrare le novità all’altra persona.</p>
-    <div class="identityChoices">
-      <button id="chooseAndrea" class="primary">👨 Andrea</button>
-      <button id="chooseMicol">👩 Micol</button>
-    </div>
-  </div>
-</div>
-
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import { getDatabase, ref, onValue, set, get } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
@@ -650,8 +545,8 @@ const cfg={
 };
 const cycle=["M","M","R","N","N","R","P","P","R"], labels={M:"Mattina",P:"Pomeriggio",N:"Notte",R:"Riposo",F:"Ferie"}, hours={M:8,P:8,N:8,R:0,F:0};
 const months=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"], weekdays=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
-const STORE="turni-v24-local", SNAP="turni-v24-snap", ANCHOR="turni-v24-anchor", ACTOR_KEY="turni-v24-actor", READS_KEY="turni-v24-change-reads";
-let db=null, state={current:new Date(), selected:null, data:{}, anchor:{date:"2026-04-08",value:"M"}}, changeLog={}, localReads={};
+const STORE="turni-v23a-local", SNAP="turni-v23a-snap", ANCHOR="turni-v23a-anchor";
+let db=null, state={current:new Date(), selected:null, data:{}, anchor:{date:"2026-04-08",value:"M"}};
 
 const $=id=>document.getElementById(id);
 const key=d=>{let x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)}
@@ -674,85 +569,9 @@ function updateBackupInfo(){try{let s=JSON.parse(localStorage.getItem(SNAP)||"nu
 async function persist(k,p){state.data[k]=p;saveLocal();if(db)await set(ref(db,`${cfg.sharedPath}/days/${k}`),p)}
 async function persistAnchor(){saveLocal();if(db)await set(ref(db,`${cfg.sharedPath}/meta/anchor`),state.anchor)}
 function norm(v,d){if(!v)return"";let a=autoA(d);if(v==="F")return"F";return v===a?"":"X:"+v}
-
-function actorName(){return localStorage.getItem(ACTOR_KEY)||""}
-function loadChangeReads(){try{localReads=JSON.parse(localStorage.getItem(READS_KEY)||"{}")}catch(e){localReads={}}}
-function saveChangeReads(){localStorage.setItem(READS_KEY,JSON.stringify(localReads))}
-function changeId(){return `${Date.now()}_${Math.random().toString(36).slice(2,8)}`}
-function cleanValue(v){return (v===undefined||v===null||v==="")?"—":String(v)}
-function fieldLabel(f){return ({andrea:"Andrea",micol:"Micol",nota:"Nota",ciclo:"Ciclo",backup:"Calendario"})[f]||f}
-function effectiveFromRecord(rec,date){return eff(rec||{andrea:"",micol:"",nota:""},date)}
-async function recordChange(dateKey,changes,kind="giorno"){
-  let actor=actorName()||"Dispositivo";
-  let valid=(changes||[]).filter(c=>cleanValue(c.old)!==cleanValue(c.new));
-  if(!valid.length||!db)return;
-  let id=changeId(),payload={id,actor,createdAt:Date.now(),date:dateKey||"",kind,changes:valid};
-  try{await set(ref(db,`${cfg.sharedPath}/changes/${id}`),payload)}catch(e){console.error("Errore registro modifica",e)}
-}
-function unreadChanges(){
-  let me=actorName();
-  return Object.values(changeLog||{}).filter(c=>c&&c.actor!==me&&!localReads[c.id]).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0))
-}
-function formatChangeTime(ts){
-  if(!ts)return "";
-  let d=new Date(ts),today=new Date();
-  let same=d.toDateString()===today.toDateString();
-  return same?`Oggi ${d.toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"})}`:d.toLocaleString("it-IT",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})
-}
-function renderChangeUi(){
-  let unread=unreadChanges(),badge=$("changeBadge");
-  if(badge){badge.textContent=unread.length>99?"99+":String(unread.length);badge.classList.toggle("show",unread.length>0)}
-  if($("identityCurrent"))$("identityCurrent").innerHTML=`✓ Questo telefono: ${actorName()||"non impostato"}`;
-  let list=$("changeList");if(!list)return;
-  let all=Object.values(changeLog||{}).filter(Boolean).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,40);
-  if(!all.length){list.innerHTML='<div class="changeEmpty">Nessuna modifica registrata.</div>';return}
-  let me=actorName();
-  list.innerHTML=all.map(c=>{
-    let isUnread=c.actor!==me&&!localReads[c.id];
-    let rows=(c.changes||[]).map(x=>`<div class="changeRow"><div class="changeField">${fieldLabel(x.field)}</div><div class="changeValue">${escapeHtmlV21(cleanValue(x.old))}<span class="changeArrow">→</span><strong>${escapeHtmlV21(cleanValue(x.new))}</strong></div></div>`).join("");
-    return `<div class="changeCard ${isUnread?'unread':''}" data-change-id="${c.id}"><div class="changeCardTop"><div><div class="changeWho">${c.actor} ha modificato</div><div class="changeDate">${c.date||"Calendario"}</div></div><div class="changeWhen">${formatChangeTime(c.createdAt)}</div></div><div class="changeRows">${rows}</div></div>`
-  }).join("");
-  list.querySelectorAll("[data-change-id]").forEach(el=>el.onclick=()=>{
-    localReads[el.dataset.changeId]=true;saveChangeReads();renderChangeUi();
-  })
-}
-function openChanges(){
-  $("changePanel")?.classList.add("open");
-  unreadChanges().forEach(c=>localReads[c.id]=true);
-  saveChangeReads();renderChangeUi();
-}
-function closeChanges(){$("changePanel")?.classList.remove("open")}
-function chooseActor(name){
-  localStorage.setItem(ACTOR_KEY,name);
-  $("identityPanel")?.classList.remove("open");
-  renderChangeUi();
-}
-async function saveCurrent(){
-  ensure(state.selected);
-  let d=from(state.selected),oldRec={...(state.data[state.selected]||{andrea:"",micol:"",nota:""})};
-  let oldA=effectiveFromRecord(oldRec,d),oldM=micolText(oldRec.micol||""),oldN=oldRec.nota||"";
-  let p={andrea:norm($("andreaSel").value,d),micol:$("micolInput").value.trim(),nota:$("notaInput").value.trim()};
-  let newA=effectiveFromRecord(p,d),newM=micolText(p.micol||""),newN=p.nota||"";
-  snapshot("salvataggio giorno");
-  await persist(state.selected,p);
-  await recordChange(state.selected,[
-    {field:"andrea",old:labels[oldA]||oldA,new:labels[newA]||newA},
-    {field:"micol",old:oldM,new:newM},
-    {field:"nota",old:oldN,new:newN}
-  ]);
-  render()
-}
-async function clearField(f){(f){ensure(state.selected);state.data[state.selected][f]="";snapshot("svuota "+f);await persist(state.selected,state.data[state.selected]);render()}
-async function realign(){
-  let v=$("andreaSel").value;
-  if(!["M","P","N","R"].includes(v)){alert("Scegli M, P, N o R per riallineare.");return}
-  let old=`${state.anchor.date} = ${labels[state.anchor.value]||state.anchor.value}`;
-  snapshot("prima riallinea");
-  state.anchor={date:state.selected,value:v};
-  await persistAnchor();
-  await recordChange(state.selected,[{field:"ciclo",old,new:`${state.selected} = ${labels[v]}`}],"ciclo");
-  render();alert("Ciclo riallineato.")
-}
+async function saveCurrent(){ensure(state.selected);let d=from(state.selected),p={andrea:norm($("andreaSel").value,d),micol:$("micolInput").value.trim(),nota:$("notaInput").value.trim()};snapshot("salvataggio giorno");await persist(state.selected,p);render()}
+async function clearField(f){ensure(state.selected);state.data[state.selected][f]="";snapshot("svuota "+f);await persist(state.selected,state.data[state.selected]);render()}
+async function realign(){let v=$("andreaSel").value;if(!["M","P","N","R"].includes(v)){alert("Scegli M, P, N o R per riallineare.");return}snapshot("prima riallinea");state.anchor={date:state.selected,value:v};await persistAnchor();render();alert("Ciclo riallineato.")}
 function monthDays(){let y=state.current.getFullYear(),m=state.current.getMonth(),a=[];for(let i=1;i<=dim(y,m);i++)a.push(day(key(new Date(y,m,i))));return a}
 function stats(){let a=monthDays();return {a:a.reduce((s,d)=>s+(hours[d.andrea]||0),0),m:a.reduce((s,d)=>s+hM(d.micol),0),l:a.filter(together).length,w:a.filter(d=>[0,6].includes(d.date.getDay())&&!["R","F"].includes(d.andrea)).length}}
 
@@ -772,24 +591,17 @@ function renderSide(){if(!state.selected)state.selected=key(new Date());let rec=
 function setActiveNavV23(v){document.querySelectorAll("[data-viewnav]").forEach(b=>b.classList.toggle("active",b.dataset.viewnav===v))}
 function render(){setActiveNavV23((document.querySelector('.tab.active')||{}).dataset?.view||'week');renderTop();renderWeek();renderMonth();renderYear();renderStats();renderBackup();renderSide();updateBackupInfo()}
 function show(v){setActiveNavV23(v);document.querySelectorAll("[data-viewnav]").forEach(b=>b.onclick=()=>show(b.dataset.viewnav));
+if($("navMore"))$("navMore").onclick=()=>{document.getElementById("detailView")?.scrollIntoView({behavior:"smooth",block:"start"})};
 document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===v));["week","month","year","stats","backup"].forEach(x=>$(x+"View").classList.toggle("hidden",x!==v))}
 function exportBackup(){let blob=new Blob([JSON.stringify({version:12,exportedAt:new Date().toISOString(),anchor:state.anchor,data:state.data},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`TurniFamiglia_${new Date().toISOString().replace(/[:.]/g,"-").slice(0,16)}.json`;a.click();URL.revokeObjectURL(a.href)}
-async function importBackup(file){let p=JSON.parse(await file.text());snapshot("prima import");state.data=p.data||p;state.anchor=p.anchor||state.anchor;saveLocal();if(db){await persistAnchor();for(let [k,v] of Object.entries(state.data))await persist(k,v)}await recordChange("",[{field:"backup",old:"Stato precedente",new:"Backup importato"}],"backup");render();alert("Backup importato e sincronizzato.")}
-async function init(){loadLocal();loadChangeReads();try{let app=initializeApp(cfg.firebase);db=getDatabase(app);$("firebaseStatus").className="status ok syncBadgePro";$("firebaseStatus").innerHTML=`<span class="syncDot"></span><span><div class="syncTitle">Sincronizzazione attiva</div><div class="syncSub">Firebase · ${cfg.firebase.projectId} · ${cfg.sharedPath}</div></span>`;let a=await get(ref(db,`${cfg.sharedPath}/meta/anchor`));if(a.exists()){state.anchor=a.val();saveLocal()}onValue(ref(db,`${cfg.sharedPath}/days`),snap=>{let cloud=snap.val();if(cloud&&Object.keys(cloud).length){state.data=cloud;saveLocal()}render()});onValue(ref(db,`${cfg.sharedPath}/changes`),snap=>{changeLog=snap.val()||{};renderChangeUi()});return}catch(e){$("firebaseStatus").className="status err";$("firebaseStatus").textContent="Firebase errore: controlla regole database. Deve essere read/write true";console.error(e)}render()}
+async function importBackup(file){let p=JSON.parse(await file.text());snapshot("prima import");state.data=p.data||p;state.anchor=p.anchor||state.anchor;saveLocal();if(db){await persistAnchor();for(let [k,v] of Object.entries(state.data))await persist(k,v)}render();alert("Backup importato e sincronizzato.")}
+async function init(){loadLocal();try{let app=initializeApp(cfg.firebase);db=getDatabase(app);$("firebaseStatus").className="status ok syncBadgePro";$("firebaseStatus").innerHTML=`<span class="syncDot"></span><span><div class="syncTitle">Sincronizzazione attiva</div><div class="syncSub">Firebase · ${cfg.firebase.projectId} · ${cfg.sharedPath}</div></span>`;let a=await get(ref(db,`${cfg.sharedPath}/meta/anchor`));if(a.exists()){state.anchor=a.val();saveLocal()}onValue(ref(db,`${cfg.sharedPath}/days`),snap=>{let cloud=snap.val();if(cloud&&Object.keys(cloud).length){state.data=cloud;saveLocal()}render()});return}catch(e){$("firebaseStatus").className="status err";$("firebaseStatus").textContent="Firebase errore: controlla regole database. Deve essere read/write true";console.error(e)}render()}
 if($("miniCalendarBtn"))if($("miniCalendarBtn"))$("miniCalendarBtn").onclick=()=>show("month");if($("miniMoreBtn"))if($("miniMoreBtn"))$("miniMoreBtn").onclick=()=>show("backup");
-
-if($("navChanges"))$("navChanges").onclick=openChanges;
-if($("closeChangesBtn"))$("closeChangesBtn").onclick=closeChanges;
-if($("markAllReadBtn"))$("markAllReadBtn").onclick=()=>{Object.values(changeLog||{}).filter(c=>c&&c.actor!==actorName()).forEach(c=>localReads[c.id]=true);saveChangeReads();renderChangeUi()};
-if($("chooseAndrea"))$("chooseAndrea").onclick=()=>chooseActor("Andrea");
-if($("chooseMicol"))$("chooseMicol").onclick=()=>chooseActor("Micol");
-if($("changePanel"))$("changePanel").onclick=e=>{if(e.target.id==="changePanel")closeChanges()};
-
 $("saveBtn").onclick=saveCurrent;$("regenFromBtn").onclick=realign;$("clearAndreaBtn").onclick=()=>clearField("andrea");$("clearMicolBtn").onclick=()=>clearField("micol");$("clearNotaBtn").onclick=()=>clearField("nota");
 $("exportBtn").onclick=exportBackup;$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=e=>{let f=e.target.files?.[0];if(f)importBackup(f)};$("restoreLocalBtn").onclick=()=>{let s=JSON.parse(localStorage.getItem(SNAP)||"null");if(!s)return alert("Nessun backup locale");state.data=s.data||{};state.anchor=s.anchor||state.anchor;saveLocal();render()};$("saveSnapshotBtn").onclick=()=>{snapshot("snapshot manuale");alert("Snapshot salvato")};
 if($("editToggleV21"))$("editToggleV21").onclick=()=>{$("editPanelV21").classList.toggle("open");$("editToggleV21").textContent=$("editPanelV21").classList.contains("open")?"Chiudi modifica":"✏️ Modifica giornata"};
-$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","24");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>show(b.dataset.view));await init();if(!state.selected)state.selected=key(new Date());render();show("week");renderChangeUi();if(!actorName())$("identityPanel")?.classList.add("open");
+$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","22");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>show(b.dataset.view));await init();if(!state.selected)state.selected=key(new Date());render();show("week");
 </script>
 </body>
 </html>
