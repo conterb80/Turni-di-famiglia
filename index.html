@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Turni Andrea & Micol - V23A</title>
+<title>Turni Andrea & Micol - V24 TEST</title>
 <meta name="theme-color" content="#111827">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -469,6 +469,70 @@ main{
   }
 }
 
+
+/* V24 TEST - modifiche condivise */
+.changeBellBtn{position:relative!important}
+.changeBadge{
+  position:absolute;top:-5px;right:-4px;
+  display:none;align-items:center;justify-content:center;
+  min-width:20px;height:20px;padding:0 5px;border-radius:999px;
+  background:#ef4444;color:white;border:2px solid white;
+  font-size:10px;font-weight:950;box-shadow:0 5px 12px rgba(239,68,68,.3)
+}
+.changeBadge.show{display:flex}
+.changeOverlay,.actorOverlay{
+  position:fixed;inset:0;z-index:10000;
+  background:rgba(15,23,42,.48);
+  display:none;align-items:flex-end;justify-content:center;padding:14px
+}
+.changeOverlay.open,.actorOverlay.open{display:flex}
+.changeSheet,.actorCard{
+  width:min(560px,100%);max-height:84vh;overflow:auto;
+  background:#f5f8fc;border-radius:26px 26px 20px 20px;
+  padding:15px;box-shadow:0 25px 70px rgba(15,23,42,.30)
+}
+.changeHead{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:10px;margin-bottom:11px
+}
+.changeHead h2,.actorCard h2{margin:0;font-size:25px;letter-spacing:-.04em}
+.changeHead p,.actorCard p{margin:3px 0 0;color:var(--muted);font-size:13px}
+.changeHeadActions{display:flex;gap:7px}
+.changeHeadActions button{padding:8px 10px;border-radius:14px;font-size:12px;font-weight:900}
+.changeList{display:grid;gap:9px}
+.changeCard{
+  background:white;border:1px solid rgba(15,23,42,.08);
+  border-radius:19px;padding:11px 12px;
+  box-shadow:0 8px 22px rgba(15,23,42,.06)
+}
+.changeCard.unread{border-left:5px solid #2563eb;background:#f7fbff}
+.changeTop{display:flex;justify-content:space-between;gap:9px;align-items:flex-start}
+.changeWho{font-weight:950}
+.changeDate{font-size:13px;color:#475569;font-weight:850;margin-top:2px}
+.changeTime{font-size:11px;color:var(--muted);white-space:nowrap}
+.changeRows{display:grid;gap:5px;margin-top:8px}
+.changeRow{
+  display:grid;grid-template-columns:68px minmax(0,1fr);
+  gap:7px;font-size:13px
+}
+.changeField{font-weight:900;color:#475569}
+.changeValue{min-width:0;overflow-wrap:anywhere}
+.changeArrow{color:#64748b;padding:0 4px}
+.changeEmpty{text-align:center;color:var(--muted);padding:30px 12px}
+.actorOverlay{align-items:center}
+.actorCard{max-width:430px;border-radius:26px;text-align:center;background:white}
+.actorChoices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.actorChoices button{min-height:72px;border-radius:20px;font-size:18px;font-weight:950}
+.actorPill{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:7px;padding:6px 10px;border-radius:999px;
+  background:#ecfdf5;color:#166534;font-size:12px;font-weight:900
+}
+@media(min-width:700px){
+  .changeOverlay{align-items:center}
+  .changeSheet{border-radius:26px}
+}
+
 </style>
 </head>
 <body>
@@ -480,7 +544,7 @@ main{
       <button class="navIconV23" data-viewnav="month" id="navMonth"><span class="ico">📆</span><span class="txt">Mese</span></button>
       <button class="navIconV23" data-viewnav="year" id="navYear"><span class="ico">🗓️</span><span class="txt">Anno</span></button>
       <button class="navIconV23" data-viewnav="backup" id="navBackup"><span class="ico">💾</span><span class="txt">Backup</span></button>
-      <button class="navIconV23 more" id="navMore"><span class="ico">⋮</span><span class="txt">Altro</span></button>
+      <button class="navIconV23 more changeBellBtn" id="navChanges"><span class="ico">🔔</span><span class="txt">Novità</span><span id="changeBadge" class="changeBadge">0</span></button>
     </div>
   </div>
   <div class="card headerIntro"><div class="small muted">APP TURNI FAMIGLIA · VERSIONE 23A HEADER INTELLIGENTE</div><h1 class="title">Andrea & Micol</h1><p class="muted" style="margin-top:8px">V23a: header attivo con navigazione superiore. Logica invariata.</p></div>
@@ -527,6 +591,34 @@ main{
 </div>
 <div class="bottom-wrap"><div class="bottom-bar polishBottom"><button id="prevBtn"><span class="navIcon">‹</span><span class="navText">Indietro</span></button><button id="todayBtn"><span class="navIcon">⌖</span><span class="navText">Oggi</span></button><button id="nextBtn"><span class="navIcon">›</span><span class="navText">Avanti</span></button><button id="refreshBtn"><span class="navIcon">↻</span><span class="navText">Aggiorna</span></button><button id="jumpOpenBtn" class="primary"><span class="navIcon">⌕</span><span class="navText">Cerca</span></button></div></div>
 <div class="modalWrap" id="searchWrap"><div class="modal"><h3>Cerca data</h3><div class="field"><label>Formato</label><input id="jumpDate" placeholder="2027-08-15"></div><div class="toolbar" style="grid-template-columns:1fr 1fr;margin-top:12px"><button id="jumpBtn" class="primary">Vai</button><button id="jumpCloseBtn">Chiudi</button></div></div></div>
+
+<div class="changeOverlay" id="changeOverlay">
+  <div class="changeSheet">
+    <div class="changeHead">
+      <div>
+        <h2>Modifiche condivise</h2>
+        <div id="actorPill" class="actorPill"></div>
+      </div>
+      <div class="changeHeadActions">
+        <button id="markReadBtn">Segna viste</button>
+        <button id="closeChangesBtn" class="primary">Chiudi</button>
+      </div>
+    </div>
+    <div id="changeList" class="changeList"></div>
+  </div>
+</div>
+
+<div class="actorOverlay" id="actorOverlay">
+  <div class="actorCard">
+    <h2>Di chi è questo telefono?</h2>
+    <p>La scelta serve solo a distinguere chi modifica turni, orari e note.</p>
+    <div class="actorChoices">
+      <button id="actorAndrea" class="primary">👨 Andrea</button>
+      <button id="actorMicol">👩 Micol</button>
+    </div>
+  </div>
+</div>
+
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import { getDatabase, ref, onValue, set, get } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
@@ -545,8 +637,8 @@ const cfg={
 };
 const cycle=["M","M","R","N","N","R","P","P","R"], labels={M:"Mattina",P:"Pomeriggio",N:"Notte",R:"Riposo",F:"Ferie"}, hours={M:8,P:8,N:8,R:0,F:0};
 const months=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"], weekdays=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
-const STORE="turni-v23a-local", SNAP="turni-v23a-snap", ANCHOR="turni-v23a-anchor";
-let db=null, state={current:new Date(), selected:null, data:{}, anchor:{date:"2026-04-08",value:"M"}};
+const STORE="turni-v24test-local", SNAP="turni-v24test-snap", ANCHOR="turni-v24test-anchor", ACTOR_KEY="turni-v24test-actor", READ_KEY="turni-v24test-read";
+let db=null, state={current:new Date(), selected:null, data:{}, anchor:{date:"2026-04-08",value:"M"}}, sharedChanges={}, readChanges={};
 
 const $=id=>document.getElementById(id);
 const key=d=>{let x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)}
@@ -569,13 +661,104 @@ function updateBackupInfo(){try{let s=JSON.parse(localStorage.getItem(SNAP)||"nu
 async function persist(k,p){state.data[k]=p;saveLocal();if(db)await set(ref(db,`${cfg.sharedPath}/days/${k}`),p)}
 async function persistAnchor(){saveLocal();if(db)await set(ref(db,`${cfg.sharedPath}/meta/anchor`),state.anchor)}
 function norm(v,d){if(!v)return"";let a=autoA(d);if(v==="F")return"F";return v===a?"":"X:"+v}
-async function saveCurrent(){ensure(state.selected);let d=from(state.selected),p={andrea:norm($("andreaSel").value,d),micol:$("micolInput").value.trim(),nota:$("notaInput").value.trim()};snapshot("salvataggio giorno");await persist(state.selected,p);render()}
-async function clearField(f){ensure(state.selected);state.data[state.selected][f]="";snapshot("svuota "+f);await persist(state.selected,state.data[state.selected]);render()}
-async function realign(){let v=$("andreaSel").value;if(!["M","P","N","R"].includes(v)){alert("Scegli M, P, N o R per riallineare.");return}snapshot("prima riallinea");state.anchor={date:state.selected,value:v};await persistAnchor();render();alert("Ciclo riallineato.")}
+async function saveCurrent(){
+  ensure(state.selected);
+  let d=from(state.selected),oldRec={...state.data[state.selected]};
+  let oldA=eff(oldRec,d),oldM=micolText(oldRec.micol||""),oldN=oldRec.nota||"";
+  let p={andrea:norm($("andreaSel").value,d),micol:$("micolInput").value.trim(),nota:$("notaInput").value.trim()};
+  let newA=eff(p,d),newM=micolText(p.micol||""),newN=p.nota||"";
+  snapshot("salvataggio giorno");
+  await persist(state.selected,p);
+  await writeSharedChange(state.selected,[
+    {field:"andrea",old:labels[oldA]||oldA,new:labels[newA]||newA},
+    {field:"micol",old:oldM,new:newM},
+    {field:"nota",old:oldN,new:newN}
+  ]);
+  render()
+}
+async function clearField(f){
+  ensure(state.selected);
+  let d=from(state.selected),oldRec={...state.data[state.selected]};
+  let oldValue=f==="andrea"?(labels[eff(oldRec,d)]||eff(oldRec,d)):f==="micol"?micolText(oldRec.micol||""):(oldRec.nota||"");
+  state.data[state.selected][f]="";
+  let newRec={...state.data[state.selected]};
+  let newValue=f==="andrea"?(labels[eff(newRec,d)]||eff(newRec,d)):f==="micol"?micolText(newRec.micol||""):(newRec.nota||"");
+  snapshot("svuota "+f);
+  await persist(state.selected,state.data[state.selected]);
+  await writeSharedChange(state.selected,[{field:f,old:oldValue,new:newValue}]);
+  render()
+}
+async function realign(){
+  let v=$("andreaSel").value;
+  if(!["M","P","N","R"].includes(v)){alert("Scegli M, P, N o R per riallineare.");return}
+  let old=`${state.anchor.date} = ${labels[state.anchor.value]||state.anchor.value}`;
+  snapshot("prima riallinea");
+  state.anchor={date:state.selected,value:v};
+  await persistAnchor();
+  await writeSharedChange(state.selected,[{field:"ciclo",old:old,new:`${state.selected} = ${labels[v]}`}],"ciclo");
+  render();alert("Ciclo riallineato.")
+}
 function monthDays(){let y=state.current.getFullYear(),m=state.current.getMonth(),a=[];for(let i=1;i<=dim(y,m);i++)a.push(day(key(new Date(y,m,i))));return a}
 function stats(){let a=monthDays();return {a:a.reduce((s,d)=>s+(hours[d.andrea]||0),0),m:a.reduce((s,d)=>s+hM(d.micol),0),l:a.filter(together).length,w:a.filter(d=>[0,6].includes(d.date.getDay())&&!["R","F"].includes(d.andrea)).length}}
 
 function escapeHtmlV21(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+
+function currentActor(){return localStorage.getItem(ACTOR_KEY)||""}
+function loadReadChanges(){try{readChanges=JSON.parse(localStorage.getItem(READ_KEY)||"{}")}catch(e){readChanges={}}}
+function saveReadChanges(){localStorage.setItem(READ_KEY,JSON.stringify(readChanges))}
+function newChangeId(){return `${Date.now()}_${Math.random().toString(36).slice(2,8)}`}
+function shownValue(v){return (v===undefined||v===null||String(v).trim()==="")?"—":String(v)}
+function changeFieldName(f){return ({andrea:"Andrea",micol:"Micol",nota:"Nota",ciclo:"Ciclo"})[f]||f}
+async function writeSharedChange(dateKey,changes,kind="giorno"){
+  if(!db)return;
+  let useful=(changes||[]).filter(c=>shownValue(c.old)!==shownValue(c.new));
+  if(!useful.length)return;
+  let id=newChangeId();
+  let payload={id,actor:currentActor()||"Dispositivo",createdAt:Date.now(),date:dateKey||"",kind,changes:useful};
+  try{await set(ref(db,`${cfg.sharedPath}/changes/${id}`),payload)}
+  catch(e){console.error("Registro modifiche non disponibile",e)}
+}
+function unreadSharedChanges(){
+  let me=currentActor();
+  return Object.values(sharedChanges||{}).filter(c=>c&&c.actor!==me&&!readChanges[c.id]).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0))
+}
+function changeTime(ts){
+  if(!ts)return "";
+  let d=new Date(ts),now=new Date();
+  if(d.toDateString()===now.toDateString())return `Oggi ${d.toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"})}`;
+  return d.toLocaleString("it-IT",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})
+}
+function renderSharedChanges(){
+  let unread=unreadSharedChanges(),badge=$("changeBadge");
+  if(badge){
+    badge.textContent=unread.length>99?"99+":String(unread.length);
+    badge.classList.toggle("show",unread.length>0)
+  }
+  if($("actorPill"))$("actorPill").textContent=`✓ Questo telefono: ${currentActor()||"non impostato"}`;
+  let box=$("changeList");if(!box)return;
+  let all=Object.values(sharedChanges||{}).filter(Boolean).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,40);
+  if(!all.length){box.innerHTML='<div class="changeEmpty">Nessuna modifica registrata.</div>';return}
+  let me=currentActor();
+  box.innerHTML=all.map(c=>{
+    let unreadClass=(c.actor!==me&&!readChanges[c.id])?"unread":"";
+    let rows=(c.changes||[]).map(x=>`<div class="changeRow"><div class="changeField">${changeFieldName(x.field)}</div><div class="changeValue">${escapeHtmlV21(shownValue(x.old))}<span class="changeArrow">→</span><strong>${escapeHtmlV21(shownValue(x.new))}</strong></div></div>`).join("");
+    return `<div class="changeCard ${unreadClass}" data-change="${c.id}"><div class="changeTop"><div><div class="changeWho">${escapeHtmlV21(c.actor||"Dispositivo")} ha modificato</div><div class="changeDate">${escapeHtmlV21(c.date||"Calendario")}</div></div><div class="changeTime">${changeTime(c.createdAt)}</div></div><div class="changeRows">${rows}</div></div>`
+  }).join("");
+  box.querySelectorAll("[data-change]").forEach(el=>el.onclick=()=>{
+    readChanges[el.dataset.change]=true;saveReadChanges();renderSharedChanges()
+  })
+}
+function openSharedChanges(){
+  $("changeOverlay").classList.add("open");
+  unreadSharedChanges().forEach(c=>readChanges[c.id]=true);
+  saveReadChanges();renderSharedChanges()
+}
+function closeSharedChanges(){$("changeOverlay").classList.remove("open")}
+function chooseActor(name){
+  localStorage.setItem(ACTOR_KEY,name);
+  $("actorOverlay").classList.remove("open");
+  renderSharedChanges()
+}
 function noteLinesV21(txt){txt=(txt||"").trim();if(!txt)return [];return txt.split(/\n+/).map(x=>x.trim()).filter(Boolean)}
 function iconForNoteLineV21(line){let l=line.toLowerCase();if(l.startsWith("andrea"))return "🧔";if(l.startsWith("micol"))return "👩";if(l.startsWith("figli")||l.includes("ambra")||l.includes("diego"))return "👧";if(l.startsWith("casa"))return "🏠";if(l.includes("gattile")||l.includes("astrid")||l.includes("gatto"))return "🐾";if(l.includes("corso")||l.includes("lavoro"))return "📌";return "📝"}
 function prettyNoteHtmlV21(txt){let lines=noteLinesV21(txt);if(!lines.length)return '<span>📝</span><span>Nessuna nota</span>';return `<span><span class="noteTitle">Note giornata</span>${lines.map(l=>`<span class="noteLinePretty"><span class="tag">${iconForNoteLineV21(l)}</span><span>${escapeHtmlV21(l)}</span></span>`).join("")}</span>`}
@@ -591,17 +774,29 @@ function renderSide(){if(!state.selected)state.selected=key(new Date());let rec=
 function setActiveNavV23(v){document.querySelectorAll("[data-viewnav]").forEach(b=>b.classList.toggle("active",b.dataset.viewnav===v))}
 function render(){setActiveNavV23((document.querySelector('.tab.active')||{}).dataset?.view||'week');renderTop();renderWeek();renderMonth();renderYear();renderStats();renderBackup();renderSide();updateBackupInfo()}
 function show(v){setActiveNavV23(v);document.querySelectorAll("[data-viewnav]").forEach(b=>b.onclick=()=>show(b.dataset.viewnav));
-if($("navMore"))$("navMore").onclick=()=>{document.getElementById("detailView")?.scrollIntoView({behavior:"smooth",block:"start"})};
 document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===v));["week","month","year","stats","backup"].forEach(x=>$(x+"View").classList.toggle("hidden",x!==v))}
 function exportBackup(){let blob=new Blob([JSON.stringify({version:12,exportedAt:new Date().toISOString(),anchor:state.anchor,data:state.data},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`TurniFamiglia_${new Date().toISOString().replace(/[:.]/g,"-").slice(0,16)}.json`;a.click();URL.revokeObjectURL(a.href)}
 async function importBackup(file){let p=JSON.parse(await file.text());snapshot("prima import");state.data=p.data||p;state.anchor=p.anchor||state.anchor;saveLocal();if(db){await persistAnchor();for(let [k,v] of Object.entries(state.data))await persist(k,v)}render();alert("Backup importato e sincronizzato.")}
-async function init(){loadLocal();try{let app=initializeApp(cfg.firebase);db=getDatabase(app);$("firebaseStatus").className="status ok syncBadgePro";$("firebaseStatus").innerHTML=`<span class="syncDot"></span><span><div class="syncTitle">Sincronizzazione attiva</div><div class="syncSub">Firebase · ${cfg.firebase.projectId} · ${cfg.sharedPath}</div></span>`;let a=await get(ref(db,`${cfg.sharedPath}/meta/anchor`));if(a.exists()){state.anchor=a.val();saveLocal()}onValue(ref(db,`${cfg.sharedPath}/days`),snap=>{let cloud=snap.val();if(cloud&&Object.keys(cloud).length){state.data=cloud;saveLocal()}render()});return}catch(e){$("firebaseStatus").className="status err";$("firebaseStatus").textContent="Firebase errore: controlla regole database. Deve essere read/write true";console.error(e)}render()}
+async function init(){loadLocal();loadReadChanges();try{let app=initializeApp(cfg.firebase);db=getDatabase(app);$("firebaseStatus").className="status ok syncBadgePro";$("firebaseStatus").innerHTML=`<span class="syncDot"></span><span><div class="syncTitle">Sincronizzazione attiva</div><div class="syncSub">Firebase · ${cfg.firebase.projectId} · ${cfg.sharedPath}</div></span>`;let a=await get(ref(db,`${cfg.sharedPath}/meta/anchor`));if(a.exists()){state.anchor=a.val();saveLocal()}onValue(ref(db,`${cfg.sharedPath}/days`),snap=>{let cloud=snap.val();if(cloud&&Object.keys(cloud).length){state.data=cloud;saveLocal()}render()});
+try{onValue(ref(db,`${cfg.sharedPath}/changes`),snap=>{sharedChanges=snap.val()||{};renderSharedChanges()})}catch(changeErr){console.warn("Cronologia modifiche non disponibile",changeErr)}
+return}catch(e){$("firebaseStatus").className="status err";$("firebaseStatus").textContent="Firebase errore: controlla regole database. Deve essere read/write true";console.error(e)}render()}
 if($("miniCalendarBtn"))if($("miniCalendarBtn"))$("miniCalendarBtn").onclick=()=>show("month");if($("miniMoreBtn"))if($("miniMoreBtn"))$("miniMoreBtn").onclick=()=>show("backup");
+
+if($("navChanges"))$("navChanges").onclick=openSharedChanges;
+if($("closeChangesBtn"))$("closeChangesBtn").onclick=closeSharedChanges;
+if($("markReadBtn"))$("markReadBtn").onclick=()=>{
+  Object.values(sharedChanges||{}).filter(c=>c&&c.actor!==currentActor()).forEach(c=>readChanges[c.id]=true);
+  saveReadChanges();renderSharedChanges()
+};
+if($("actorAndrea"))$("actorAndrea").onclick=()=>chooseActor("Andrea");
+if($("actorMicol"))$("actorMicol").onclick=()=>chooseActor("Micol");
+if($("changeOverlay"))$("changeOverlay").onclick=e=>{if(e.target.id==="changeOverlay")closeSharedChanges()};
+
 $("saveBtn").onclick=saveCurrent;$("regenFromBtn").onclick=realign;$("clearAndreaBtn").onclick=()=>clearField("andrea");$("clearMicolBtn").onclick=()=>clearField("micol");$("clearNotaBtn").onclick=()=>clearField("nota");
 $("exportBtn").onclick=exportBackup;$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=e=>{let f=e.target.files?.[0];if(f)importBackup(f)};$("restoreLocalBtn").onclick=()=>{let s=JSON.parse(localStorage.getItem(SNAP)||"null");if(!s)return alert("Nessun backup locale");state.data=s.data||{};state.anchor=s.anchor||state.anchor;saveLocal();render()};$("saveSnapshotBtn").onclick=()=>{snapshot("snapshot manuale");alert("Snapshot salvato")};
 if($("editToggleV21"))$("editToggleV21").onclick=()=>{$("editPanelV21").classList.toggle("open");$("editToggleV21").textContent=$("editPanelV21").classList.contains("open")?"Chiudi modifica":"✏️ Modifica giornata"};
-$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","22");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>show(b.dataset.view));await init();if(!state.selected)state.selected=key(new Date());render();show("week");
+$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","24test");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>show(b.dataset.view));await init();if(!state.selected)state.selected=key(new Date());render();show("week");renderSharedChanges();if(!currentActor())$("actorOverlay").classList.add("open");
 </script>
 </body>
 </html>
