@@ -1,0 +1,12 @@
+V24.4 - SOLO GRAFICA
+Nessuna modifica a funzioni, conteggi, turni, Firebase, note, backup o dati.
+
+Rifiniture:
+- eliminato il testo laterale nella barra superiore;
+- 5 pulsanti superiori distribuiti uniformemente;
+- barra inferiore alleggerita, con Oggi come unico richiamo;
+- Cerca non più nero/dominante;
+- riepilogo mese/anno più compatto;
+- Mattine/Pomeriggi/Notti disposti in una riga quando lo spazio lo consente;
+- totali ore meglio bilanciati;
+- pannello Modifica giornata leggermente più compatto.

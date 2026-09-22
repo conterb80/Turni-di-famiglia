@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Turni Andrea & Micol - V24.3</title>
+<title>Turni Andrea & Micol - V24.4</title>
 <meta name="theme-color" content="#111827">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -603,6 +603,54 @@ main{
 }
 @media(max-width:390px){.summaryGridV242{grid-template-columns:1fr!important}.shiftCountsV242{grid-template-columns:repeat(3,1fr)!important}}
 
+
+/* V24.4 - SOLO RIFINITURA GRAFICA. Nessuna modifica funzionale. */
+
+/* Barra superiore: elimina il testo laterale e dedica tutta la larghezza ai 5 comandi */
+.brand{display:none!important}
+.topbar{padding:10px 12px!important}
+.topnav{width:100%!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:7px!important}
+.topnav button,.topnav .navBtn{width:100%!important;min-width:0!important;padding:7px 3px!important;border-radius:16px!important}
+.topnav button span,.topnav .navBtn span{max-width:100%!important}
+
+/* Barra inferiore: tutti leggeri; Oggi resta il solo richiamo visivo */
+.bottomnav{padding:6px 7px!important;gap:4px!important}
+.bottomnav button{background:transparent!important;color:#172033!important;border:0!important;box-shadow:none!important}
+.bottomnav button:nth-child(2){background:#e8f2ff!important;color:#174ea6!important}
+.bottomnav button:last-child{background:transparent!important;color:#172033!important}
+.bottomnav button:active{background:#eef2f7!important}
+
+/* Riepilogo mese/anno: più compatto e bilanciato */
+.summaryV242{padding:13px!important;border-radius:22px!important}
+.summaryV242 h3{margin-bottom:10px!important}
+.summaryGridV242{gap:9px!important}
+.summaryBoxV242{padding:12px!important;min-height:0!important}
+.summaryBoxV242 .who{font-size:15px!important}
+.summaryBoxV242 .big{font-size:25px!important;line-height:1.08!important;white-space:normal!important}
+.shiftCountsV242{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important;margin-top:10px!important}
+.shiftCountsV242 span{font-size:9.5px!important;padding:6px 2px!important;white-space:nowrap!important}
+.adjV242{font-size:10.5px!important;margin-top:8px!important;padding-top:7px!important}
+
+/* Modifica giornata: stessi controlli, solo spazi più efficienti */
+#editPanel .field{margin-bottom:11px!important}
+#editPanel input,#editPanel select,#editPanel textarea{border-radius:15px!important}
+.fieldHelpV242{font-size:10.5px!important;line-height:1.25!important;margin-top:5px!important}
+.adjustGridV242{gap:7px!important}
+#saveCurrent{min-height:54px!important}
+
+/* Piccoli schermi: niente testi troncati o box sproporzionati */
+@media(max-width:600px){
+  .topnav{gap:6px!important}
+  .topnav button,.topnav .navBtn{padding-left:2px!important;padding-right:2px!important}
+  .summaryGridV242{grid-template-columns:1fr 1fr!important}
+  .summaryBoxV242{padding:10px!important}
+  .summaryBoxV242 .big{font-size:23px!important}
+  .shiftCountsV242{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+@media(max-width:365px){
+  .summaryGridV242{grid-template-columns:1fr!important}
+}
+
 </style>
 </head>
 <body>
@@ -884,7 +932,7 @@ if($("changeOverlay"))$("changeOverlay").onclick=e=>{if(e.target.id==="changeOve
 $("saveBtn").onclick=saveCurrent;$("regenFromBtn").onclick=realign;$("clearAndreaBtn").onclick=()=>clearField("andrea");$("clearMicolBtn").onclick=()=>clearField("micol");$("clearNotaBtn").onclick=()=>clearField("nota");
 $("exportBtn").onclick=exportBackup;$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=e=>{let f=e.target.files?.[0];if(f)importBackup(f)};$("restoreLocalBtn").onclick=()=>{let s=JSON.parse(localStorage.getItem(SNAP)||"null");if(!s)return alert("Nessun backup locale");state.data=s.data||{};state.anchor=s.anchor||state.anchor;saveLocal();render()};$("saveSnapshotBtn").onclick=()=>{snapshot("snapshot manuale");alert("Snapshot salvato")};
 if($("editToggleV21"))$("editToggleV21").onclick=()=>{$("editPanelV21").classList.toggle("open");$("editToggleV21").textContent=$("editPanelV21").classList.contains("open")?"Chiudi modifica":"✏️ Modifica giornata"};
-$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","24_3");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
+$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","24_4");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>show(b.dataset.view));await init();if(!state.selected)state.selected=key(new Date());render();show("week");renderSharedChanges();if(!currentActor())$("actorOverlay").classList.add("open");
 </script>
 </body>
