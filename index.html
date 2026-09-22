@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Turni Andrea & Micol - V24.2</title>
+<title>Turni Andrea & Micol - V24.3</title>
 <meta name="theme-color" content="#111827">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -565,12 +565,50 @@ main{
 .fieldHelpV242{font-size:11px;color:var(--muted);line-height:1.3}
 @media(max-width:380px){.summaryGridV242{grid-template-columns:1fr}}
 
+
+/* V24.3 - SOLO OTTIMIZZAZIONE GRAFICA */
+:root{--v243nav:#0f1a2e;--v243blue:#2563eb;--v243pink:#db2777}
+.topbar{background:linear-gradient(135deg,#101b30,#172b4d)!important;border:0!important;box-shadow:0 8px 22px rgba(15,23,42,.16)!important}
+.brand{font-weight:950!important;letter-spacing:-.02em}
+.brand::first-letter{color:inherit}
+.topnav{gap:5px!important}
+.topnav button,.topnav .navBtn{border-radius:15px!important;min-height:42px!important;transition:.15s ease!important}
+.topnav button.active,.topnav .navBtn.active{background:#fff!important;color:#14213a!important;box-shadow:0 5px 14px rgba(0,0,0,.14)!important}
+.bottomnav{background:rgba(255,255,255,.96)!important;border:1px solid rgba(226,232,240,.95)!important;border-radius:24px!important;box-shadow:0 10px 28px rgba(15,23,42,.14)!important;padding:6px!important;gap:3px!important}
+.bottomnav button{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:18px!important;min-height:58px!important}
+.bottomnav button:nth-child(2){background:linear-gradient(180deg,#dbeafe,#bfdbfe)!important;color:#0b4bb3!important}
+.bottomnav button:last-child{background:transparent!important;color:#0f172a!important}
+.summaryV242{border:1px solid #dbe4f0!important;border-radius:24px!important;padding:14px!important;background:linear-gradient(180deg,#fff,#f8fbff)!important}
+.summaryV242 h3{font-size:21px!important;letter-spacing:-.02em!important}
+.summaryGridV242{gap:10px!important}
+.summaryBoxV242{border-radius:20px!important;padding:14px!important;box-shadow:0 5px 16px rgba(15,23,42,.045)!important}
+.summaryBoxV242:first-child{background:linear-gradient(145deg,#f4f9ff,#eaf4ff)!important;border-color:#cfe3ff!important}
+.summaryBoxV242:last-child{background:linear-gradient(145deg,#fff7fb,#fff0f7)!important;border-color:#f5d4e5!important}
+.summaryBoxV242 .who{font-size:16px!important;color:#172033!important}
+.summaryBoxV242 .big{font-size:30px!important;line-height:1.05!important;margin-top:6px!important}
+.shiftCountsV242{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:6px!important;margin-top:12px!important}
+.shiftCountsV242 span{text-align:center!important;border-radius:13px!important;padding:7px 4px!important;font-size:10px!important}
+.adjV242{border-top:1px solid rgba(148,163,184,.22)!important;padding-top:9px!important;margin-top:10px!important}
+.adjustGridV242 input{border-radius:15px!important;background:#fbfdff!important}
+.fieldHelpV242{padding:0 2px!important}
+#editPanel{border-radius:22px!important}
+#saveCurrent{border-radius:17px!important}
+@media(max-width:600px){
+ .topbar{border-radius:0 0 18px 18px!important}
+ .summaryGridV242{grid-template-columns:1fr 1fr!important}
+ .summaryBoxV242{padding:11px!important}
+ .summaryBoxV242 .big{font-size:25px!important}
+ .shiftCountsV242{grid-template-columns:1fr!important}
+ .shiftCountsV242 span{padding:5px 4px!important}
+}
+@media(max-width:390px){.summaryGridV242{grid-template-columns:1fr!important}.shiftCountsV242{grid-template-columns:repeat(3,1fr)!important}}
+
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="appbar polishAppbar">
-    <div class="brand"><div><div class="brandTitle">TURNI</div></div></div>
+    <div class="brand"><div><div class="brandTitle">Andrea &amp; Micol</div></div></div>
     <div class="headerNavV23">
       <button class="navIconV23" data-viewnav="week" id="navWeek"><span class="ico">📅</span><span class="txt">Set</span></button>
       <button class="navIconV23" data-viewnav="month" id="navMonth"><span class="ico">📆</span><span class="txt">Mese</span></button>
@@ -846,7 +884,7 @@ if($("changeOverlay"))$("changeOverlay").onclick=e=>{if(e.target.id==="changeOve
 $("saveBtn").onclick=saveCurrent;$("regenFromBtn").onclick=realign;$("clearAndreaBtn").onclick=()=>clearField("andrea");$("clearMicolBtn").onclick=()=>clearField("micol");$("clearNotaBtn").onclick=()=>clearField("nota");
 $("exportBtn").onclick=exportBackup;$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=e=>{let f=e.target.files?.[0];if(f)importBackup(f)};$("restoreLocalBtn").onclick=()=>{let s=JSON.parse(localStorage.getItem(SNAP)||"null");if(!s)return alert("Nessun backup locale");state.data=s.data||{};state.anchor=s.anchor||state.anchor;saveLocal();render()};$("saveSnapshotBtn").onclick=()=>{snapshot("snapshot manuale");alert("Snapshot salvato")};
 if($("editToggleV21"))$("editToggleV21").onclick=()=>{$("editPanelV21").classList.toggle("open");$("editToggleV21").textContent=$("editPanelV21").classList.contains("open")?"Chiudi modifica":"✏️ Modifica giornata"};
-$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","24_2");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
+$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","24_3");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>show(b.dataset.view));await init();if(!state.selected)state.selected=key(new Date());render();show("week");renderSharedChanges();if(!currentActor())$("actorOverlay").classList.add("open");
 </script>
 </body>

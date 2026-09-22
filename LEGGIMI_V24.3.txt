@@ -1,0 +1,8 @@
+V24.3 - restyling grafico
+SOLO grafica: nessuna modifica a turni, Firebase, conteggi o dati.
+- Barra superiore più pulita e moderna.
+- Rimossa la scritta TURN/TURNI non pertinente; sostituita con Andrea & Micol.
+- Barra inferiore alleggerita; Oggi evidenziato.
+- Riepilogo mese più leggibile e rifinito.
+- Campi correzione ore armonizzati con il resto dell'app.
+- Cache/versione aggiornata a V24.3.
