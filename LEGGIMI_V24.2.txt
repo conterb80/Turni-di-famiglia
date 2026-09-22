@@ -1,0 +1,7 @@
+V24.2
+- Andrea: ore lavorate mese/anno, conteggio Mattine/Pomeriggi/Notti.
+- Correzione manuale giornaliera +/- ore e minuti Andrea.
+- Micol: totale ore lavorate mese/anno.
+- Orari Micol riconosciuti anche come 8-14, 14+20, 12.30-18.30 e 08:30-13:30.
+- Riepiloghi nelle viste Mese e Anno.
+- Firebase, Novità, note e backup mantenuti.
