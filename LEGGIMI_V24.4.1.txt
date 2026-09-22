@@ -1,0 +1,4 @@
+V24.4.1 - correzione finale
+- Corretto esclusivamente il ritorno alla settimana corrente tramite il tasto Set.
+- Grafica V24.4 invariata.
+- Nessuna modifica a turni, ore, statistiche, Firebase, note, backup o dati.
