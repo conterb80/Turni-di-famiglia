@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Turni Andrea & Micol - V24.4.1</title>
+<title>Turni Andrea & Micol - V24.5</title>
 <meta name="theme-color" content="#111827">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -651,6 +651,51 @@ main{
   .summaryGridV242{grid-template-columns:1fr!important}
 }
 
+
+/* V24.5 - FERIE MANUALI. Tutto il resto resta invariato. */
+.vacCardV245{margin-top:14px;border:1px solid #dbe4f0;border-radius:22px;padding:14px;background:linear-gradient(180deg,#fff,#fbfdff)}
+.vacHeadV245{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}
+.vacHeadV245 h3{font-size:21px}
+.vacManualV245{font-size:10px;font-weight:800;color:#64748b;background:#f1f5f9;border-radius:999px;padding:6px 9px;white-space:nowrap}
+.vacGridV245{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.vacPersonV245{border-radius:20px;padding:12px;border:1px solid}
+.vacPersonV245.andrea{background:linear-gradient(145deg,#f4f9ff,#eaf4ff);border-color:#cfe3ff}
+.vacPersonV245.micol{background:linear-gradient(145deg,#fff7fb,#fff0f7);border-color:#f5d4e5}
+.vacNameV245{font-size:16px;font-weight:900;margin-bottom:9px}
+.vacNumsV245{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.vacNumV245{background:rgba(255,255,255,.72);border:1px solid rgba(148,163,184,.18);border-radius:13px;padding:7px 3px;text-align:center}
+.vacNumV245 small{display:block;font-size:8.5px;color:#64748b;font-weight:800}
+.vacNumV245 strong{display:block;font-size:20px;line-height:1.05;margin-top:3px}
+.vacNumV245.residue strong{color:#15803d}
+.vacNumV245.zero strong{color:#dc2626}
+.vacBarV245{height:9px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-top:10px}
+.vacFillV245{height:100%;border-radius:999px;background:#2563eb}
+.vacPersonV245.micol .vacFillV245{background:#db2777}
+.vacPctV245{text-align:right;font-size:9px;font-weight:850;color:#64748b;margin-top:3px}
+.vacManageV245{width:100%;margin-top:10px;border:0;background:#e8f2ff;color:#174ea6;font-weight:900}
+.vacNoteV245{text-align:center;color:#64748b;font-size:9.5px;margin-top:8px}
+.vacOverlayV245{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:flex-end;justify-content:center;z-index:9999;padding:12px}
+.vacOverlayV245.open{display:flex}
+.vacSheetV245{width:min(620px,100%);background:#fff;border-radius:24px;padding:18px;box-shadow:0 20px 50px rgba(15,23,42,.22)}
+.vacSheetV245 h2{font-size:23px;margin-bottom:4px}
+.vacSheetV245 .sub{color:#64748b;font-size:12px;margin-bottom:14px}
+.vacEditGridV245{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vacEditPersonV245{border:1px solid #e5e7eb;border-radius:18px;padding:12px}
+.vacEditPersonV245 h3{font-size:17px;margin-bottom:8px}
+.vacEditPersonV245 label{font-size:11px;font-weight:800;color:#64748b}
+.vacEditPersonV245 input{width:100%;margin:4px 0 9px}
+.vacActionsV245{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+@media(max-width:420px){
+ .vacCardV245{padding:11px}
+ .vacGridV245{grid-template-columns:1fr 1fr}
+ .vacPersonV245{padding:9px}
+ .vacNumsV245{grid-template-columns:1fr}
+ .vacNumV245{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;text-align:left}
+ .vacNumV245 small,.vacNumV245 strong{display:inline;margin:0}
+ .vacNumV245 strong{font-size:17px}
+ .vacEditGridV245{grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 <body>
@@ -727,6 +772,26 @@ main{
   </div>
 </div>
 
+
+<div class="vacOverlayV245" id="vacOverlayV245">
+  <div class="vacSheetV245">
+    <h2>🏖️ Gestisci ferie <span id="vacYearV245"></span></h2>
+    <div class="sub">Inserimento manuale. Non modifica e non legge le ferie del calendario.</div>
+    <input id="vacYearInputV245" type="hidden">
+    <div class="vacEditGridV245">
+      <div class="vacEditPersonV245"><h3>Andrea</h3>
+        <label>Giorni disponibili</label><input id="vacAAvailV245" type="number" min="0" step="0.5" inputmode="decimal">
+        <label>Giorni utilizzati</label><input id="vacAUsedV245" type="number" min="0" step="0.5" inputmode="decimal">
+      </div>
+      <div class="vacEditPersonV245"><h3>Micol</h3>
+        <label>Giorni disponibili</label><input id="vacMAvailV245" type="number" min="0" step="0.5" inputmode="decimal">
+        <label>Giorni utilizzati</label><input id="vacMUsedV245" type="number" min="0" step="0.5" inputmode="decimal">
+      </div>
+    </div>
+    <div class="vacActionsV245"><button id="vacCancelV245">Annulla</button><button id="vacSaveV245" class="primary">Salva ferie</button></div>
+  </div>
+</div>
+
 <div class="actorOverlay" id="actorOverlay">
   <div class="actorCard">
     <h2>Di chi è questo telefono?</h2>
@@ -756,8 +821,8 @@ const cfg={
 };
 const cycle=["M","M","R","N","N","R","P","P","R"], labels={M:"Mattina",P:"Pomeriggio",N:"Notte",R:"Riposo",F:"Ferie"}, hours={M:8,P:8,N:8,R:0,F:0};
 const months=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"], weekdays=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
-const STORE="turni-v24_1-local", SNAP="turni-v24_1-snap", ANCHOR="turni-v24_1-anchor", ACTOR_KEY="turni-v24_1-actor", READ_KEY="turni-v24_1-read";
-let db=null, state={current:new Date(), selected:null, data:{}, anchor:{date:"2026-04-08",value:"M"}}, sharedChanges={}, readChanges={};
+const STORE="turni-v24_1-local", SNAP="turni-v24_1-snap", ANCHOR="turni-v24_1-anchor", ACTOR_KEY="turni-v24_1-actor", READ_KEY="turni-v24_1-read", VAC_KEY="turni-v24_5-vacations";
+let db=null, state={current:new Date(), selected:null, data:{}, anchor:{date:"2026-04-08",value:"M"}, vacations:{}}, sharedChanges={}, readChanges={};
 
 const $=id=>document.getElementById(id);
 const key=d=>{let x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)}
@@ -774,8 +839,8 @@ function micolText(v){if(!v)return"Riposo";let s=v.trim().toLowerCase();if(["r",
 function parseClockV242(v){let s=String(v||"").trim().replace(",",".");let m=s.match(/^(\d{1,2})(?:[.:](\d{1,2}))?$/);if(!m)return null;let h=+m[1],mi=m[2]?+m[2]:0;if(h>23||mi>59)return null;return h*60+mi}
 function hM(v){if(!v)return 0;let s=String(v).trim().toLowerCase();if(["r","riposo","f","ferie"].includes(s))return 0;s=s.replace(/\s+/g,"");let p=s.split(/[-+–—]/);if(p.length!==2)return 0;let a=parseClockV242(p[0]),b=parseClockV242(p[1]);if(a===null||b===null)return 0;if(b<a)b+=1440;return(b-a)/60}
 function together(d){return d.andrea==="R"&&micolText(d.micol)==="Riposo"}
-function saveLocal(){localStorage.setItem(STORE,JSON.stringify(state.data));localStorage.setItem(ANCHOR,JSON.stringify(state.anchor))}
-function loadLocal(){try{state.data=JSON.parse(localStorage.getItem(STORE)||"{}");state.anchor=JSON.parse(localStorage.getItem(ANCHOR)||JSON.stringify(state.anchor))}catch(e){}}
+function saveLocal(){localStorage.setItem(STORE,JSON.stringify(state.data));localStorage.setItem(ANCHOR,JSON.stringify(state.anchor));localStorage.setItem(VAC_KEY,JSON.stringify(state.vacations||{}))}
+function loadLocal(){try{state.data=JSON.parse(localStorage.getItem(STORE)||"{}");state.anchor=JSON.parse(localStorage.getItem(ANCHOR)||JSON.stringify(state.anchor));state.vacations=JSON.parse(localStorage.getItem(VAC_KEY)||"{}")}catch(e){}}
 function snapshot(label){localStorage.setItem(SNAP,JSON.stringify({savedAt:new Date().toISOString(),label,anchor:state.anchor,data:state.data}));updateBackupInfo()}
 function updateBackupInfo(){try{let s=JSON.parse(localStorage.getItem(SNAP)||"null");$("backupInfo").textContent=s?`Ultimo backup locale: ${s.savedAt.replace("T"," ").slice(0,16)} · ${s.label}`:"Ultimo backup locale: nessuno"}catch(e){}}
 async function persist(k,p){state.data[k]=p;saveLocal();if(db)await set(ref(db,`${cfg.sharedPath}/days/${k}`),p)}
@@ -904,7 +969,46 @@ function renderTop(){let s=stats();$("sA").textContent=s.a;$("sM").textContent=s
 function noteShort(t){return (t||"").trim().replace(/\s+/g," ")}
 function renderWeek(){let start=sow(state.current),endD=new Date(start);endD.setDate(start.getDate()+6);let notesCount=0;for(let i=0;i<7;i++){let d=new Date(start);d.setDate(start.getDate()+i);let dd=day(key(d));if(dd.nota&&dd.nota.trim())notesCount++}let html=`<div class="head"><div><h2>Settimana compatta ${notesCount?`<span class="noteCountChip">📝 ${notesCount}</span>`:''}</h2><div class="small muted">${key(start)} · ${key(endD)} · Ancora ciclo: ${state.anchor.date} = ${labels[state.anchor.value]}</div></div></div><div class="week-list" style="margin-top:12px">`;for(let i=0;i<7;i++){let d=new Date(start);d.setDate(start.getDate()+i);let dd=day(key(d));let mt=micolText(dd.micol);let micClass=(mt==="Riposo"||mt==="Ferie")?"pillMic rip":"pillMic";let nt=noteShort(dd.nota);html+=`<div class="week-day ${state.selected===dd.key?'sel':''} ${together(dd)?'together':''} ${nt?'hasNote':''}" data-k="${dd.key}"><div class="week-compact-row"><div class="wdate"><div class="dow">${weekdays[i].toUpperCase()}</div><div class="num">${d.getDate()}</div></div><div><div class="person-head">Andrea</div><div class="pill pill${dd.andrea}"><span class="code">${dd.andrea}</span><span>${labels[dd.andrea]}</span></div></div><div><div class="person-head">Micol</div><div class="pill ${micClass}"><span>${mt}</span></div></div><div class="weekNoteText ${nt?'':'empty'}" title="${nt||'Nessuna nota'}">${nt?'📝':''}<span>${nt||'—'}</span></div></div></div>`}html+=`</div><div class="weekNoteHint">📝 Le note si leggono qui; tocca il giorno per il testo completo sotto.</div><div class="legendCompact"><span>🟡 Mattina</span><span>🟠 Pomeriggio</span><span>🔵 Notte</span><span>🟢 Riposo</span><span>🟣 Ferie</span></div>${weekNotesV21(start)}`;$("weekView").innerHTML=html;document.querySelectorAll("#weekView [data-k]").forEach(e=>e.onclick=()=>{state.selected=e.dataset.k;render()});document.querySelectorAll("#weekView [data-note-k]").forEach(e=>e.onclick=()=>{state.selected=e.dataset.noteK;render();setTimeout(()=>document.querySelector(".detailCardPro")?.scrollIntoView({behavior:"smooth",block:"start"}),80)})}
 function renderMonth(){let y=state.current.getFullYear(),m=state.current.getMonth();let today=key(new Date());let html=`<div class="monthHeaderPro"><button onclick="state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()">‹</button><h2>${months[m]} ${y}</h2><button onclick="state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()">›</button></div><div class="monthGridPro">${weekdays.map(w=>`<div class="weekdayPro">${w}</div>`).join("")}</div><div class="monthGridPro" style="margin-top:4px">`;for(let d of grid(y,m)){if(!d){html+='<div class="dayPro empty"></div>';continue}let dd=day(key(d));let mt=micolText(dd.micol);let mic=mt.replace(":00","").replace("Riposo","R").replace("Ferie","F");let micClass=(mt==="Riposo"||mt==="Ferie")?"micolMiniPro rip":"micolMiniPro";html+=`<div class="dayPro ${state.selected===dd.key?'sel':''} ${dd.key===today?'today':''} ${together(dd)?'together':''}" data-k="${dd.key}"><div class="dayNumPro">${d.getDate()}</div><span class="badgePro badge${dd.andrea}">${dd.andrea}</span><div class="${micClass}">${mic}</div><div class="noteMiniPro">${dd.nota?'📝':''}</div></div>`}html+=`</div><div class="legendCompact v18"><span>🟡 M</span><span>🟠 P</span><span>🔵 N</span><span>🟢 R</span><span>🟣 F</span></div>${summaryHtmlV242("Riepilogo mese",periodStatsV242(y,m))}`;$("monthView").classList.add("monthCardPro");$("monthView").innerHTML=html;document.querySelectorAll("#monthView [data-k]").forEach(e=>e.onclick=()=>{state.selected=e.dataset.k;render()})}
-function renderYear(){let y=state.current.getFullYear();let html=`<div class="monthHeaderPro"><button onclick="state.current=new Date(state.current.getFullYear()-1,state.current.getMonth(),1);render()">‹</button><h2>${y}</h2><button onclick="state.current=new Date(state.current.getFullYear()+1,state.current.getMonth(),1);render()">›</button></div><div class="yearPro">`;for(let m=0;m<12;m++){html+=`<div class="yearMonthPro" data-month="${m}"><div class="yearMonthTitlePro">${months[m].slice(0,3).toUpperCase()}</div><div class="yearDotsPro">`;for(let i=1;i<=31;i++){if(i>dim(y,m)){html+='<span></span>';continue}let dd=day(key(new Date(y,m,i)));html+=`<span class="dotPro dot${dd.andrea}"></span>`}html+=`</div></div>`}html+=`</div><div class="legendCompact v18"><span>🟢 R</span><span>🟡 M</span><span>🟠 P</span><span>🔵 N</span><span>🟣 F</span></div>${summaryHtmlV242("Riepilogo anno",periodStatsV242(y,null))}`;$("yearView").innerHTML=html;document.querySelectorAll("#yearView [data-month]").forEach(e=>e.onclick=()=>{state.current=new Date(y,+e.dataset.month,1);show("month");render()})}
+
+function vacDataV245(y){
+  let v=(state.vacations&&state.vacations[y])||{};
+  let clean=n=>Math.max(0,Number(n)||0);
+  return {
+    andrea:{available:clean(v.andrea?.available),used:clean(v.andrea?.used)},
+    micol:{available:clean(v.micol?.available),used:clean(v.micol?.used)}
+  }
+}
+function vacPersonHtmlV245(name,v,cls){
+  let residual=v.available-v.used,pct=v.available>0?Math.max(0,Math.min(100,Math.round(v.used/v.available*100))):0;
+  return `<div class="vacPersonV245 ${cls}"><div class="vacNameV245">${name}</div><div class="vacNumsV245">
+    <div class="vacNumV245"><small>Disponibili</small><strong>${v.available}</strong></div>
+    <div class="vacNumV245"><small>Utilizzate</small><strong>${v.used}</strong></div>
+    <div class="vacNumV245 residue ${residual<=0&&v.available>0?'zero':''}"><small>Residue</small><strong>${residual}</strong></div>
+  </div><div class="vacBarV245"><div class="vacFillV245" style="width:${pct}%"></div></div><div class="vacPctV245">${pct}% utilizzate</div></div>`
+}
+function vacationHtmlV245(y){
+  let v=vacDataV245(y);
+  return `<div class="vacCardV245"><div class="vacHeadV245"><h3>🏖️ Ferie ${y}</h3><span class="vacManualV245">Conteggio manuale</span></div>
+    <div class="vacGridV245">${vacPersonHtmlV245("Andrea",v.andrea,"andrea")}${vacPersonHtmlV245("Micol",v.micol,"micol")}</div>
+    <button class="vacManageV245" id="vacManageV245">✏️ Gestisci ferie</button>
+    <div class="vacNoteV245">Il conteggio è manuale e indipendente dal calendario.</div>
+  </div>`
+}
+function openVacV245(y){
+  let v=vacDataV245(y);$("vacYearV245").textContent=y;$("vacYearInputV245").value=y;
+  $("vacAAvailV245").value=v.andrea.available||"";$("vacAUsedV245").value=v.andrea.used||"";
+  $("vacMAvailV245").value=v.micol.available||"";$("vacMUsedV245").value=v.micol.used||"";
+  $("vacOverlayV245").classList.add("open");
+}
+async function saveVacV245(){
+  let y=String($("vacYearInputV245").value),num=id=>Math.max(0,Number($(id).value)||0);
+  let v={andrea:{available:num("vacAAvailV245"),used:num("vacAUsedV245")},micol:{available:num("vacMAvailV245"),used:num("vacMUsedV245")}};
+  state.vacations[y]=v;saveLocal();
+  if(db)await set(ref(db,`${cfg.sharedPath}/vacations/${y}`),v);
+  $("vacOverlayV245").classList.remove("open");render();
+}
+
+function renderYear(){let y=state.current.getFullYear();let html=`<div class="monthHeaderPro"><button onclick="state.current=new Date(state.current.getFullYear()-1,state.current.getMonth(),1);render()">‹</button><h2>${y}</h2><button onclick="state.current=new Date(state.current.getFullYear()+1,state.current.getMonth(),1);render()">›</button></div><div class="yearPro">`;for(let m=0;m<12;m++){html+=`<div class="yearMonthPro" data-month="${m}"><div class="yearMonthTitlePro">${months[m].slice(0,3).toUpperCase()}</div><div class="yearDotsPro">`;for(let i=1;i<=31;i++){if(i>dim(y,m)){html+='<span></span>';continue}let dd=day(key(new Date(y,m,i)));html+=`<span class="dotPro dot${dd.andrea}"></span>`}html+=`</div></div>`}html+=`</div><div class="legendCompact v18"><span>🟢 R</span><span>🟡 M</span><span>🟠 P</span><span>🔵 N</span><span>🟣 F</span></div>${summaryHtmlV242("Riepilogo anno",periodStatsV242(y,null))}${vacationHtmlV245(y)}`;$("yearView").innerHTML=html;if($("vacManageV245"))$("vacManageV245").onclick=()=>openVacV245(y);document.querySelectorAll("#yearView [data-month]").forEach(e=>e.onclick=()=>{state.current=new Date(y,+e.dataset.month,1);show("month");render()})}
 function renderStats(){let s=stats();let pct=(v,max)=>Math.max(4,Math.min(100,Math.round(v/max*100)));$("statsView").innerHTML=`<h2>Statistiche smart</h2><div class="statsSmartPro"><div class="smartRowPro"><div class="smartHeadPro"><span>Ore Andrea mese</span><strong>${s.a}h</strong></div><div class="barPro"><div class="fillPro" style="width:${pct(s.a,200)}%"></div></div></div><div class="smartRowPro"><div class="smartHeadPro"><span>Ore Micol mese</span><strong>${s.m.toFixed(1).replace(".0","")}h</strong></div><div class="barPro"><div class="fillPro micol" style="width:${pct(s.m,120)}%"></div></div></div><div class="smartRowPro"><div class="smartHeadPro"><span>Liberi insieme</span><strong>${s.l} giorni</strong></div><div class="barPro"><div class="fillPro free" style="width:${pct(s.l,12)}%"></div></div></div><div class="smartRowPro"><div class="smartHeadPro"><span>Weekend lavorati</span><strong>${s.w}</strong></div><div class="barPro"><div class="fillPro weekend" style="width:${pct(s.w,10)}%"></div></div></div></div>`}
 function renderBackup(){ $("backupView").innerHTML=`<h2>Backup</h2><p class="muted" style="margin-top:8px">Usa Esporta backup prima di modifiche importanti. Importa backup carica i dati anche su Firebase.</p>`}
 function renderSide(){if(!state.selected)state.selected=key(new Date());let rec=state.data[state.selected]||{andrea:"",micol:"",nota:""},d=from(state.selected),a=eff(rec,d),mt=micolText(rec.micol);$("selLabel").textContent=`${state.selected} · automatico: ${labels[autoA(d)]}`;$("andreaSel").value=a;$("micolInput").value=rec.micol||"";$("notaInput").value=rec.nota||"";let adj=Number(rec.andreaAdjMin)||0;if($("andreaAdjHours"))$("andreaAdjHours").value=adj?Math.trunc(adj/60):"";if($("andreaAdjMinutes"))$("andreaAdjMinutes").value=adj?adj-Math.trunc(adj/60)*60:"";if($("andreaAdjPreview")){$("andreaAdjPreview").textContent=`Correzione ${formatAdjV242(adj)}`;$("andreaAdjPreview").classList.toggle("show",adj!==0)};if($("andreaPreview")){ $("andreaPreview").textContent=labels[a]||"-"; $("andreaPreview").className=`previewPillPro ${a}`;} if($("micolPreview")){ $("micolPreview").textContent=mt||"-"; $("micolPreview").className=`previewPillPro micol ${((mt==="Riposo"||mt==="Ferie")?"rip":"")}`;} if($("notePreview")){let nt=(rec.nota||"").trim();$("notePreview").className=`previewNotePro ${nt?"":"empty"}`;$("notePreview").innerHTML=prettyNoteHtmlV21(nt);} if($("editPanelV21"))$("editPanelV21").classList.remove("open"); if($("editToggleV21"))$("editToggleV21").textContent="✏️ Modifica giornata";}
@@ -912,9 +1016,10 @@ function setActiveNavV23(v){document.querySelectorAll("[data-viewnav]").forEach(
 function render(){setActiveNavV23((document.querySelector('.tab.active')||{}).dataset?.view||'week');renderTop();renderWeek();renderMonth();renderYear();renderStats();renderBackup();renderSide();updateBackupInfo()}
 function show(v){setActiveNavV23(v);document.querySelectorAll("[data-viewnav]").forEach(b=>b.onclick=()=>show(b.dataset.viewnav));
 document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===v));["week","month","year","stats","backup"].forEach(x=>$(x+"View").classList.toggle("hidden",x!==v))}
-function exportBackup(){let blob=new Blob([JSON.stringify({version:12,exportedAt:new Date().toISOString(),anchor:state.anchor,data:state.data},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`TurniFamiglia_${new Date().toISOString().replace(/[:.]/g,"-").slice(0,16)}.json`;a.click();URL.revokeObjectURL(a.href)}
-async function importBackup(file){let p=JSON.parse(await file.text());snapshot("prima import");state.data=p.data||p;state.anchor=p.anchor||state.anchor;saveLocal();if(db){await persistAnchor();for(let [k,v] of Object.entries(state.data))await persist(k,v)}render();alert("Backup importato e sincronizzato.")}
+function exportBackup(){let blob=new Blob([JSON.stringify({version:13,exportedAt:new Date().toISOString(),anchor:state.anchor,data:state.data,vacations:state.vacations||{}},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`TurniFamiglia_${new Date().toISOString().replace(/[:.]/g,"-").slice(0,16)}.json`;a.click();URL.revokeObjectURL(a.href)}
+async function importBackup(file){let p=JSON.parse(await file.text());snapshot("prima import");state.data=p.data||p;state.anchor=p.anchor||state.anchor;state.vacations=p.vacations||state.vacations||{};saveLocal();if(db){await persistAnchor();for(let [k,v] of Object.entries(state.data))await persist(k,v);for(let [y,v] of Object.entries(state.vacations))await set(ref(db,`${cfg.sharedPath}/vacations/${y}`),v)}render();alert("Backup importato e sincronizzato.")}
 async function init(){loadLocal();loadReadChanges();try{let app=initializeApp(cfg.firebase);db=getDatabase(app);$("firebaseStatus").className="status ok syncBadgePro";$("firebaseStatus").innerHTML=`<span class="syncDot"></span><span><div class="syncTitle">Sincronizzazione attiva</div><div class="syncSub">Firebase · ${cfg.firebase.projectId} · ${cfg.sharedPath}</div></span>`;let a=await get(ref(db,`${cfg.sharedPath}/meta/anchor`));if(a.exists()){state.anchor=a.val();saveLocal()}onValue(ref(db,`${cfg.sharedPath}/days`),snap=>{let cloud=snap.val();if(cloud&&Object.keys(cloud).length){state.data=cloud;saveLocal()}render()});
+onValue(ref(db,`${cfg.sharedPath}/vacations`),snap=>{state.vacations=snap.val()||state.vacations||{};saveLocal();render()});
 try{onValue(ref(db,`${cfg.sharedPath}/changes`),snap=>{sharedChanges=snap.val()||{};renderSharedChanges()})}catch(changeErr){console.warn("Cronologia modifiche non disponibile",changeErr)}
 return}catch(e){$("firebaseStatus").className="status err";$("firebaseStatus").textContent="Firebase errore: controlla regole database. Deve essere read/write true";console.error(e)}render()}
 if($("miniCalendarBtn"))if($("miniCalendarBtn"))$("miniCalendarBtn").onclick=()=>show("month");if($("miniMoreBtn"))if($("miniMoreBtn"))$("miniMoreBtn").onclick=()=>show("backup");
@@ -930,9 +1035,10 @@ if($("actorMicol"))$("actorMicol").onclick=()=>chooseActor("Micol");
 if($("changeOverlay"))$("changeOverlay").onclick=e=>{if(e.target.id==="changeOverlay")closeSharedChanges()};
 
 $("saveBtn").onclick=saveCurrent;$("regenFromBtn").onclick=realign;$("clearAndreaBtn").onclick=()=>clearField("andrea");$("clearMicolBtn").onclick=()=>clearField("micol");$("clearNotaBtn").onclick=()=>clearField("nota");
+if($("vacSaveV245"))$("vacSaveV245").onclick=saveVacV245;if($("vacCancelV245"))$("vacCancelV245").onclick=()=>$("vacOverlayV245").classList.remove("open");
 $("exportBtn").onclick=exportBackup;$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=e=>{let f=e.target.files?.[0];if(f)importBackup(f)};$("restoreLocalBtn").onclick=()=>{let s=JSON.parse(localStorage.getItem(SNAP)||"null");if(!s)return alert("Nessun backup locale");state.data=s.data||{};state.anchor=s.anchor||state.anchor;saveLocal();render()};$("saveSnapshotBtn").onclick=()=>{snapshot("snapshot manuale");alert("Snapshot salvato")};
 if($("editToggleV21"))$("editToggleV21").onclick=()=>{$("editPanelV21").classList.toggle("open");$("editToggleV21").textContent=$("editPanelV21").classList.contains("open")?"Chiudi modifica":"✏️ Modifica giornata"};
-$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","24_4_1");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
+$("prevBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()-1,1);render()};$("nextBtn").onclick=()=>{state.current=new Date(state.current.getFullYear(),state.current.getMonth()+1,1);render()};$("todayBtn").onclick=()=>{state.current=new Date();state.selected=key(new Date());render()};$("refreshBtn").onclick=()=>{let u=new URL(location.href);u.searchParams.set("v","24_5");u.searchParams.set("t",Date.now());location.href=u};$("jumpOpenBtn").onclick=()=>$("searchWrap").style.display="flex";$("jumpCloseBtn").onclick=()=>$("searchWrap").style.display="none";$("jumpBtn").onclick=()=>{let d=from($("jumpDate").value.trim());if(!isNaN(d)){state.current=new Date(d.getFullYear(),d.getMonth(),1);state.selected=key(d);$("searchWrap").style.display="none";render()}};
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>show(b.dataset.view));await init();if(!state.selected)state.selected=key(new Date());render();state.current=new Date();show("week");renderSharedChanges();if(!currentActor())$("actorOverlay").classList.add("open");
 </script>
 </body>

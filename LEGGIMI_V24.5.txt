@@ -1,0 +1,13 @@
+V24.5 - CONTATORE FERIE MANUALE
+Base: V24.4.1 finale.
+
+UNICA nuova funzione:
+- Sezione Ferie nella vista Anno, subito sotto Riepilogo anno.
+- Andrea e Micol separati.
+- Inserimento manuale giorni disponibili e giorni utilizzati.
+- Residuo e percentuale calcolati automaticamente.
+- Nessun collegamento automatico con le ferie del calendario.
+- Dati ferie sincronizzati su Firebase tra i telefoni.
+- Dati ferie inclusi nel backup.
+
+Tutto il resto dell'app resta invariato.
